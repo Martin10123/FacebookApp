@@ -1,7 +1,5 @@
+import { ProfilePage } from "../auth";
+
 export const AppRouter = () => {
-  return (
-    <div>
-      <h1>AppRouter</h1>
-    </div>
-  );
+  return <ProfilePage />;
 };
