@@ -1,3 +1,5 @@
+import { ReactionsPost } from "./ReactionsPost";
+
 import styles from "./layout.module.css";
 
 export const CardLayout = ({
@@ -35,18 +37,11 @@ export const CardLayout = ({
 
       {children}
 
-      <div className={styles.layout__content_reactions_comments_share}>
-        <p>851</p>
-        <span>
-          <p>300 comentarios</p>
-          <p>20 compartidas</p>
-        </span>
-      </div>
-
       <div className={styles.layout__buttons_reactions}>
-        <button className={styles.layout__button}>
+        <button className={styles.layout__button_like}>
           <i className="fa-regular fa-thumbs-up"></i>
           Like
+          <ReactionsPost />
         </button>
         <button className={styles.layout__button}>
           <i className="fa-regular fa-comment"></i>

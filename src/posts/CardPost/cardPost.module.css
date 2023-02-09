@@ -1,0 +1,27 @@
+.post__image > img {
+  cursor: pointer;
+  object-fit: cover;
+  width: 100%;
+}
+
+.post__content_reactions_comments_share {
+  align-items: center;
+  color: #625c5c;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.post__content_reactions_comments_share > p {
+  font-size: 0.9rem;
+}
+
+.post__content_reactions_comments_share > span {
+  align-items: center;
+  display: flex;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
