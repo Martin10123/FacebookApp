@@ -1,0 +1,34 @@
+.post__container {
+  align-items: center;
+  background: #fff;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: 0fr 1fr 0fr;
+  justify-items: center;
+  padding: 0.5rem 0.7rem;
+  width: 100%;
+}
+
+.post__info_user_active {
+  border-radius: 50%;
+  cursor: pointer;
+  height: 2.5rem;
+  object-fit: cover;
+  width: 2.5rem;
+}
+
+.post__title {
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px solid gray;
+  cursor: pointer;
+  display: flex;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+  width: 100%;
+}
+
+.post__container > i {
+  color: lime;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
