@@ -1,3 +1,3 @@
 export * from "./CardPost/CardPost";
-export * from "./CreatePost/CreatePost";
+export * from "./CreatePost/page/CreatePost";
 export * from "./FormPost/FormPost";
