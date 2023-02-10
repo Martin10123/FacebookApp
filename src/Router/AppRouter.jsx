@@ -1,5 +1,5 @@
-import { ProfilePage } from "../auth";
+import { CreatePost } from "../posts";
 
 export const AppRouter = () => {
-  return <ProfilePage />;
+  return <CreatePost />;
 };
