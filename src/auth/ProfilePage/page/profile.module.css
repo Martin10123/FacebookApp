@@ -1,7 +1,11 @@
-/* #f1f2f6 */
-
 .profile__container {
-  background-color: #a2a2a2ad;
+  background-color: #dedede;
+  width: 100%;
+}
+
+.profile__content,
+.profile__contain_details_and_posts,
+.profile__content_form_post {
   display: grid;
   gap: 1rem;
   width: 100%;
@@ -26,7 +30,7 @@
 
 .profile__img_cover {
   align-items: center;
-  background: #8a8a8aad;
+  background: #d6d6d6;
   display: flex;
   height: 100%;
   justify-content: center;
@@ -85,7 +89,7 @@
   display: grid;
   gap: 0.7rem;
   grid-template-columns: 1fr 0fr;
-  margin: 1rem 0 0;
+  padding: 1rem 0 0;
   width: 100%;
 }
 
@@ -137,6 +141,7 @@
   background: #0099ff24;
   border-radius: 2rem;
   color: #0099ff;
+  cursor: pointer;
   font-weight: 500;
   padding: 0.3rem 0.5rem;
 }
@@ -205,6 +210,7 @@
 
 .profile__list_friends {
   display: grid;
+  cursor: pointer;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -224,4 +230,90 @@
   background: #cccccc;
   color: #000;
   font-weight: 500;
+}
+
+@media (min-width: 900px) {
+  .profile__container {
+    align-items: center;
+    background: #f1f2f6;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile__content {
+    position: relative;
+    width: 55rem;
+  }
+
+  .profile__content_images_user_info {
+    box-shadow: 0px 1px 6px #80808042;
+  }
+
+  .profile__cover_photo {
+    height: 25rem;
+  }
+
+  .profile__img_cover {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .profile__content_photo_user {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 0fr 1fr 0fr;
+    padding: 23rem 0.7rem 0;
+  }
+
+  .profile__photo_user > img {
+    height: 12rem;
+    width: 12rem;
+  }
+
+  .profile__name_user {
+    margin: 1.5rem 0 0;
+  }
+
+  .profile__name_user {
+    font-size: 2rem;
+  }
+
+  .profile__buttons_history {
+    align-items: end;
+    height: 100%;
+  }
+
+  .profile__add_history {
+    width: 14rem;
+  }
+
+  .profile__contain_details_and_posts {
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .profile__contents_other_info_user {
+    background: transparent;
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .profile__info_details,
+  .profile__content_info_friends {
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 6px #80808042;
+    padding: 0.8rem 1rem;
+  }
+
+  .profile__content_titles {
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .profile__content {
+    width: 70rem;
+  }
 }
