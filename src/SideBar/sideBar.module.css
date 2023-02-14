@@ -1,0 +1,54 @@
+.sideBar__container {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .sideBar__container {
+    display: block;
+    padding: 1rem;
+    position: sticky;
+    top: 3.8rem;
+    width: fit-content;
+  }
+
+  .sideBar__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .sideBar__windown {
+    border-bottom: 1px solid #9b9a9a63;
+    display: grid;
+    gap: 0.5rem;
+    padding: 0 0 1rem;
+  }
+
+  .sideBar__item {
+    align-items: center;
+    cursor: pointer;
+    display: grid;
+    gap: 0.2rem;
+    grid-template-columns: 2.5rem 1fr;
+    padding: 0.8rem;
+    transition: 0.5s ease-in-out;
+    width: 100%;
+  }
+
+  .sideBar__item_img {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 1.8rem;
+    object-fit: cover;
+    width: 1.8rem;
+  }
+
+  .sideBar__item i {
+    font-size: 1.3rem;
+  }
+
+  .sideBar__item:hover {
+    background: #f1f2f6;
+    border-radius: 0.4rem;
+    transition: 0.5s ease-in-out;
+  }
+}

@@ -72,7 +72,11 @@
   font-size: 1.5rem;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 800px) {
+  .nav__container {
+    top: 0;
+  }
+
   .nav__content {
     align-items: center;
     grid-template-columns: 0.7fr 1fr 0.8fr;
