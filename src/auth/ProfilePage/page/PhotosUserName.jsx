@@ -1,6 +1,6 @@
 import { photoUser } from "../../../assets";
 
-import styles from "../page/profile.module.css";
+import styles from "./profile.module.css";
 
 export const PhotosUserName = () => {
   return (

@@ -1,0 +1,35 @@
+.options__input_form {
+  align-items: center;
+  background: #e9e9e9;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 0fr 1fr;
+  height: 5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.options__span_icon {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  font-size: 1.2rem;
+  height: 3rem;
+  justify-content: center;
+  width: 3rem;
+}
+
+.options__input_form p {
+  font-size: 1.3rem;
+}
+
+.options__select_by {
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 6px grey;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+}

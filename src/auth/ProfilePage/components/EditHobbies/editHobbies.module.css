@@ -1,0 +1,160 @@
+.hobbies__container {
+  background: #ffffff;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.hobbies__box {
+  background: #ffffff;
+  display: grid;
+  grid-template-rows: 0fr 1fr 0fr;
+  height: 100%;
+  width: 100%;
+}
+
+.hobbies__content {
+  align-items: center;
+  border-bottom: 1px solid gray;
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+}
+
+.hobbies__content > i {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 0 0.8rem 0 0;
+}
+
+.hobbies__content > p {
+  font-size: 1.3rem;
+}
+
+.hobbies__title {
+  padding: 0.6rem;
+  width: 100%;
+}
+
+.hobbies__title > p {
+  color: gray;
+  font-size: 1.3rem;
+}
+
+.hobbies__title_figure {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.hobbies__title_figure > img {
+  border-radius: 0.6rem;
+  width: 100%;
+}
+
+.hobbies__contain_list {
+  overflow: auto;
+  width: 100%;
+}
+
+.hobbies__contain_list::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+.hobbies__contain_list::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 5px;
+}
+
+.hobbies__list {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.hobbies__item {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 0fr;
+  width: 100%;
+}
+
+.hobbies__list_img {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0fr 1fr;
+}
+
+.hobbies__list_img > img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.hobbies__list_img > figcaption {
+  font-size: 1.2rem;
+}
+
+.hobbies__checkbox {
+  align-items: center;
+  border-radius: 0.2rem;
+  border: 3px solid gray;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.9rem;
+  height: 1.3rem;
+  justify-content: center;
+  width: 1.3rem;
+}
+
+.hobbies__checkbox_select {
+  background: #0099ff;
+  border: none;
+}
+
+.hobbies__buttons {
+  align-items: center;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.hobbies__buttons > button {
+  background: #0099ff;
+  border-radius: 0.5rem;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  height: 3rem;
+  width: 100%;
+}
+
+.hobbies__buttons > button:nth-child(2) {
+  background: #ff0000;
+}
+
+@media (min-width: 768px) {
+  .hobbies__container {
+    align-items: center;
+    background: #ffffff46;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hobbies__box {
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px grey;
+    height: 45rem;
+    padding: 0.3rem;
+    width: 35rem;
+  }
+}

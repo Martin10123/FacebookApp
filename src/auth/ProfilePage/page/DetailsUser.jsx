@@ -1,4 +1,4 @@
-import styles from "../page/profile.module.css";
+import styles from "./profile.module.css";
 
 export const DetailsUser = () => {
   return (
