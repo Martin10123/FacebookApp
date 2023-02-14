@@ -1,5 +1,5 @@
-import { EditCountry } from "../auth/ProfilePage/components";
+import { MainApp } from "../MainApp/MainApp";
 
 export const AppRouter = () => {
-  return <EditCountry />;
+  return <MainApp />;
 };
