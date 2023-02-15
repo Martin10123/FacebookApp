@@ -1,0 +1,111 @@
+.sideMessage__container {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .sideMessage__container {
+    display: block;
+    height: calc(100vh - 3.75rem);
+    position: sticky;
+    top: 3.8rem;
+    width: 100%;
+  }
+
+  .sideMessage__content {
+    display: grid;
+    gap: 1rem;
+    grid-template-rows: 0fr 1fr;
+    height: 100%;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .sideMessage__windown_events {
+    border-radius: 0.8rem;
+    box-shadow: 1px 1px 6px #80808087;
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .sideMessage__windown_events > h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sideMessage__windown_events > h3 > i {
+    color: #ff00c6;
+    font-size: 1.5rem;
+  }
+
+  .sideMessage__info_card_events {
+    border-bottom: 1px solid gainsboro;
+    padding: 0 0 0.4rem;
+  }
+
+  .sideMessage__info_card_events > p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .sideMessage__info_card_events > span {
+    color: gray;
+    font-size: 0.9rem;
+  }
+
+  .sideMessage__titles {
+    color: gray;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 0.8rem;
+  }
+
+  .sideMessage__users_lists {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .sideMessage__list_item {
+    align-items: center;
+    cursor: pointer;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 0fr 1fr;
+    padding: 0.5rem;
+    transition: 0.5s ease-in-out;
+  }
+
+  .sideMessage__list_item:hover {
+    background: #eeeeee;
+    border-radius: 0.4rem;
+    transition: 0.5s ease-in-out;
+  }
+
+  .sideMessage__photo_user {
+    position: relative;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .sideMessage__photo_user > img {
+    border-radius: 50%;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .sideMessage__photo_user > i {
+    bottom: 0;
+    color: lime;
+    font-size: 0.6rem;
+    position: absolute;
+    right: 0;
+  }
+
+  .sideMessage__list_item > p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}

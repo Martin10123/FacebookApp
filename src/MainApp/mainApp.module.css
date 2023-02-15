@@ -1,0 +1,40 @@
+.main__container::before {
+  background: #f1f2f6;
+  content: "";
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.main__content_posts {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .main__container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 0fr 1fr;
+    padding: 0 1rem 0 0;
+  }
+
+  .main__content_posts {
+    padding: 1rem 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  .main__container {
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main__content_posts {
+    width: 36rem;
+  }
+}

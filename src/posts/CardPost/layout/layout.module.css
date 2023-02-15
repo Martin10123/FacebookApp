@@ -170,5 +170,14 @@
   transition: all 0.5s ease-in-out;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
+  .layout__container {
+    border-radius: 0.6rem;
+    box-shadow: 1px 1px 6px #80808082;
+  }
+
+  .layout__button i,
+  .layout__button_like i {
+    font-size: 1.5rem;
+  }
 }

@@ -1,13 +1,20 @@
-import { Navbar } from "../NavBar/Navbar";
-import { SideBar } from "../SideBar/SideBar";
+import { FormPost, CardPost } from "../posts";
 
+import { SideMessage, SideBar } from "../SideBar";
 import styles from "./mainApp.module.css";
 
 export const MainApp = () => {
   return (
-    <>
-      <Navbar />
+    <main className={styles.main__container}>
       <SideBar />
-    </>
+      <div className={styles.main__content_posts}>
+        <FormPost />
+        <CardPost />
+        <CardPost />
+        <CardPost />
+        <CardPost />
+      </div>
+      <SideMessage />
+    </main>
   );
 };

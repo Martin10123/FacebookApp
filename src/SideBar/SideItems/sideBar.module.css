@@ -2,9 +2,16 @@
   display: none;
 }
 
+.sideBar__item:hover {
+  background: #dddddd;
+  border-radius: 0.4rem;
+  transition: 0.5s ease-in-out;
+}
+
 @media (min-width: 800px) {
   .sideBar__container {
     display: block;
+    height: 91.7vh;
     padding: 1rem;
     position: sticky;
     top: 3.8rem;
@@ -44,11 +51,5 @@
 
   .sideBar__item i {
     font-size: 1.3rem;
-  }
-
-  .sideBar__item:hover {
-    background: #f1f2f6;
-    border-radius: 0.4rem;
-    transition: 0.5s ease-in-out;
   }
 }

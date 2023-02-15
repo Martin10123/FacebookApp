@@ -41,7 +41,7 @@
   display: none;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 800px) {
   .post__container {
     box-shadow: 1px 1px 6px #80808042;
     border-radius: 0.5rem;
