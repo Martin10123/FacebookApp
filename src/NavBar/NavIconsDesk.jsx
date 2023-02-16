@@ -1,6 +1,6 @@
 import { photoUser } from "../assets";
 // import { WindownChats } from "../Messages";
-import { WindownNotifications } from "../WindownNotifications/WindownNotifications";
+// import { WindownNotifications } from "../WindownNotifications/WindownNotifications";
 
 import styles from "./navbar.module.css";
 
@@ -20,7 +20,7 @@ export const NavIconsDesk = () => {
         </div>
         <div className={styles.nav__icon}>
           <i className="fa-solid fa-bell"></i>
-          <WindownNotifications />
+          {/* <WindownNotifications /> */}
         </div>
 
         <div className={styles.nav__user_profile}>

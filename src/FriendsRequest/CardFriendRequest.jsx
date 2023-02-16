@@ -1,43 +1,21 @@
-import { man } from "../../../images";
+import { photoUser } from "../assets";
 
-const CardFriendRequest = ({
-  styles,
-  friend,
-  acceptRequest,
-  rechacedRequest,
-  infoUserActive,
-  handleGoToProfile,
-}) => {
-  const countFriendSimilar = friend.friendsList.filter((friends1) =>
-    infoUserActive.friendsList.includes(friends1)
-  ).length;
+import styles from "./friendsRequest.module.css";
 
+export const CardFriendRequest = () => {
   return (
-    <li key={friend.id} className={styles.friends__li}>
-      <figure
-        className={styles.friends__img_user}
-        onClick={() => handleGoToProfile(friend.username)}
-      >
-        {friend.photo ? (
-          <img src={friend.photo} alt="Foto de perfil" />
-        ) : (
-          <img src={man} alt="Foto de perfil" />
-        )}
+    <li className={styles.friends__li}>
+      <figure className={styles.friends__img_user}>
+        <img src={photoUser} alt="Foto de perfil" />
       </figure>
       <div className={styles.friends__content_user_info}>
-        <p onClick={() => handleGoToProfile(friend.username)}>{friend.name}</p>
-        <p>{countFriendSimilar} amigos en común</p>
+        <p>Martin Elias</p>
+        <p>{0} amigos en común</p>
         <div className={styles.friends__content_buttons}>
-          <button onClick={() => acceptRequest(friend.id, friend.uid)}>
-            Confirmar
-          </button>
-          <button onClick={() => rechacedRequest(friend.id, friend.uid)}>
-            Eliminar
-          </button>
+          <button>Confirmar</button>
+          <button>Eliminar</button>
         </div>
       </div>
     </li>
   );
 };
-
-export default CardFriendRequest;
