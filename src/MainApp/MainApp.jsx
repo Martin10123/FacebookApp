@@ -1,6 +1,7 @@
 import { FormPost, CardPost } from "../posts";
-
+import { HistoryPage } from "../Historys/pages/HistoryPage";
 import { SideMessage, SideBar } from "../SideBar";
+
 import styles from "./mainApp.module.css";
 
 export const MainApp = () => {
@@ -9,9 +10,7 @@ export const MainApp = () => {
       <SideBar />
       <div className={styles.main__content_posts}>
         <FormPost />
-        <CardPost />
-        <CardPost />
-        <CardPost />
+        <HistoryPage />
         <CardPost />
       </div>
       <SideMessage />

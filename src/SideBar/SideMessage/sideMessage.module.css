@@ -21,6 +21,7 @@
   }
 
   .sideMessage__windown_events {
+    background: #fff;
     border-radius: 0.8rem;
     box-shadow: 1px 1px 6px #80808087;
     display: grid;

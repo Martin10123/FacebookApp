@@ -1,0 +1,90 @@
+.history__container {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  gap: 1rem;
+  overflow: auto;
+  padding: 1rem;
+  white-space: nowrap;
+}
+
+.history__container::-webkit-scrollbar {
+  width: 0;
+}
+
+.history__create_history {
+  background: #fff;
+  border-radius: 0.8rem;
+  border: 1px solid #80808099;
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: 1fr 4rem;
+  height: 13.5rem;
+  max-width: 9rem;
+  min-width: 9rem;
+  position: relative;
+}
+
+.history__create_photo > img {
+  border-radius: 0.8rem 0.8rem 0 0;
+  height: 100%;
+  width: 100%;
+}
+
+.history__create_history > i {
+  color: #0099ff;
+  font-size: 2rem;
+  left: 3.7rem;
+  top: 8.4rem;
+  position: absolute;
+}
+
+.history__create_history > p {
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 0.5rem;
+  display: flex;
+}
+
+.history__card_info {
+  background: #fff;
+  border-radius: 0.8rem;
+  border: 1px solid #80808099;
+  cursor: pointer;
+  height: 13.5rem;
+  max-width: 9rem;
+  min-width: 9rem;
+  position: relative;
+}
+
+.history__card_photo_user {
+  border-radius: 50%;
+  border: 3px solid #0071bc;
+  height: 2.3rem;
+  left: 0.5rem;
+  object-fit: cover;
+  position: absolute;
+  top: 0.5rem;
+  width: 2.3rem;
+}
+
+.history__card_photo_select {
+  border-radius: 0.8rem;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.history__card_info > p {
+  bottom: 0.5rem;
+  color: #fff;
+  left: 1rem;
+  position: absolute;
+}
+
+@media (min-width: 1000px) {
+  .history__container {
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 6px #80808089;
+  }
+}
