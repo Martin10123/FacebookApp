@@ -1,4 +1,4 @@
-import { CardPost, FormPost } from "../../../posts";
+import { CardPost, FormPost } from "../../posts";
 import { DetailsUser, ListFriendsUser, PhotosUserName } from "./";
 
 import styles from "./profile.module.css";

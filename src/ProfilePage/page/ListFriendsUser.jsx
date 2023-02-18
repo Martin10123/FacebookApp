@@ -1,5 +1,4 @@
-import { photoUser } from "../../../assets";
-
+import { photoUser } from "../../assets";
 import styles from "./profile.module.css";
 
 export const ListFriendsUser = () => {
