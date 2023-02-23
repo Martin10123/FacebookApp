@@ -1,0 +1,84 @@
+.card_comment__container {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 0fr 1fr;
+  width: 100%;
+}
+
+.card_comment__photo > img {
+  border-radius: 100%;
+  cursor: pointer;
+  height: 3rem;
+  object-fit: cover;
+  width: 3rem;
+}
+
+.card_comment__name_comment {
+  background: #80808075;
+  border-radius: 1rem;
+  padding: 0.5rem 0.8rem;
+  width: fit-content;
+}
+
+.card_comment__name_elli {
+  display: grid;
+  font-size: 1.1rem;
+  font-weight: bold;
+  gap: 0.3rem;
+  grid-template-columns: 1fr 0fr;
+  position: relative;
+  width: 100%;
+}
+
+.card_comment__name_elli > i {
+  cursor: pointer;
+}
+
+.card_comment__options_elli {
+  background: #fff;
+  border-radius: 0.8rem;
+  box-shadow: 1px 1px 6px grey;
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: 1rem;
+}
+
+.card_comment__options_elli p {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+}
+
+.card_comment__date_reaction_response {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 500;
+  padding: 0.1rem 0.5rem;
+  width: 100%;
+}
+
+.comment__content_spans {
+  display: flex;
+  gap: 2rem;
+}
+
+.comment__content_spans > span:nth-child(1) {
+  cursor: auto;
+}
+
+.comment__content_spans > span {
+  color: #686868;
+  cursor: pointer;
+}
+
+@media (min-width: 800px) {
+  .card_comment__date_reaction_response {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}

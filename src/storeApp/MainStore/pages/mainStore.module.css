@@ -86,10 +86,16 @@
   .container {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
+    height: calc(100vh - 3.8rem);
   }
 
-  .content_nav > svg:nth-child(1) {
-    display: none;
+  .content_info {
+    overflow: auto;
+  }
+
+  .content_nav > i:nth-child(1) {
+    visibility: hidden;
+    opacity: 0;
   }
 
   .input_form {

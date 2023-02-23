@@ -1,0 +1,17 @@
+.favorites__container {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.favorites__container h2 {
+  font-size: 2rem;
+}
+
+.favorites__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  width: 100%;
+}

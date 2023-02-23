@@ -1,12 +1,11 @@
-import { MainApp } from "../MainApp/MainApp";
+import { MenuApp } from "../MenuApp/MenuApp";
 import { Navbar } from "../NavBar/Navbar";
-import { MainStore, SelfArticle } from "../storeApp";
 
 export const AppRouter = () => {
   return (
     <>
       <Navbar />
-      <SelfArticle />
+      <MenuApp />
     </>
   );
 };

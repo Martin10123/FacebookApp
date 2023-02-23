@@ -1,0 +1,9 @@
+.answers__list_answers {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.answers__pass_end {
+  width: 92%;
+}

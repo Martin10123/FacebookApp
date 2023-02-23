@@ -24,10 +24,14 @@
 
 .side__image_user {
   align-items: center;
+  border-radius: 0.6rem;
+  box-shadow: 1px 1px 6px grey;
   cursor: pointer;
+  display: grid;
   gap: 1rem;
   grid-template-columns: 0fr 1fr 0fr;
-  display: grid;
+  padding: 0.5rem;
+  transition: 0.4s ease;
 }
 
 .side__image_user > img {
@@ -64,6 +68,13 @@
   font-size: 1.2rem;
   gap: 1rem;
   padding: 1rem 0.5rem;
+  transition: 0.4s ease;
+}
+
+.side__list_item:hover,
+.side__image_user:hover {
+  transition: 0.6s ease;
+  transform: scale(1.06);
 }
 
 @media (min-width: 800px) {
