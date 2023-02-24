@@ -7,6 +7,7 @@
 
 .windownNoti__nav {
   align-items: center;
+  color: #000;
   display: flex;
   justify-content: space-between;
 }
@@ -51,6 +52,7 @@
 
 .windownNoti__info_user {
   align-items: center;
+  color: #000;
   display: grid;
   gap: 1rem;
   grid-template-columns: 0fr 1fr 0fr;

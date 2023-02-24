@@ -13,7 +13,6 @@ export const PhotoUser = ({
         <img src={photoUser} alt="" />
         <i className="fa-solid fa-circle"></i>
       </figure>
-      <p></p>
       {showName && <p>{nameUser.substring(0, 12) + "..."}</p>}
     </div>
   );

@@ -1,0 +1,32 @@
+.auto__container {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 6px grey;
+  padding: 1rem;
+  position: absolute;
+  top: 3.2rem;
+  width: 100%;
+}
+
+.auto__content_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auto__li_item {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+}
+
+.auto__li_item > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auto__li_item > i {
+  color: #00000059;
+}

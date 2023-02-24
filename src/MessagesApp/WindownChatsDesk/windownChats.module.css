@@ -17,6 +17,7 @@
 
 .windownChats__nav {
   align-items: center;
+  color: #000;
   display: flex;
   justify-content: space-between;
 }
@@ -45,6 +46,7 @@
 }
 
 .windownChats__search > i {
+  color: #000;
   font-size: 1.2rem;
 }
 
@@ -96,11 +98,13 @@
 }
 
 .windownChats__user_name {
+  color: #000;
   font-size: 1rem;
 }
 
 .windownChats__content_lastmessage {
   align-items: center;
+  color: #000;
   display: grid;
   font-size: 0.8rem;
   grid-template-columns: 1fr 4rem;
