@@ -1,11 +1,11 @@
-import { MenuApp } from "../MenuApp/MenuApp";
+import { ChatsFilters, ChatAppPage } from "../MessagesApp";
 import { Navbar } from "../NavBar/Navbar";
 
 export const AppRouter = () => {
   return (
     <>
       <Navbar />
-      <MenuApp />
+      <ChatAppPage />
     </>
   );
 };

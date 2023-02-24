@@ -1,0 +1,22 @@
+.chat__container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 3.8rem);
+}
+
+.chat__content {
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 23rem 1fr;
+  max-width: 70rem;
+}
+
+.chat_not_selected {
+  align-items: center;
+  background: #dcdcdc;
+  display: flex;
+  font-size: 1.6rem;
+  justify-content: center;
+  padding: 6rem;
+}
