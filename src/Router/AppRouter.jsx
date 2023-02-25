@@ -1,4 +1,4 @@
-import { CreateHistory, ImagesHistory, SeeHistory } from "../Historys";
+import { SeeHistory } from "../Historys";
 import { Navbar } from "../NavBar/Navbar";
 
 export const AppRouter = () => {
