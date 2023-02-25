@@ -1,0 +1,38 @@
+.image_history__list {
+  align-items: center;
+  display: grid;
+  gap: 0.4rem;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  padding: 0.5rem;
+}
+
+.image_history__img_item {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.image_history__img_item img {
+  height: fit-content;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .image_history__list {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+  }
+
+  .image_history__img_item {
+    max-width: 14.6rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .image_history__img_item {
+    max-width: 14rem;
+  }
+}
