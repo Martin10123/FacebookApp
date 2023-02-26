@@ -1,5 +1,6 @@
 import { photoUser } from "../../assets";
 import { ButtonForm } from "../../auth";
+import { WindownMessage } from "../../MessagesApp";
 
 import styles from "./sideMessage.module.css";
 
@@ -17,7 +18,10 @@ export const SideMessage = () => {
             <span>12 junio 2001</span>
           </div>
 
-          <ButtonForm title="Ver más..." stylesButton={{ height: "3rem" }} />
+          <ButtonForm
+            title="Ver más..."
+            stylesButton={{ height: "2.5rem", fontSize: "1rem" }}
+          />
         </div>
 
         <div className={styles.sideMessage__contacts_users}>
@@ -25,7 +29,10 @@ export const SideMessage = () => {
             <p>Contactos</p>
           </div>
           <div className={styles.sideMessage__users_lists}>
-            <div className={styles.sideMessage__list_item}>
+            <div
+              className={styles.sideMessage__list_item}
+              onClick={() => createANewWindow(userSelected.length)}
+            >
               <figure className={styles.sideMessage__photo_user}>
                 <img src={photoUser} alt="Foto de perfil" />
                 <i className="fa-solid fa-circle"></i>
@@ -34,6 +41,10 @@ export const SideMessage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className={styles.sideMessage__content_windown_messages} style={{}}>
+        {/* <WindownMessage /> */}
       </div>
     </div>
   );

@@ -156,4 +156,26 @@
     position: initial;
     z-index: 0;
   }
+
+  .filters__photo_user > img {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .filters__photo_user > i {
+    bottom: 0.2rem;
+    font-size: 0.6rem;
+  }
+
+  .filters__list_item {
+    gap: 0;
+  }
+
+  .filters__item_name > p {
+    font-size: 1rem;
+  }
+
+  .filters__item_name > span {
+    font-size: 0.9rem;
+  }
 }

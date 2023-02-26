@@ -16,8 +16,18 @@
     gap: 1rem;
     grid-template-rows: 0fr 1fr;
     height: 100%;
+    overflow: auto;
     padding: 1rem;
     width: 100%;
+  }
+
+  .sideMessage__content::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  .sideMessage__content::-webkit-scrollbar-thumb {
+    background: #adaeaecf;
+    border-radius: 5px;
   }
 
   .sideMessage__windown_events {
@@ -34,11 +44,12 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 1rem;
   }
 
   .sideMessage__windown_events > h3 > i {
     color: #ff00c6;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .sideMessage__info_card_events {
@@ -47,25 +58,20 @@
   }
 
   .sideMessage__info_card_events > p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
   }
 
   .sideMessage__info_card_events > span {
     color: gray;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .sideMessage__titles {
     color: gray;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     margin: 0 0 0.8rem;
-  }
-
-  .sideMessage__users_lists {
-    display: grid;
-    gap: 1rem;
   }
 
   .sideMessage__list_item {
@@ -79,15 +85,15 @@
   }
 
   .sideMessage__list_item:hover {
-    background: #eeeeee;
+    background: #cececebf;
     border-radius: 0.4rem;
     transition: 0.5s ease-in-out;
   }
 
   .sideMessage__photo_user {
     position: relative;
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
   }
 
   .sideMessage__photo_user > img {
@@ -100,13 +106,28 @@
   .sideMessage__photo_user > i {
     bottom: 0;
     color: lime;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     position: absolute;
     right: 0;
   }
 
   .sideMessage__list_item > p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
+  }
+
+  .sideMessage__content_windown_messages {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    gap: 0.5rem;
+    position: fixed;
+    right: 1%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sideMessage__content_windown_messages {
+    right: 8%;
   }
 }

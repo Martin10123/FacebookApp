@@ -2,7 +2,9 @@ import { messi, photoUser } from "../../../assets";
 
 import styles from "./messages.module.css";
 
-export const ContentMessages = () => {
+export const ContentMessages = ({ imgDesk = false }) => {
+  const imageDesk = imgDesk ? styles.message__image_desk : "";
+
   return (
     <>
       <div className={styles.message__info_message}>
@@ -35,14 +37,14 @@ export const ContentMessages = () => {
           <img src={photoUser} alt="Foto de perfil" />
           <i className="fa-solid fa-circle"></i>
         </figure>
-        <figure className={styles.message__image}>
+        <figure className={`${styles.message__image} ${imageDesk}`}>
           <img src={messi} alt="" />
         </figure>
       </div>
 
       <div className={styles.message__image_message_active}>
         <i className="fa-solid fa-circle-check"></i>
-        <figure className={styles.message__image}>
+        <figure className={`${styles.message__image} ${imageDesk}`}>
           <img src={messi} alt="" />
         </figure>
       </div>

@@ -55,7 +55,9 @@
   .post__title {
     background: #f1f2f6;
     border: none;
+    font-size: 0.9rem;
     padding: 0.7rem 0.3rem 0.7rem 0.8rem;
+    font-size: 0.9rem;
   }
 
   .post__content_options {
@@ -74,15 +76,16 @@
     cursor: pointer;
     display: flex;
     gap: 1rem;
+    font-size: 0.9rem;
   }
 
   .post__option_item:nth-child(1) > i {
     color: #00ff00;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   .post__option_item:nth-child(2) > i {
     color: #ff0000;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 }

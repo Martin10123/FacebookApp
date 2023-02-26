@@ -2,7 +2,7 @@ import { photoUser } from "../../../assets";
 
 import styles from "./messages.module.css";
 
-export const HeaderMessages = ({ setOpenMessage }) => {
+export const HeaderMessages = ({ setOpenMessage, isWindownOpen = false }) => {
   return (
     <div className={styles.message__nav}>
       <div className={styles.message__arrow_info_user}>
@@ -16,13 +16,19 @@ export const HeaderMessages = ({ setOpenMessage }) => {
             <p>Martin Elias</p>
             <span>Activo(a) ahora</span>
           </figcaption>
+          <i className="fa-solid fa-circle"></i>
         </figure>
       </div>
 
       <div className={styles.message__options}>
         <i className="fa-solid fa-phone"></i>
         <i className="fa-solid fa-video"></i>
-        <i className="fa-solid fa-circle-info"></i>
+        {isWindownOpen && <i className="fa-solid fa-window-minimize"></i>}
+        {!isWindownOpen ? (
+          <i className="fa-solid fa-circle-info"></i>
+        ) : (
+          <i className="fa-solid fa-x"></i>
+        )}
       </div>
     </div>
   );

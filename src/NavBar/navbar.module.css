@@ -94,13 +94,17 @@
     display: none;
   }
 
+  .nav__title_face {
+    font-size: 1.3rem;
+  }
+
   .nav__search_friends {
     align-items: center;
     background: #f1f2f6;
     border-radius: 2rem;
     display: flex;
     gap: 0.5rem;
-    height: 2.6rem;
+    height: 2.3rem;
     padding: 0 0.6rem;
     position: relative;
     width: 100%;
