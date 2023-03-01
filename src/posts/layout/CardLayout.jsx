@@ -1,4 +1,5 @@
-import { ReactionsPost } from "./ReactionsPost";
+import { OptionsPost } from "../CardPost";
+import { ButtonsReactions } from "./ButtonsReactions";
 
 import styles from "./layout.module.css";
 
@@ -8,9 +9,11 @@ export const CardLayout = ({
   nameUser,
   createdDate,
   iconStyle,
+  isCardShare = false,
+  style,
 }) => {
   return (
-    <div className={styles.layout__container}>
+    <div style={style} className={styles.layout__container}>
       <div className={styles.layout__content_info_user}>
         <div className={styles.layout__name_date}>
           <img src={photoUser} alt="Foto de perfil del usuario" />
@@ -23,7 +26,8 @@ export const CardLayout = ({
             </span>
           </span>
         </div>
-        <i className="fa-solid fa-ellipsis"></i>
+        {!isCardShare && <i className="fa-solid fa-ellipsis"></i>}
+        {!isCardShare && <OptionsPost />}
       </div>
 
       <div className={styles.layout__desc_post}>
@@ -37,21 +41,7 @@ export const CardLayout = ({
 
       {children}
 
-      <div className={styles.layout__buttons_reactions}>
-        <button className={styles.layout__button_like}>
-          <i className="fa-regular fa-thumbs-up"></i>
-          Like
-          <ReactionsPost />
-        </button>
-        <button className={styles.layout__button}>
-          <i className="fa-regular fa-comment"></i>
-          Comentar
-        </button>
-        <button className={styles.layout__button}>
-          <i className="fa-regular fa-share-from-square"></i>
-          Compartir
-        </button>
-      </div>
+      {!isCardShare && <ButtonsReactions />}
     </div>
   );
 };

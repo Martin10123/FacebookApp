@@ -84,7 +84,7 @@
   position: absolute;
   transition: all 0.5s ease-in-out;
   visibility: hidden;
-  width: 23rem;
+  width: 20rem;
   z-index: -1;
 }
 
@@ -170,6 +170,30 @@
   transition: all 0.5s ease-in-out;
 }
 
+/* CountReactions */
+
+.layout__content_reactions_comments_share {
+  align-items: center;
+  color: #625c5c;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.layout__content_reactions_comments_share > p {
+  font-size: 0.9rem;
+}
+
+.layout__content_reactions_comments_share > span {
+  align-items: center;
+  display: flex;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
 @media (min-width: 800px) {
   .layout__container {
     border-radius: 0.6rem;
@@ -179,5 +203,13 @@
   .layout__button i,
   .layout__button_like i {
     font-size: 1.5rem;
+  }
+
+  .reactions__container {
+    width: 19rem;
+  }
+
+  .reactions__emoji > p {
+    bottom: 5rem;
   }
 }

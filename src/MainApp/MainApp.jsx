@@ -1,4 +1,4 @@
-import { FormPost, CardPost } from "../posts";
+import { FormPost, CardPost, CardSharePost } from "../posts";
 import { HistoryPage } from "../Historys/pages/HistoryPage";
 import { SideMessage, SideBar } from "../SideBar";
 
@@ -12,6 +12,7 @@ export const MainApp = () => {
         <FormPost />
         <HistoryPage />
         <CardPost />
+        <CardSharePost />
       </div>
       <SideMessage />
     </main>

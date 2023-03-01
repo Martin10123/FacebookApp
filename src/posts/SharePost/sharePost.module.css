@@ -1,0 +1,156 @@
+.share__container {
+  align-items: flex-end;
+  background: #00000091;
+  display: flex;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999999;
+}
+
+.share__close_modal_share {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.share__content {
+  background: #ebebeb;
+  border-radius: 1rem 1rem 0 0;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-rows: 0fr 0fr 0fr;
+  padding: 0.7rem;
+  width: 100%;
+}
+
+.share__writte_post {
+  background: #fff;
+  border-radius: 0.5rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.share__photo_user {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0fr 1fr;
+}
+
+.share__photo_user > img {
+  border-radius: 100%;
+  height: 3rem;
+  object-fit: cover;
+  width: 3rem;
+}
+
+.share__figcaption > p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.share__select_state {
+  background: #8080808f;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.share__content_textarea > textarea {
+  border: none;
+  font-size: 1.1rem;
+  max-height: 7rem;
+  outline: none;
+  resize: none;
+  width: 100%;
+}
+
+.share__btn_share {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.share__btn_share > button {
+  background: #1875e8;
+  border-radius: 0.5rem;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 2.7rem;
+  width: 10rem;
+}
+
+.share__content_send_message {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.share__scroll_users {
+  align-items: center;
+  display: flex;
+  font-weight: 500;
+  gap: 1rem;
+  height: 9rem;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.share__scroll_users::-webkit-scrollbar {
+  width: 0;
+}
+
+.share__share_in {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.share__share_in_item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.share__share_logo {
+  align-items: center;
+  background: #fff;
+  border-radius: 100%;
+  display: flex;
+  font-size: 1.6rem;
+  height: 4rem;
+  justify-content: center;
+  width: 4rem;
+}
+
+.share__share_in_item > p {
+  font-weight: 500;
+}
+
+@media (min-width: 800px) {
+  .share__container {
+    align-items: center;
+    background: #ffffffb5;
+    display: flex;
+    justify-content: center;
+  }
+
+  .share__content {
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px #8080809e;
+    height: 36rem;
+    width: 36rem;
+  }
+}

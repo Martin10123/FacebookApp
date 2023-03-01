@@ -1,4 +1,4 @@
-import { care, like, haha, angry, love, sad, wow } from "../../../assets";
+import { care, like, haha, angry, love, sad, wow } from "../../assets";
 
 import styles from "./layout.module.css";
 
@@ -12,7 +12,7 @@ const reactionsData = [
   { name: "Me enoja", img: angry, classE: "profile__angry" },
 ];
 
-export const ReactionsPost = () => {
+export const ReactionsPost = ({ style }) => {
   return (
     <div className={styles.reactions__container}>
       <div className={styles.reactions__content}>
