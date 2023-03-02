@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { usePositionElement } from "../../hooks";
 import { OptionsPost } from "../CardPost";
 import { ButtonsReactions } from "./ButtonsReactions";
 
@@ -12,6 +14,9 @@ export const CardLayout = ({
   isCardShare = false,
   style,
 }) => {
+  const [openOptions, setOpenOptions] = useState(false);
+  const { myDivRef, isAtBottom } = usePositionElement();
+
   return (
     <div style={style} className={styles.layout__container}>
       <div className={styles.layout__content_info_user}>
@@ -21,22 +26,30 @@ export const CardLayout = ({
             <p className={styles.layout__name}>{nameUser}</p>
             <span className={styles.layout__date_post}>
               <p>
-                {createdDate} . <i className={iconStyle}></i>
+                {createdDate}. <i className={iconStyle}></i>
               </p>
             </span>
           </span>
         </div>
-        {!isCardShare && <i className="fa-solid fa-ellipsis"></i>}
-        {!isCardShare && <OptionsPost />}
+
+        {!isCardShare && (
+          <i
+            className="fa-solid fa-ellipsis"
+            ref={myDivRef}
+            onClick={() => setOpenOptions(!openOptions)}
+          ></i>
+        )}
+
+        {!isCardShare && openOptions && (
+          <OptionsPost
+            isAtBottom={isAtBottom}
+            setOpenOptions={setOpenOptions}
+          />
+        )}
       </div>
 
       <div className={styles.layout__desc_post}>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero
-          commodi hic atque odio in nemo aliquid omnis corrupti vel quae nihil
-          unde tempore saepe voluptate maiores esse provident, corporis
-          nesciunt!
-        </p>
+        <p>Lorem</p>
       </div>
 
       {children}

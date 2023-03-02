@@ -1,8 +1,16 @@
+import { useCloseModal } from "../../hooks";
+
 import styles from "./cardPost.module.css";
 
-export const OptionsPost = () => {
+export const OptionsPost = ({ isAtBottom, setOpenOptions }) => {
+  const ref = useCloseModal(() => setOpenOptions(false));
+
   return (
-    <div className={styles.options_post__container}>
+    <div
+      ref={ref}
+      className={styles.options_post__container}
+      style={{ top: isAtBottom ? "-15rem" : "" }}
+    >
       <div className={styles.options_post__close_modal}></div>
       <div className={styles.options_post__content}>
         <div className={styles.options_post_info}>
