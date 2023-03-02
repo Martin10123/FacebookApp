@@ -67,14 +67,15 @@
   align-items: center;
   background: #e5e5e5e8;
   border-radius: 50%;
-  bottom: 0;
+  border: 3px solid #fff;
+  bottom: 0.5rem;
   cursor: pointer;
   display: flex;
   font-size: 1.3rem;
   height: 2.5rem;
   justify-content: center;
   position: absolute;
-  right: 0;
+  right: 1rem;
   width: 2.5rem;
   z-index: 99;
 }
@@ -84,7 +85,8 @@
   font-weight: 500;
 }
 
-.profile__buttons_history {
+.profile__buttons_history,
+.profile__buttons_history_other {
   align-items: center;
   display: grid;
   gap: 0.7rem;
@@ -93,9 +95,14 @@
   width: 100%;
 }
 
+.profile__buttons_history_other {
+  grid-template-columns: 1fr 1fr;
+}
+
 .profile__add_history,
 .profile__see_all_friends,
-.profile__edit_public_details {
+.profile__edit_public_details,
+.profile__btn_other {
   align-items: center;
   background: #1c75e0;
   border-radius: 0.4rem;
@@ -108,6 +115,11 @@
   height: 2.3rem;
   justify-content: center;
   width: 100%;
+}
+
+.profile__btn_other:nth-child(1) {
+  background: #e5e6eb;
+  color: #000;
 }
 
 .profile__ellipsis {
@@ -278,13 +290,18 @@
     font-size: 2rem;
   }
 
-  .profile__buttons_history {
+  .profile__buttons_history,
+  .profile__buttons_history_other {
     align-items: end;
     height: 100%;
   }
 
   .profile__add_history {
     width: 14rem;
+  }
+
+  .profile__btn_other {
+    width: 8rem;
   }
 
   .profile__contain_details_and_posts {

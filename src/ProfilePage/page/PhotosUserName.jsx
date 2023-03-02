@@ -40,6 +40,17 @@ export const PhotosUserName = () => {
             <i className="fa-regular fa-pen-to-square"></i>
           </button>
         </div>
+
+        {/* <div className={styles.profile__buttons_history_other}>
+          <button className={styles.profile__btn_other}>
+            <i className="fa-solid fa-user-plus"></i>
+            Agregar
+          </button>
+          <button className={styles.profile__btn_other}>
+            <i className="fa-brands fa-facebook-messenger"></i>
+            Mensaje
+          </button>
+        </div> */}
       </div>
     </div>
   );
