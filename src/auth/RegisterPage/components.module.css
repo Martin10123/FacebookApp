@@ -21,3 +21,12 @@
   padding: 0.5rem;
   width: 100%;
 }
+
+.register__show_error {
+  background: #ff0000;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  text-align: center;
+}

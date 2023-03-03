@@ -1,5 +1,10 @@
 import { createContext, useState } from "react";
-import { validatorRegister } from "../../../helpers";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
+import { createAccountDate } from "../../../helpers/dates";
+import { doc, setDoc } from "firebase/firestore";
+import { firebaseAuth, firebaseDB } from "../../../firebase/firebaseConfig";
+import { generateUsernameUnic, validatorRegister } from "../helpers";
 import { useForm } from "../../../hooks";
 
 export const RegisterProvider = createContext();
@@ -18,77 +23,102 @@ const dataForm = {
 export const RegisterContext = ({ children }) => {
   const [page, setPage] = useState(1);
   const [formSubmitted, setformSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [startLoading, setStartLoading] = useState(false);
   const { formState, formValidation, isFormValid, onInputChange } = useForm(
     dataForm,
     validatorRegister
   );
 
-  const isValidInfo1 = () => {
-    const { displayNameValid, lastNameValid, phoneNumberValid } =
-      formValidation;
-    let canAvance = false;
-
-    if (
-      displayNameValid === null &&
-      lastNameValid === null &&
-      phoneNumberValid === null
-    ) {
-      return (canAvance = true);
-    } else {
-      setformSubmitted(true);
-      return (canAvance = false);
-    }
-  };
-
-  const isValidInfo2 = () => {
-    const { emailValid, password1Valid, password2Valid } = formValidation;
-    let canAvance = false;
-
-    if (
-      emailValid === null &&
-      password1Valid === null &&
-      password2Valid === null
-    ) {
-      return (canAvance = true);
-    } else {
-      setformSubmitted(true);
-      return (canAvance = false);
-    }
+  const isFieldsValid = (fields) => {
+    return fields.every((fieldName) => formValidation[fieldName] === null);
   };
 
   const onChangePage = (num, type) => {
-    const isValid1 = isValidInfo1();
-    const isValid2 = isValidInfo2();
+    let isValid = false;
 
-    const whatIsType = type === "seguir";
+    switch (type) {
+      case "volver":
+        setPage(Math.max(0, Math.min(page + num, 3)));
+        break;
+      case "seguir":
+        switch (page) {
+          case 1:
+            isValid = isFieldsValid([
+              "displayNameValid",
+              "lastNameValid",
+              "phoneNumberValid",
+            ]);
+            break;
+          case 2:
+            isValid = isFieldsValid([
+              "emailValid",
+              "password1Valid",
+              "password2Valid",
+            ]);
+            break;
+          default:
+            break;
+        }
 
-    if (!whatIsType) {
-      const result = Math.max(0, Math.min(page + num, 3));
-      setPage(result);
-    } else {
-      if (isValid1 && page === 1) {
-        const result = Math.max(0, Math.min(page + num, 3));
-        setPage(result);
-        setformSubmitted(false);
-      }
+        if (isValid) {
+          setPage(Math.max(0, Math.min(page + num, 3)));
+          setformSubmitted(false);
+        } else {
+          setformSubmitted(true);
+        }
 
-      if (isValid2 && page === 2) {
-        const result = Math.max(0, Math.min(page + num, 3));
-        setPage(result);
-        setformSubmitted(false);
-      }
+        break;
+      default:
+        break;
     }
   };
 
-  const onSubmitForm = () => {
+  const onSubmitForm = async () => {
     if (!isFormValid) return setformSubmitted(true);
 
-    console.log({ ...formState });
+    setStartLoading(true);
+
+    try {
+      const { email, password1, displayName } = formState;
+
+      const { user } = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password1
+      );
+
+      await updateProfile(firebaseAuth.currentUser, {
+        displayName,
+      });
+
+      delete formState.password1;
+      delete formState.password2;
+
+      await setDoc(doc(firebaseDB, "users", user.uid), {
+        ...formState,
+        createAccount: createAccountDate(new Date().getTime()),
+        isActive: true,
+        uid: user.uid,
+        username: generateUsernameUnic(displayName),
+      });
+
+      setStartLoading(false);
+    } catch (error) {
+      console.log(error);
+      if (error.code === "auth/email-already-in-use") {
+        setErrorMessage("Este email ya esta en uso");
+      } else {
+        setErrorMessage(error.code);
+      }
+      setStartLoading(false);
+    }
   };
 
   return (
     <RegisterProvider.Provider
       value={{
+        errorMessage,
         formState,
         formSubmitted,
         formValidation,
@@ -99,6 +129,7 @@ export const RegisterContext = ({ children }) => {
         page,
         setformSubmitted,
         setPage,
+        startLoading,
       }}
     >
       {children}

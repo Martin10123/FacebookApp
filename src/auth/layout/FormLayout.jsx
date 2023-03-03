@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import styles from "./layout.module.css";
 
 export const FormLayout = ({ children, title, imageBack, titleRedirect }) => {
+  const linkTo = title === "Login" ? "/auth/register" : "/auth/login";
+
   return (
     <div className={styles.layout__container}>
       <div className={styles.layout__content_img}>
@@ -17,14 +20,17 @@ export const FormLayout = ({ children, title, imageBack, titleRedirect }) => {
         )}
 
         {title === "Login" && (
-          <p className={styles.layout__forgot_password}>
+          <Link to="/auth/recover" className={styles.layout__forgot_password}>
             ¿Olvidaste tu contraseña?
-          </p>
+          </Link>
         )}
 
         {!!titleRedirect && (
           <span className={styles.layout__redirect_register}>
-            ¿Aún no tienes cuenta? <a href="#">{titleRedirect}</a>
+            {title === "Login"
+              ? "¿Aún no tienes cuenta?"
+              : "¿Ya tienes cuenta?"}
+            <Link to={linkTo}>{titleRedirect}</Link>
           </span>
         )}
       </div>

@@ -31,14 +31,15 @@
 
 .layout__forgot_password,
 .layout__redirect_register {
+  color: #000;
   font-size: 1.1rem;
   margin: 0 0 1rem;
   text-align: end;
 }
 
 .layout__forgot_password:hover {
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .layout__redirect_register {
@@ -48,9 +49,13 @@
 }
 
 .layout__redirect_register > a {
+  color: #1b74f0;
   font-size: 1.3rem;
   font-weight: bold;
-  color: #1b74f0;
+}
+
+.layout__redirect_register > a:hover {
+  text-decoration: underline;
 }
 
 @media (min-width: 600px) {

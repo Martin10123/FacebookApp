@@ -1,38 +1,18 @@
-import { useState } from "react";
-import { recover } from "../../assets";
-import { regex } from "../../helpers";
-import { useForm } from "../../hooks";
 import { ButtonForm, InputForm } from "../helpers";
 import { FormLayout } from "../layout";
-
-const dataForm = {
-  email: "",
-};
-
-const emailValidator = {
-  email: [(value) => regex.test(value) === false, "Ingrese un email valido"],
-};
+import { recover } from "../../assets";
+import { useRecover } from "./useRecover";
 
 export const RecoverAccount = () => {
   const {
-    formValidation: { emailValid },
-    onInputChange,
-    isFormValid,
     email,
-  } = useForm(dataForm, emailValidator);
-  const [formSubmitted, setformSubmitted] = useState(false);
-  const [startLoading, setStartLoading] = useState(false);
-
-  const onSubmitForm = (e) => {
-    e.preventDefault();
-
-    if (!isFormValid) return setformSubmitted(true);
-    console.log(email);
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    emailValid,
+    errorMessage,
+    formSubmitted,
+    isLoadingForm,
+    onInputChange,
+    onSubmitForm,
+  } = useRecover();
 
   return (
     <FormLayout
@@ -50,8 +30,25 @@ export const RecoverAccount = () => {
         type="email"
         value={email}
       />
-
-      <ButtonForm title="Recuperar" onSubmit={onSubmitForm} />
+      <ButtonForm
+        title={isLoadingForm ? "Cargando..." : "Recuperar"}
+        onSubmit={onSubmitForm}
+        disabled={isLoadingForm}
+      />
+      {errorMessage && (
+        <p
+          style={{
+            background: "#ff0000",
+            borderRadius: "0.5rem",
+            color: "#fff",
+            fontSize: "1.1rem",
+            padding: "0.5rem",
+            textAlign: "center",
+          }}
+        >
+          {errorMessage}
+        </p>
+      )}
     </FormLayout>
   );
 };

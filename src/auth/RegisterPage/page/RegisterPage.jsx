@@ -9,13 +9,15 @@ import styles from "../components.module.css";
 
 export const RegisterPage = () => {
   const {
+    errorMessage,
     formState,
     formSubmitted,
     formValidation,
     onChangePage,
     onInputChange,
-    page,
     onSubmitForm,
+    page,
+    startLoading,
   } = useContext(RegisterProvider);
 
   return (
@@ -67,7 +69,17 @@ export const RegisterPage = () => {
         )}
       </div>
 
-      {page === 3 && <ButtonForm title="Registrarse" onSubmit={onSubmitForm} />}
+      {page === 3 && (
+        <ButtonForm
+          disabled={startLoading}
+          onSubmit={onSubmitForm}
+          title={startLoading ? "Cargando..." : "Registrarse"}
+        />
+      )}
+
+      {errorMessage && (
+        <p className={styles.register__show_error}>{errorMessage}</p>
+      )}
     </FormLayout>
   );
 };
