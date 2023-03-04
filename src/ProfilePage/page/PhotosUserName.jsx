@@ -1,7 +1,10 @@
 import { photoUser } from "../../assets";
+
 import styles from "./profile.module.css";
 
-export const PhotosUserName = () => {
+export const PhotosUserName = ({ userProfile, userActive }) => {
+  const isUserActive = userProfile?.uid === userActive?.uid;
+
   return (
     <div className={styles.profile__content_images_user_info}>
       <div className={styles.profile__cover_photo}>
@@ -15,43 +18,67 @@ export const PhotosUserName = () => {
 
       <div className={styles.profile__content_photo_user}>
         <div className={styles.profile__photo_user}>
-          <img src={photoUser} alt="Foto del perfil" />
+          <img
+            src={userProfile?.photoUrl ? userProfile?.photoUrl : photoUser}
+            alt="Foto del perfil"
+          />
           <div className={styles.profile__camera_float}>
             <i className="fa-solid fa-camera"></i>
           </div>
         </div>
 
         <div className={styles.profile__name_state}>
-          <p className={styles.profile__name_user}>Martin Elias</p>
-          <span>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga
-            impedit autem praesentium blanditiis veniam aperiam adipisci quam
-            deserunt repellendus, molestiae ut est iure deleniti, doloremque hic
-            reprehenderit. Dignissimos, blanditiis suscipit.
-          </span>
+          <p className={styles.profile__name_user}>
+            {userProfile?.displayName}
+          </p>
+          <span>{userProfile?.personalStatus || "Escribe un estado..."}</span>
         </div>
 
-        <div className={styles.profile__buttons_history}>
-          <button className={styles.profile__add_history}>
-            <i className="fa-solid fa-circle-plus"></i>
-            Agregar historia
-          </button>
-          <button className={styles.profile__ellipsis}>
-            <i className="fa-regular fa-pen-to-square"></i>
-          </button>
+        <div
+          className={
+            isUserActive
+              ? styles.profile__buttons_history
+              : styles.profile__buttons_history_other
+          }
+        >
+          {isUserActive ? (
+            <>
+              <ProfileButton
+                buttonText="Agregar historia"
+                buttonClass={styles.profile__add_history}
+                iconClass="fa-solid fa-circle-plus"
+              />
+              <ProfileButton
+                buttonText=""
+                buttonClass={styles.profile__ellipsis}
+                iconClass="fa-regular fa-pen-to-square"
+              />
+            </>
+          ) : (
+            <>
+              <ProfileButton
+                buttonText="Agregar"
+                buttonClass={styles.profile__btn_other}
+                iconClass="fa-solid fa-user-plus"
+              />
+              <ProfileButton
+                buttonClass={styles.profile__btn_other}
+                buttonText="Mensaje"
+                iconClass="fa-brands fa-facebook-messenger"
+              />
+            </>
+          )}
         </div>
-
-        {/* <div className={styles.profile__buttons_history_other}>
-          <button className={styles.profile__btn_other}>
-            <i className="fa-solid fa-user-plus"></i>
-            Agregar
-          </button>
-          <button className={styles.profile__btn_other}>
-            <i className="fa-brands fa-facebook-messenger"></i>
-            Mensaje
-          </button>
-        </div> */}
       </div>
     </div>
+  );
+};
+
+const ProfileButton = ({ iconClass, buttonText, buttonClass }) => {
+  return (
+    <button className={buttonClass}>
+      <i className={iconClass}></i>
+      {buttonText}
+    </button>
   );
 };

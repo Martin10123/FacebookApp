@@ -1,4 +1,7 @@
+import { Link, NavLink } from "react-router-dom";
 import { photoUser } from "../assets";
+import { ButtonForm } from "../Auth/helpers";
+import { useNavbar } from "../NavBar";
 
 import styles from "./menuApp.module.css";
 
@@ -18,6 +21,8 @@ const dataMenu = [
 ];
 
 export const MenuApp = () => {
+  const { onStartLogout, infoUserActive } = useNavbar();
+
   return (
     <div className={styles.menu__container}>
       <div className={styles.menu__content}>
@@ -30,25 +35,44 @@ export const MenuApp = () => {
             </span>
           </div>
 
-          <figure className={styles.menu__info_user}>
-            <img src={photoUser} alt="Foto de perfil" />
-            <figcaption className={styles.menu__figcaption_name}>
-              <p>Martin Elias</p>
-              <span>Ver tu perfil</span>
-            </figcaption>
-          </figure>
+          <Link to={`/${infoUserActive?.username}`}>
+            <figure className={styles.menu__info_user}>
+              <img
+                src={
+                  infoUserActive?.photoUrl
+                    ? infoUserActive?.photoUrl
+                    : photoUser
+                }
+                alt="Foto de perfil"
+              />
+              <figcaption className={styles.menu__figcaption_name}>
+                <p>{infoUserActive?.displayName}</p>
+                <span>Ver tu perfil</span>
+              </figcaption>
+            </figure>
+          </Link>
 
           <div className={styles.menu__access_direct}>
             {dataMenu.map(({ name, icon, color }) => (
-              <div key={name} className={styles.menu__access_item}>
+              <NavLink key={name} className={styles.menu__access_item}>
                 <i className={icon} style={{ color: color }}></i>
-                {name}
-              </div>
+                <p>{name}</p>
+              </NavLink>
             ))}
           </div>
         </div>
         <div className={styles.menu__btn_logout}>
-          <button className={styles.menu__btn}>Cerrar sesión</button>
+          <ButtonForm
+            stylesButton={{
+              background: "#d4d3d3",
+              boxShadow: "none",
+              color: "#000",
+              fontSize: "1.1rem",
+              height: "2.5rem",
+            }}
+            title="Cerrar sesión"
+            onSubmit={onStartLogout}
+          />
         </div>
       </div>
     </div>

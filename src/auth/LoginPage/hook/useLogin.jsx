@@ -57,8 +57,6 @@ export const useLogin = () => {
         isActive: true,
       });
 
-      console.log(user);
-
       setStartLoading(false);
     } catch (error) {
       console.log(error);

@@ -1,3 +1,97 @@
+.menu__container {
+  background: #f1f2f6;
+  height: calc(100vh - 7.688rem);
+  width: 100%;
+}
+
+.menu__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.menu__content_all_less_btn {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.menu__nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu__content_icon {
+  align-items: center;
+  background: #e7e7e7;
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.4rem;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.menu__info_user {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0fr 1fr;
+}
+
+.menu__info_user > img {
+  border-radius: 100%;
+  height: 3rem;
+  object-fit: cover;
+  width: 3rem;
+}
+
+.menu__figcaption_name > p {
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.menu__figcaption_name > span {
+  color: gray;
+}
+
+.menu__access_direct {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.menu__access_item {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 6px grey;
+  cursor: pointer;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.menu__access_item > i {
+  font-size: 1.3rem;
+}
+
+.menu__access_item > p {
+  color: #000;
+  font-weight: 500;
+}
+
+/* Desk */
+
 .navbar_desk__dropdown {
   background: #fff;
   border-radius: 0.6rem;
@@ -28,6 +122,7 @@
 }
 
 .navbar_desk__photo_user > figcaption {
+  color: #000;
   font-size: 1.2rem;
   font-weight: 500;
 }

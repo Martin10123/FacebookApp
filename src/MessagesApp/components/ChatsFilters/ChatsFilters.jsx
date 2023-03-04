@@ -2,11 +2,16 @@ import { PhotoUser } from "./PhotoUser";
 
 import styles from "./chatsFilters.module.css";
 
-export const ChatsFilters = ({ setOpenMessage }) => {
+export const ChatsFilters = ({ setOpenMessage, setOpenChats }) => {
   return (
     <div className={styles.filters__container}>
       <div className={styles.filters__content}>
         <div className={styles.filters__nav}>
+          <i
+            className="fa-solid fa-arrow-left"
+            onClick={() => setOpenChats(false)}
+          ></i>
+
           <h2>Chats</h2>
 
           <span className={styles.filters__icon}>

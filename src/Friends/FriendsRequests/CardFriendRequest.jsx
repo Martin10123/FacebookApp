@@ -1,4 +1,4 @@
-import { photoUser } from "../assets";
+import { photoUser } from "../../assets";
 
 import styles from "./friendsRequest.module.css";
 

@@ -3,13 +3,16 @@ import { ChatsFilters, Messages } from "../components";
 
 import styles from "./chat.module.css";
 
-export const ChatAppPage = () => {
+export const ChatAppPage = ({ setOpenChats }) => {
   const [openMessage, setOpenMessage] = useState(false);
 
   return (
     <div className={styles.chat__container}>
       <div className={styles.chat__content}>
-        <ChatsFilters setOpenMessage={setOpenMessage} />
+        <ChatsFilters
+          setOpenMessage={setOpenMessage}
+          setOpenChats={setOpenChats}
+        />
         {openMessage ? (
           <Messages setOpenMessage={setOpenMessage} />
         ) : (
