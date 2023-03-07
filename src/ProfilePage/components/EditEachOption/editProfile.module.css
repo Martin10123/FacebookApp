@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10000;
+  z-index: 999990000;
 }
 
 .edit__content {
@@ -83,7 +83,16 @@
   width: 10rem;
 }
 
-.edit__image_cover {
+.edit__image_cover > img {
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 100%;
+  max-height: 38rem;
+  object-fit: cover;
+  width: 100%;
+}
+
+.edit__not_image_cover {
   align-items: center;
   background: #949494;
   border-radius: 0.8rem;
@@ -159,7 +168,7 @@
 @media (min-width: 800px) {
   .edit__container {
     align-items: center;
-    background: #ffffff5c;
+    background: #ffffff45;
     display: flex;
     justify-content: center;
   }

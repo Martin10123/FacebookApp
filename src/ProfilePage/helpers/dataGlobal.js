@@ -1,4 +1,4 @@
-import * as svg from "../../../assets/hobbies";
+import * as svg from "../../assets/hobbies";
 
 export const listHobbies = [
   {

@@ -1,4 +1,4 @@
-import { InputForm } from "../../../../../helpers";
+import { InputForm } from "../../../../../Auth";
 import { dataYears } from "../../../../helpers/dataGlobal";
 
 import styles from "./education.module.css";

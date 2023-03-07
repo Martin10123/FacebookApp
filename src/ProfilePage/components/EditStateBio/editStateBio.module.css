@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 999999999;
 }
 
 .bio__content {
@@ -88,12 +88,13 @@
 @media (min-width: 768px) {
   .bio__container {
     align-items: center;
-    background: #ffffff46;
+    background: #ffffffb8;
     display: flex;
     justify-content: center;
   }
 
   .bio__content {
+    background: #fff;
     border-radius: 1rem;
     box-shadow: 1px 1px 6px grey;
     height: 38rem;

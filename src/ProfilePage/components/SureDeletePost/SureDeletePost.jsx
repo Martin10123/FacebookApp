@@ -1,8 +1,8 @@
-import { ButtonForm } from "../../../helpers";
+import { ButtonForm } from "../../../Auth";
 
 import styles from "./deletePost.module.css";
 
-export const DeletePost = () => {
+export const SureDeleteElement = ({ onSubmitDelete, onCancelDelete }) => {
   return (
     <article className={styles.delete__container}>
       <div className={styles.delete__header}>
@@ -13,8 +13,9 @@ export const DeletePost = () => {
           <ButtonForm
             title="Cancelar"
             stylesButton={{ background: "#d8d8d8", color: "#000" }}
+            onSubmit={onCancelDelete}
           />
-          <ButtonForm title="Confirmar" />
+          <ButtonForm title="Confirmar" onSubmit={onSubmitDelete} />
         </div>
       </div>
     </article>

@@ -2,13 +2,16 @@ import { LayoutDetails } from "../layout/LayoutDetails";
 
 import styles from "./editDetails.module.css";
 
-export const EditDetailsPage = () => {
+export const EditDetailsPage = ({ setOpenEditDetails }) => {
   return (
     <>
       <section className={styles.details__container}>
         <div className={styles.details__box}>
           <div className={styles.details__content}>
-            <i className="fa-solid fa-arrow-left"></i>
+            <i
+              className="fa-solid fa-arrow-left"
+              onClick={() => setOpenEditDetails(false)}
+            ></i>
             <p>Editar detalles</p>
           </div>
           <div className={styles.details__title}>

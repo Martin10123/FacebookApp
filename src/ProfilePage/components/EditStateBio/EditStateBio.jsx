@@ -1,14 +1,17 @@
-import { photoUser } from "../../../../assets";
-import { ButtonForm } from "../../../helpers";
+import { photoUser } from "../../../assets";
+import { ButtonForm } from "../../../Auth";
 
 import styles from "./editStateBio.module.css";
 
-export const EditStateBio = () => {
+export const EditStateBio = ({ setOpenEditStateBio }) => {
   return (
     <div className={styles.bio__container}>
       <div className={styles.bio__content}>
         <div className={styles.bio__nav}>
-          <i className="fa-solid fa-arrow-left"></i>
+          <i
+            className="fa-solid fa-arrow-left"
+            onClick={() => setOpenEditStateBio(false)}
+          ></i>
           <p>Editar estado</p>
         </div>
 

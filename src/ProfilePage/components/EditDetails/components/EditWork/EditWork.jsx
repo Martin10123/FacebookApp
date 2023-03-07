@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputForm } from "../../../../../helpers";
+import { InputForm } from "../../../../../Auth";
 import { listJobs } from "../../../../helpers/dataGlobal";
 import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
 import { FilterOptions } from "../FilterOptions/FilterOptions";

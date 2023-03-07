@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 999999999;
 }
 
 .details__box {
@@ -115,7 +115,7 @@
 @media (min-width: 768px) {
   .details__container {
     align-items: center;
-    background: #ffffff46;
+    background: #ffffffb8;
     display: flex;
     justify-content: center;
   }

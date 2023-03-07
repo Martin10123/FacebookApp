@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { FilterOptions } from "../FilterOptions/FilterOptions";
-import { InputForm } from "../../../../../helpers";
+import { InputForm } from "../../../../../Auth";
 import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
 import { listRelationships } from "../../../../helpers/dataGlobal";
 

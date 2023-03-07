@@ -1,15 +1,18 @@
-import { hobbies } from "../../../../assets/hobbies";
+import { hobbies } from "../../../assets/hobbies";
 import { listHobbies } from "../../helpers/dataGlobal";
 
 import styles from "./editHobbies.module.css";
 
-export const EditHobbies = () => {
+export const EditHobbies = ({ setOpenEditHobbies }) => {
   return (
     <>
       <section className={styles.hobbies__container}>
         <div className={styles.hobbies__box}>
           <div className={styles.hobbies__content}>
-            <i className="fa-solid fa-arrow-left"></i>
+            <i
+              className="fa-solid fa-arrow-left"
+              onClick={() => setOpenEditHobbies(false)}
+            ></i>
             <p>Editar detalles</p>
           </div>
           <div className={styles.hobbies__contain_list}>

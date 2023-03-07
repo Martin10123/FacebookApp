@@ -1,15 +1,18 @@
-import { photoUser } from "../../../../assets";
-import { InputForm } from "../../../helpers";
+import { photoUser } from "../../../assets";
+import { InputForm } from "../../../Auth";
 
-import styles from "./listUsersFriends.module.css";
+import styles from "./yourFriends.module.css";
 
-export const ListUsersFriends = () => {
+export const YourFriends = ({ setOpenYourFriends }) => {
   return (
     <div className={styles.list_friends__container}>
       <div className={styles.list_friends__content}>
         <div className={styles.list_friends__nav}>
           <span className={styles.list_friends__name_icon}>
-            <i className="fa-solid fa-arrow-left"></i>
+            <i
+              className="fa-solid fa-arrow-left"
+              onClick={() => setOpenYourFriends(false)}
+            ></i>
             <p>Martin Elias</p>
           </span>
 

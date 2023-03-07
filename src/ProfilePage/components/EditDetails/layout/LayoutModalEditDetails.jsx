@@ -1,4 +1,4 @@
-import { ButtonForm } from "../../../../helpers";
+import { ButtonForm } from "../../../../Auth";
 
 import styles from "./editModalLayout.module.css";
 

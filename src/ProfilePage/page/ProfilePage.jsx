@@ -10,12 +10,15 @@ export const ProfilePage = () => {
   const { searchUserByUsername, userActive } = useContext(AuthUserContext);
   const { username } = useParams();
 
-  const userProfile = searchUserByUsername(username);
+  const userMatchUsername = searchUserByUsername(username);
 
   return (
     <div className={styles.profile__container}>
       <div className={styles.profile__content}>
-        <PhotosUserName userProfile={userProfile} userActive={userActive} />
+        <PhotosUserName
+          userMatchUsername={userMatchUsername}
+          userActive={userActive}
+        />
 
         <div className={styles.profile__contain_details_and_posts}>
           <div className={styles.profile__contents_other_info_user}>

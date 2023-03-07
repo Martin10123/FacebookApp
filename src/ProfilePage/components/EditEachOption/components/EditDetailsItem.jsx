@@ -1,4 +1,4 @@
-import styles from "./editProfile.module.css";
+import styles from "../editProfile.module.css";
 
 export const EditDetailsItem = () => {
   return (

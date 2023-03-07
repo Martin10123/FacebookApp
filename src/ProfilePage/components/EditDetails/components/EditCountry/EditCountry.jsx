@@ -2,9 +2,9 @@ import { useState } from "react";
 import { dataCountrys } from "../../../../helpers/dataGlobal";
 import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
 import { FilterOptions } from "../FilterOptions/FilterOptions";
+import { InputForm } from "../../../../../Auth";
 
 import styles from "../EditWork/work.module.css";
-import { InputForm } from "../../../../../helpers";
 
 export const EditCountry = () => {
   const [openCountrys, setOpenCountrys] = useState(false);
