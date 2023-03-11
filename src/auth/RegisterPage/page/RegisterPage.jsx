@@ -3,14 +3,14 @@ import { register } from "../../../assets";
 import { ButtonForm } from "../../helpers";
 import { FormLayout } from "../../layout";
 import { EmailPassword, InfoPersonal, OtherInfo } from "../components";
-import { RegisterProvider } from "../context/RegisterContext";
+import { RegisterContext, RegisterProvider } from "../context/RegisterContext";
 
 import styles from "../components.module.css";
 
 export const RegisterPage = () => {
   const {
-    errorMessage,
     formState,
+    errorMessage,
     formSubmitted,
     formValidation,
     onChangePage,
@@ -18,7 +18,7 @@ export const RegisterPage = () => {
     onSubmitForm,
     page,
     startLoading,
-  } = useContext(RegisterProvider);
+  } = useContext(RegisterContext);
 
   return (
     <FormLayout

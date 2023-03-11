@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { arrayRemove, doc, setDoc } from "firebase/firestore";
 
 import { AuthUserContext } from "../../../../context";
 import { EditDetailsItem } from "../components/EditDetailsItem";
@@ -6,18 +7,39 @@ import { EditDetailsPage } from "../../EditDetails";
 import { EditHobbies } from "../../EditHobbies/EditHobbiesPage";
 import { EditPhoto } from "../../EditPhoto";
 import { EditStateBio } from "../../EditStateBio/EditStateBio";
+import { firebaseDB } from "../../../../firebase/firebaseConfig";
 import { LayoutInfo } from "../layout/LayoutInfo";
+import { listHobbies } from "../../../helpers/dataGlobal";
 import { photoUser } from "../../../../assets";
+import { usePreventScroll } from "../../../../hooks";
 
 import styles from "../editProfile.module.css";
 
 export const EditProfile = ({ setOpenEditProfile }) => {
+  usePreventScroll();
+
   const { infoUserActive } = useContext(AuthUserContext);
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
   const [openEditStateBio, setOpenEditStateBio] = useState(false);
   const [openEditDetails, setOpenEditDetails] = useState(false);
   const [openEditHobbies, setOpenEditHobbies] = useState(false);
   const [whatPhotoSelected, setWhatPhotoSelected] = useState("");
+
+  const onRemoveHobbie = async (hobbie) => {
+    try {
+      await setDoc(
+        doc(firebaseDB, "users", infoUserActive.uid),
+        {
+          infoPersonal: {
+            hobbies: arrayRemove(hobbie),
+          },
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -70,7 +92,7 @@ export const EditProfile = ({ setOpenEditProfile }) => {
               setWhatPhotoSelected={setWhatPhotoSelected}
             >
               <div className={styles.edit__state_bio}>
-                Describete a ti mismo...
+                {infoUserActive?.stateBio || "Describete a ti mismo..."}
               </div>
             </LayoutInfo>
 
@@ -90,12 +112,22 @@ export const EditProfile = ({ setOpenEditProfile }) => {
               setWhatPhotoSelected={setWhatPhotoSelected}
             >
               <div className={styles.edit__lists_hobbies}>
-                <div className={styles.edit__hobbies_item}>
-                  <img src={photoUser} alt="" />
-                  <p>Educación</p>
+                {listHobbies.map(
+                  ({ name, img }) =>
+                    infoUserActive?.infoPersonal?.hobbies?.includes(name) && (
+                      <div key={name} className={styles.edit__hobbies_item}>
+                        <img src={img} alt="" />
+                        <p>{name}</p>
 
-                  <button className={styles.edit__btn_delete_hobbie}>X</button>
-                </div>
+                        <button
+                          className={styles.edit__btn_delete_hobbie}
+                          onClick={() => onRemoveHobbie(name)}
+                        >
+                          X
+                        </button>
+                      </div>
+                    )
+                )}
               </div>
             </LayoutInfo>
           </div>
@@ -111,13 +143,19 @@ export const EditProfile = ({ setOpenEditProfile }) => {
         />
       )}
       {openEditStateBio && (
-        <EditStateBio setOpenEditStateBio={setOpenEditStateBio} />
+        <EditStateBio
+          infoUserActive={infoUserActive}
+          setOpenEditStateBio={setOpenEditStateBio}
+        />
       )}
       {openEditDetails && (
         <EditDetailsPage setOpenEditDetails={setOpenEditDetails} />
       )}
       {openEditHobbies && (
-        <EditHobbies setOpenEditHobbies={setOpenEditHobbies} />
+        <EditHobbies
+          infoUserActive={infoUserActive}
+          setOpenEditHobbies={setOpenEditHobbies}
+        />
       )}
     </>
   );

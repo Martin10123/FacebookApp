@@ -1,25 +1,54 @@
-import { useState } from "react";
 import { InputForm } from "../../../../../Auth";
 import { listJobs } from "../../../../helpers/dataGlobal";
+import { SureDeleteElement } from "../../../SureDeletePost/SureDeletePost";
 import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
 import { FilterOptions } from "../FilterOptions/FilterOptions";
+import { useEditWork } from "./hook/useEditWork";
 
 import styles from "./work.module.css";
 
-export const EditWork = () => {
-  const [openJobs, setOpenJobs] = useState(false);
+export const EditWork = ({ setOpenWork, infoUserActive }) => {
+  const {
+    formSubmitted,
+    onDeleteJob,
+    onInputChange,
+    onSaveJob,
+    onSelectJob,
+    openJobs,
+    openSureDelete,
+    placeWork,
+    placeWorkValid,
+    selectedJob,
+    setOpenJobs,
+    setOpenSureDelete,
+    startLoading,
+    startLoadingDelete,
+  } = useEditWork({ setOpenWork, infoUserActive });
+
+  const {
+    infoPersonal: { job },
+  } = infoUserActive;
 
   return (
     <>
       <LayoutModalEditDetails
-        titleReturn="Agregar tu trabajo"
+        disabledSaved={startLoading}
+        disabledDelete={startLoadingDelete}
+        onDeleteDetail={() => setOpenSureDelete(true)}
+        onSaveDetail={onSaveJob}
+        setOpenDetail={setOpenWork}
         titleInfo="Trabajo"
+        titleReturn="Agregar tu trabajo"
       >
         <InputForm
-          name="job"
+          errorActive={!!placeWorkValid && formSubmitted}
+          name="placeWork"
+          onChange={onInputChange}
           placeholder="Lugar donde trabajas"
-          type="text"
           styleIcon="fa-regular fa-building"
+          textError={placeWorkValid || ""}
+          type="text"
+          value={job?.placeWork || placeWork}
         />
 
         <div className={styles.options__form}>
@@ -30,17 +59,37 @@ export const EditWork = () => {
             <span className={styles.options__span_icon}>
               <i className="fa-solid fa-briefcase"></i>
             </span>
-            <p>Nombre de tu trabajo</p>
+            {selectedJob.length === 0 && formSubmitted ? (
+              <p style={{ color: "red" }}>Debes elegir una</p>
+            ) : (
+              <>
+                {selectedJob.length === 1 ? (
+                  <p>{selectedJob[0] || "Nombre de tu trabajo"}</p>
+                ) : (
+                  <p>{job?.job || selectedJob[0] || "Nombre de tu trabajo"}</p>
+                )}
+              </>
+            )}
           </div>
-        </div>
-
-        <div className={styles.option__select_by}>
-          <p>Trabajo en miami</p>
         </div>
       </LayoutModalEditDetails>
 
       {openJobs && (
-        <FilterOptions setOpenFilter={setOpenJobs} data={listJobs} />
+        <FilterOptions
+          choosedBefore={selectedJob}
+          data={listJobs}
+          onSelectData={onSelectJob}
+          setOpenFilter={setOpenJobs}
+        />
+      )}
+
+      {openSureDelete && (
+        <SureDeleteElement
+          disabled={startLoadingDelete}
+          titleShow="¿Quieres eliminar tus datos sobre tu ocupación?"
+          onCancelDelete={() => setOpenSureDelete(false)}
+          onSubmitDelete={onDeleteJob}
+        />
       )}
     </>
   );

@@ -112,11 +112,6 @@
   width: 1.3rem;
 }
 
-.hobbies__checkbox_select {
-  background: #0099ff;
-  border: none;
-}
-
 .hobbies__buttons {
   align-items: center;
   display: grid;

@@ -33,10 +33,13 @@
 }
 
 .filter__content p {
+  align-items: center;
   border-radius: 1rem;
-  box-shadow: 1px 1px 6px gray;
+  box-shadow: 1px 1px 6px grey;
   cursor: pointer;
+  display: flex;
   font-size: 1.1rem;
+  gap: 1rem;
   padding: 0.5rem 1rem;
   width: fit-content;
 }

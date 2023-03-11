@@ -10,6 +10,7 @@ import { uploadUserProfileImage } from "../helper/loadPhotoUser";
 export const usePhoto = ({ typePhoto, setOpenEditPhoto }) => {
   const [startLoadingPhoto, setStartLoadingPhoto] = useState(false);
   const [startLoadingDeletePhoto, setStartLoadingDeletePhoto] = useState(false);
+  const [startLoadingListPhotos, setStartLoadingListPhotos] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const [imageToDelete, setImageToDelete] = useState(null);
   const [listPhotos, setListPhotos] = useState([]);
@@ -24,9 +25,20 @@ export const usePhoto = ({ typePhoto, setOpenEditPhoto }) => {
 
   useEffect(() => {
     const getAllPhotosUser = async () => {
-      const listPhotosUser = await loadListPhotosUser({ username, typePhoto });
+      setStartLoadingListPhotos(true);
 
-      setListPhotos(listPhotosUser);
+      try {
+        const listPhotosUser = await loadListPhotosUser({
+          username,
+          typePhoto,
+        });
+
+        setListPhotos(listPhotosUser);
+      } catch (error) {
+        console.log(error);
+      }
+
+      setStartLoadingListPhotos(false);
     };
 
     getAllPhotosUser();
@@ -86,10 +98,10 @@ export const usePhoto = ({ typePhoto, setOpenEditPhoto }) => {
   };
 
   const onDeletePhotoActual = async () => {
-    const whatIsPhotoActual = typePhoto === "photoUrl" ? photoUrl : coverPhoto;
+    const photoToDelete = typePhoto === "photoUrl" ? photoUrl : coverPhoto;
 
-    if (!whatIsPhotoActual) {
-      return null;
+    if (!photoToDelete) {
+      return;
     }
 
     setStartLoadingDeletePhoto(true);
@@ -117,6 +129,7 @@ export const usePhoto = ({ typePhoto, setOpenEditPhoto }) => {
     openSureDelete,
     setOpenSureDelete,
     startLoadingDeletePhoto,
+    startLoadingListPhotos,
     startLoadingPhoto,
   };
 };

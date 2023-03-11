@@ -12,3 +12,9 @@ html {
   padding: 0;
   text-decoration: none;
 }
+
+.disabled_btn {
+  color: gray !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}

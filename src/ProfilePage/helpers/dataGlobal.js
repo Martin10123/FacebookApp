@@ -160,9 +160,7 @@ export const listRelationships = [
   "En busca de alguien que me ame",
   "Esperando un milagro",
   "En 5 relaciones serias",
-  "Lllevando cacho ando",
-  "Soy programador bro, de que pareja hablas?",
-  "Mejor me pongo a aprender ingles",
+  "Llevando cacho ando",
   "otro",
 ];
 

@@ -1,15 +1,59 @@
+import { doc, setDoc } from "firebase/firestore";
+import { useState } from "react";
 import { hobbies } from "../../../assets/hobbies";
+import { firebaseDB } from "../../../firebase/firebaseConfig";
 import { listHobbies } from "../../helpers/dataGlobal";
 
 import styles from "./editHobbies.module.css";
 
-export const EditHobbies = ({ setOpenEditHobbies }) => {
+export const EditHobbies = ({ infoUserActive, setOpenEditHobbies }) => {
+  const [selectedHobbies, setSelectedHobbies] = useState(
+    infoUserActive?.infoPersonal.hobbies || []
+  );
+  const [startLoading, setStartLoading] = useState(false);
+
+  const onCheckboxChange = ({ target }) => {
+    const value = target.name;
+
+    if (selectedHobbies.includes(value)) {
+      setSelectedHobbies(selectedHobbies.filter((hobby) => hobby !== value));
+    } else {
+      if (selectedHobbies.length <= 7) {
+        setSelectedHobbies([...selectedHobbies, value]);
+      }
+    }
+  };
+
+  const onSavedHobbies = async () => {
+    if (selectedHobbies.length === 0) return;
+
+    setStartLoading(true);
+
+    try {
+      await setDoc(
+        doc(firebaseDB, "users", infoUserActive?.uid),
+        {
+          infoPersonal: {
+            hobbies: [...selectedHobbies],
+          },
+        },
+        { merge: true }
+      );
+      setStartLoading(false);
+      setOpenEditHobbies(false);
+    } catch (error) {
+      console.log(error);
+      setStartLoading(false);
+    }
+  };
+
   return (
     <>
       <section className={styles.hobbies__container}>
         <div className={styles.hobbies__box}>
           <div className={styles.hobbies__content}>
             <i
+              style={{ pointerEvents: startLoading ? "none" : "all" }}
               className="fa-solid fa-arrow-left"
               onClick={() => setOpenEditHobbies(false)}
             ></i>
@@ -32,16 +76,28 @@ export const EditHobbies = ({ setOpenEditHobbies }) => {
                     <img src={img} alt={name} />
                     <figcaption>{name}</figcaption>
                   </figure>
-                  <div className={styles.hobbies__checkbox}>
-                    <i className="fa-solid fa-check"></i>
-                  </div>
+
+                  <input
+                    checked={selectedHobbies.includes(name)}
+                    className={styles.hobbies__checkbox}
+                    name={name}
+                    onChange={onCheckboxChange}
+                    type="checkbox"
+                  />
                 </li>
               ))}
             </ul>
           </div>
           <div className={styles.hobbies__buttons}>
-            <button>Guardar</button>
-            <button>Cancelar</button>
+            <button disabled={startLoading} onClick={onSavedHobbies}>
+              {startLoading ? "Guardando..." : "Guardar"}
+            </button>
+            <button
+              disabled={startLoading}
+              onClick={() => setOpenEditHobbies(false)}
+            >
+              Cancelar
+            </button>
           </div>
         </div>
       </section>

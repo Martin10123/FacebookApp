@@ -1,9 +1,12 @@
 import { usePhoto } from "./hook/usePhoto";
 import { SureDeleteElement } from "../SureDeletePost/SureDeletePost";
+import { usePreventScroll } from "../../../hooks";
 
 import styles from "./editPhoto.module.css";
 
 export const EditPhoto = ({ typePhoto, setOpenEditPhoto }) => {
+  usePreventScroll();
+
   const {
     displayName,
     fileInputRef,
@@ -15,6 +18,7 @@ export const EditPhoto = ({ typePhoto, setOpenEditPhoto }) => {
     openSureDelete,
     setOpenSureDelete,
     startLoadingDeletePhoto,
+    startLoadingListPhotos,
     startLoadingPhoto,
   } = usePhoto({ typePhoto, setOpenEditPhoto });
 
@@ -49,6 +53,12 @@ export const EditPhoto = ({ typePhoto, setOpenEditPhoto }) => {
             {startLoadingPhoto && (
               <div className={styles.showLoading}>
                 <p>{displayName} estamos cargando tu foto...</p>
+              </div>
+            )}
+
+            {startLoadingListPhotos && (
+              <div className={styles.showLoading}>
+                <p>Cargando...</p>
               </div>
             )}
 

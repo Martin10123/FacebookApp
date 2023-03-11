@@ -43,9 +43,7 @@ export const PhotosUserName = ({ userMatchUsername, userActive }) => {
             <p className={styles.profile__name_user}>
               {userMatchUsername?.displayName}
             </p>
-            <span>
-              {userMatchUsername?.personalStatus || "Escribe un estado..."}
-            </span>
+            <span>{userMatchUsername?.stateBio || "Escribe un estado..."}</span>
           </div>
 
           <div

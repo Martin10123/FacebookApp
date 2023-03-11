@@ -23,13 +23,16 @@
 }
 
 .options__input_form p {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
-.options__select_by {
+.options__show_error {
   border-radius: 0.5rem;
   box-shadow: 1px 1px 6px grey;
+  color: #ff0000;
   cursor: pointer;
   font-size: 1.1rem;
+  margin: 1rem 0 0 0;
   padding: 0.5rem;
+  text-align: center;
 }

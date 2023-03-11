@@ -9,6 +9,7 @@
 }
 
 .layout_modal__content {
+  background: #fff;
   display: grid;
   grid-template-rows: 0fr 1fr 0fr;
   height: 100%;
@@ -98,10 +99,20 @@
   gap: 0.5rem;
 }
 
+.options__show_error {
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 6px grey;
+  color: #ff0000;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .layout_modal__container {
     align-items: center;
-    background: #ffffff46;
+    background: #ffffffe8;
     display: flex;
     justify-content: center;
   }
@@ -109,7 +120,8 @@
   .layout_modal__content {
     border-radius: 1rem;
     box-shadow: 1px 1px 6px grey;
-    height: 38rem;
+    height: 40rem;
+    overflow: auto;
     padding: 1rem;
     width: 35rem;
   }

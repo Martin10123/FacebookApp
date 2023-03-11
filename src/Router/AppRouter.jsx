@@ -7,9 +7,10 @@ import { StartLoading } from "../StartLoading/StartLoading";
 import { SecondRouter } from "./SecondRouter";
 
 export const AppRouter = () => {
-  const { isLoggedIn, startLoading } = useContext(AuthUserContext);
+  const { isLoggedIn, startLoading, startLoadingOther } =
+    useContext(AuthUserContext);
 
-  if (startLoading) {
+  if (startLoading || startLoadingOther) {
     return <StartLoading />;
   }
 

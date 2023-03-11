@@ -10,6 +10,7 @@ export const AuthUserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [userActive, setUserActive] = useState({});
   const [startLoading, setStartLoading] = useState(true);
+  const [startLoadingOther, setStartLoadingOther] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export const AuthUserProvider = ({ children }) => {
       });
 
       setUsers([...arrayUsers]);
+      setStartLoadingOther(false);
     });
 
     return () => unSuscribed();
@@ -50,11 +52,12 @@ export const AuthUserProvider = ({ children }) => {
   const infoUserActive = users?.find((user) => user.uid === userActive?.uid);
 
   const providerState = {
+    infoUserActive,
     isLoggedIn,
     searchUserByUsername,
     startLoading,
+    startLoadingOther,
     userActive,
-    infoUserActive,
     users,
   };
 

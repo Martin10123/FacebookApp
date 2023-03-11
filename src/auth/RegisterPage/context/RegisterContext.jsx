@@ -7,7 +7,7 @@ import { firebaseAuth, firebaseDB } from "../../../firebase/firebaseConfig";
 import { generateUsernameUnic, validatorRegister } from "../helpers";
 import { useForm } from "../../../hooks";
 
-export const RegisterProvider = createContext();
+export const RegisterContext = createContext();
 
 const dataForm = {
   birthday: "",
@@ -20,7 +20,7 @@ const dataForm = {
   phoneNumber: "",
 };
 
-export const RegisterContext = ({ children }) => {
+export const RegisterProvider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [formSubmitted, setformSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -116,7 +116,7 @@ export const RegisterContext = ({ children }) => {
   };
 
   return (
-    <RegisterProvider.Provider
+    <RegisterContext.Provider
       value={{
         errorMessage,
         formState,
@@ -133,6 +133,6 @@ export const RegisterContext = ({ children }) => {
       }}
     >
       {children}
-    </RegisterProvider.Provider>
+    </RegisterContext.Provider>
   );
 };

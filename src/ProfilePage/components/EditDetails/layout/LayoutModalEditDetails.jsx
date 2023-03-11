@@ -4,6 +4,8 @@ import styles from "./editModalLayout.module.css";
 
 export const LayoutModalEditDetails = ({
   children,
+  disabledSaved,
+  disabledDelete,
   onDeleteDetail,
   onSaveDetail,
   setOpenDetail,
@@ -17,8 +19,9 @@ export const LayoutModalEditDetails = ({
           <div className={styles.layout_modal__nav}>
             <p>{titleReturn}</p>
             <button
+              disabled={disabledSaved}
               className={styles.layout_modal__btn_close}
-              onClick={() => setOpenDetail(true)}
+              onClick={() => setOpenDetail(false)}
             >
               X
             </button>
@@ -39,11 +42,16 @@ export const LayoutModalEditDetails = ({
 
           <div className={styles.layout_modal__buttons}>
             <ButtonForm
-              title="Eliminar"
-              stylesButton={{ background: "#d8d8d8", color: "#000" }}
+              disabled={disabledDelete}
               onSubmit={onDeleteDetail}
+              stylesButton={{ background: "#d8d8d8", color: "#000" }}
+              title={disabledDelete ? "Eliminando..." : "Eliminar"}
             />
-            <ButtonForm title="Guardar" onSubmit={onSaveDetail} />
+            <ButtonForm
+              disabled={disabledSaved}
+              onSubmit={onSaveDetail}
+              title={disabledSaved ? "Guardando..." : "Guardar"}
+            />
           </div>
         </div>
       </div>

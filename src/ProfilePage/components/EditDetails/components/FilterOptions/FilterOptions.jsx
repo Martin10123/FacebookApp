@@ -21,7 +21,9 @@ export const FilterOptions = ({
               {subject}
 
               {markThis && (
-                <span className={styles.filter__check}>
+                <span
+                  className={`${styles.filter__check} ${styles.filter__check_active}`}
+                >
                   <i className="fa-solid fa-check"></i>
                 </span>
               )}

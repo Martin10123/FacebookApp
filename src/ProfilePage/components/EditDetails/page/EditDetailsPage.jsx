@@ -1,8 +1,31 @@
+import {
+  EditCountry,
+  EditEducation,
+  EditRelationship,
+  EditWork,
+} from "../components";
+import { useEditDetailsPage } from "../hook";
 import { LayoutDetails } from "../layout/LayoutDetails";
 
 import styles from "./editDetails.module.css";
 
 export const EditDetailsPage = ({ setOpenEditDetails }) => {
+  const {
+    country,
+    infoUserActive,
+    job,
+    openCountry,
+    openEducation,
+    openRelationship,
+    openWork,
+    setOpenCountry,
+    setOpenEducation,
+    setOpenRelationship,
+    setOpenWork,
+    showDetailsEducation,
+    showDetailsRelation,
+  } = useEditDetailsPage();
+
   return (
     <>
       <section className={styles.details__container}>
@@ -22,29 +45,56 @@ export const EditDetailsPage = ({ setOpenEditDetails }) => {
             <LayoutDetails
               title="Trabajo"
               titleButton="Agregar trabajo"
-              infoDetail="Trabajo en miami"
+              infoDetail={job?.job || "Ingresa un trabajo..."}
+              onOpenModal={() => setOpenWork(true)}
             />
             <LayoutDetails
               title="Educación"
               titleButton="Agregar estudios"
-              infoDetail="Seminario de Cartagena"
+              infoDetail={showDetailsEducation()}
+              onOpenModal={() => setOpenEducation(true)}
             />
             <LayoutDetails
               title="Pais - Ciudad"
               titleButton="Agregar pais"
-              infoDetail="Cartagena"
+              infoDetail={
+                country?.selectCountry && country?.selectCity
+                  ? `${country?.selectCountry} - ${country?.selectCity}`
+                  : "Ingrese su pais actual..."
+              }
+              onOpenModal={() => setOpenCountry(true)}
             />
             <LayoutDetails
               title="Relación"
               titleButton="Agregar relación"
-              infoDetail="En una relación con: sfjdsjfkd"
+              infoDetail={showDetailsRelation()}
+              onOpenModal={() => setOpenRelationship(true)}
             />
-          </div>
-          <div className={styles.details__button}>
-            <button>Guardar</button>
           </div>
         </div>
       </section>
+
+      {openCountry && (
+        <EditCountry
+          infoUserActive={infoUserActive}
+          setOpenCountry={setOpenCountry}
+        />
+      )}
+      {openEducation && (
+        <EditEducation
+          infoUserActive={infoUserActive}
+          setOpenEducation={setOpenEducation}
+        />
+      )}
+      {openRelationship && (
+        <EditRelationship
+          infoUserActive={infoUserActive}
+          setOpenRelationship={setOpenRelationship}
+        />
+      )}
+      {openWork && (
+        <EditWork infoUserActive={infoUserActive} setOpenWork={setOpenWork} />
+      )}
     </>
   );
 };

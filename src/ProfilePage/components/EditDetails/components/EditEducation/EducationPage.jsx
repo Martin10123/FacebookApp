@@ -1,30 +1,92 @@
 import { useState } from "react";
-import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
+
 import { College } from "./College";
+import { LayoutModalEditDetails } from "../../layout/LayoutModalEditDetails";
 import { School } from "./School";
+import { useCollege, useSchool } from "./hook";
+import { SureDeleteElement } from "../../../SureDeletePost/SureDeletePost";
 
 import styles from "./education.module.css";
 
-export const EditEducation = () => {
-  const [openEducation, setOpenEducation] = useState("");
+export const EditEducation = ({ setOpenEducation, infoUserActive }) => {
+  const [openListEducation, setOpenListEducation] = useState("school");
+  const [openSureDelete, setOpenSureDelete] = useState(false);
+  const whatLevelEducation = openListEducation === "college";
+
+  const {
+    formState,
+    formSubmitted,
+    formValidation,
+    isCheckedGraduate,
+    onCheckGraduation,
+    onDeleteCollege,
+    onInputChange,
+    onSavedCollege,
+    startLoading,
+    startLoadingDelete,
+  } = useCollege({ infoUserActive, setOpenEducation, setOpenSureDelete });
+
+  const {
+    formStateSchool,
+    formSubmittedSchool,
+    formValidationSchool,
+    loadingDeleteSchool,
+    loadingSchool,
+    onDeleteSchool,
+    onInputChangeSchool,
+    onSavedSchool,
+  } = useSchool({ infoUserActive, setOpenEducation, setOpenSureDelete });
 
   return (
-    <LayoutModalEditDetails
-      titleReturn="Agrega tus estudios"
-      titleInfo="Estudios"
-    >
-      <select
-        className={styles.education__select}
-        name="educationLevel"
-        value={openEducation}
-        onChange={(e) => setOpenEducation(e.target.value)}
+    <>
+      <LayoutModalEditDetails
+        setOpenDetail={setOpenEducation}
+        titleInfo="Estudios"
+        titleReturn="Agrega tus estudios"
+        onSaveDetail={whatLevelEducation ? onSavedCollege : onSavedSchool}
+        disabledSaved={whatLevelEducation ? startLoading : loadingSchool}
+        disabledDelete={
+          whatLevelEducation ? startLoadingDelete : loadingDeleteSchool
+        }
+        onDeleteDetail={() => setOpenSureDelete(true)}
       >
-        <option value="">Elegir opción</option>
-        <option value="college">Universidad</option>
-        <option value="school">Colegio</option>
-      </select>
+        <select
+          className={styles.education__select}
+          name="educationLevel"
+          value={openListEducation}
+          onChange={(e) => setOpenListEducation(e.target.value)}
+        >
+          <option value="school">Colegio</option>
+          <option value="college">Universidad</option>
+        </select>
 
-      {openEducation === "college" ? <College /> : <School />}
-    </LayoutModalEditDetails>
+        {whatLevelEducation ? (
+          <College
+            formState={formState}
+            formSubmitted={formSubmitted}
+            formValidation={formValidation}
+            onCheckGraduation={onCheckGraduation}
+            onInputChange={onInputChange}
+            isCheckedGraduate={isCheckedGraduate}
+          />
+        ) : (
+          <School
+            formStateSchool={formStateSchool}
+            formSubmittedSchool={formSubmittedSchool}
+            formValidationSchool={formValidationSchool}
+            onInputChangeSchool={onInputChangeSchool}
+          />
+        )}
+      </LayoutModalEditDetails>
+
+      {openSureDelete && (
+        <SureDeleteElement
+          onSubmitDelete={whatLevelEducation ? onDeleteCollege : onDeleteSchool}
+          onCancelDelete={() => setOpenSureDelete(false)}
+          titleShow="¿Seguro que quieres eliminar esta información?"
+          disabled={startLoadingDelete}
+        />
+      )}
+    </>
   );
 };
