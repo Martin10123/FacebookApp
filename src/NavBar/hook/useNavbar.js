@@ -3,14 +3,17 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { AuthUserContext } from "../../context";
 import { firebaseAuth, firebaseDB } from "../../firebase/firebaseConfig";
-import { useCloseModal } from "../../hooks";
+import { useCloseModal, useForm } from "../../hooks";
 
 export const useNavbar = () => {
-  const { infoUserActive } = useContext(AuthUserContext);
+  const { infoUserActive, users } = useContext(AuthUserContext);
   const [openAutoComplete, setOpenAutoComplete] = useState(false);
   const [openWindownChat, setOpenWindownChat] = useState(false);
   const [openWindownNotifi, setOpenWindownNotifi] = useState(false);
   const [openMenuDesk, setOpenMenuDesk] = useState(false);
+  const { searchFriend, onInputChange, onResetForm } = useForm({
+    searchFriend: "",
+  });
 
   const stylesIcons = {
     openWindownChat: openWindownChat
@@ -21,7 +24,7 @@ export const useNavbar = () => {
       : {},
   };
 
-  const refAutoComplete = useCloseModal(() => setOpenAutoComplete(false));
+  const refAutoCom = useCloseModal(() => setOpenAutoComplete(false));
   const refChat = useCloseModal(() => setOpenWindownChat(false));
   const refNotifi = useCloseModal(() => setOpenWindownNotifi(false));
   const refMenu = useCloseModal(() => setOpenMenuDesk(false));
@@ -41,19 +44,23 @@ export const useNavbar = () => {
 
   return {
     infoUserActive,
+    onInputChange,
+    onResetForm,
     onStartLogout,
     openAutoComplete,
     openMenuDesk,
     openWindownChat,
     openWindownNotifi,
-    refAutoComplete,
+    refAutoCom,
     refChat,
     refMenu,
     refNotifi,
+    searchFriend,
     setOpenAutoComplete,
     setOpenMenuDesk,
     setOpenWindownChat,
     setOpenWindownNotifi,
     stylesIcons,
+    users,
   };
 };

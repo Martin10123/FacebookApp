@@ -1,0 +1,82 @@
+.profile__content_titles {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.profile__span_title_friend > p:nth-child(1) {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.profile__span_title_friend > p:nth-child(2) {
+  color: gray;
+}
+
+.profile__btn_find_friends {
+  background: transparent;
+  border: none;
+  color: #1c75e0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.profile__all_info_friends {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.profile__list_friends {
+  display: grid;
+  cursor: pointer;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.profile__friend_info > img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 0.6rem;
+}
+
+.profile__friend_info > p {
+  font-weight: 500;
+}
+
+.profile__see_all_friends {
+  align-items: center;
+  background: #cccccc;
+  border-radius: 0.4rem;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  height: 2.3rem;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .profile__content_info_friends {
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 6px #80808042;
+    padding: 0.8rem 1rem;
+  }
+
+  .profile__content_titles {
+    margin: 0 0 1rem 0;
+  }
+
+  .profile__btn_find_friends {
+    display: none;
+  }
+}

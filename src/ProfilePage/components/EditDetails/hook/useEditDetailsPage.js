@@ -1,55 +1,51 @@
-import { useContext, useState } from "react";
-import { AuthUserContext } from "../../../../context";
+import { useState } from "react";
 
-export const useEditDetailsPage = () => {
-  const { infoUserActive } = useContext(AuthUserContext);
-
+export const useEditDetailsPage = ({ userMatchUsername }) => {
   const [openCountry, setOpenCountry] = useState(false);
   const [openEducation, setOpenEducation] = useState(false);
   const [openRelationship, setOpenRelationship] = useState(false);
   const [openWork, setOpenWork] = useState(false);
 
-  if (!infoUserActive) {
+  if (!userMatchUsername) {
     return null;
   }
 
-  const {
-    infoPersonal: { job, college, school, country, relationship },
-  } = infoUserActive;
+  const { infoPersonal } = userMatchUsername;
 
   const showDetailsEducation = () => {
-    if (college) {
-      return `${college.collegeName} - 
-                ${college.whatStudy} (${college.yearStart} - ${
-        college.yearEnd || "presente"
-      }) - (${college.graduate ? "Graduado" : "Estudiando"})`;
-    } else if (school) {
-      return `${school.schoolName} (${school.yearStart} - ${
-        school.yearEnd || "presente"
-      }) - (${school.yearEnd ? "Graduado" : "Estudiando"})`;
+    if (infoPersonal && infoPersonal.college) {
+      const { collegeName, whatStudy, yearStart, yearEnd, graduate } =
+        infoPersonal.college;
+
+      return `${collegeName} - ${whatStudy} (${yearStart} - ${
+        yearEnd || "presente"
+      }) - (${graduate ? "Graduado" : "Estudiando"})`;
+    } else if (infoPersonal && infoPersonal.school) {
+      const { schoolName, yearStart, yearEnd } = infoPersonal.school;
+
+      return `${schoolName} (${yearStart} - ${yearEnd || "presente"}) - (${
+        yearEnd ? "Graduado" : "Estudiando"
+      })`;
     } else {
       return "Ingrese los datos sobre sus estudios...";
     }
   };
 
   const showDetailsRelation = () => {
-    if (relationship) {
-      if (relationship?.selectRelationship) {
-        return `${relationship.selectRelationship}  ${
-          relationship.whoYourPartner
-            ? ` - (${relationship.whoYourPartner})`
-            : ""
-        }`;
-      }
+    if (infoPersonal && infoPersonal.relationship) {
+      const { selectRelationship, whoYourPartner } = infoPersonal.relationship;
+      return `${selectRelationship}${
+        whoYourPartner ? ` - (${whoYourPartner})` : ""
+      }`;
     } else {
       return "Ingrese su estado civil...";
     }
   };
 
   return {
-    country,
-    infoUserActive,
-    job,
+    country: infoPersonal?.country,
+    createAccount: userMatchUsername?.createAccount,
+    job: infoPersonal?.job,
     openCountry,
     openEducation,
     openRelationship,

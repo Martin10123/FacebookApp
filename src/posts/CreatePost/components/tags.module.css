@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10001;
+  z-index: 999999999;
 }
 
 .tag__content {
@@ -127,8 +127,10 @@
   }
 
   .tag__content {
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px grey;
     height: 36rem;
-    padding: 0.5rem;
+    padding: 1rem;
     width: 42rem;
   }
 

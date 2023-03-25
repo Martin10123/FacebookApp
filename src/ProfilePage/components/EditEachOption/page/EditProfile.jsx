@@ -15,7 +15,11 @@ import { usePreventScroll } from "../../../../hooks";
 
 import styles from "../editProfile.module.css";
 
-export const EditProfile = ({ setOpenEditProfile }) => {
+export const EditProfile = ({
+  isUserActive,
+  setOpenEditProfile,
+  userMatchUsername,
+}) => {
   usePreventScroll();
 
   const { infoUserActive } = useContext(AuthUserContext);
@@ -50,33 +54,42 @@ export const EditProfile = ({ setOpenEditProfile }) => {
               className="fa-solid fa-arrow-left"
               onClick={() => setOpenEditProfile(false)}
             ></i>
-            <p>Editar perfil</p>
+            <p>
+              {isUserActive
+                ? "Editar perfil"
+                : `Detalles de ${userMatchUsername.displayName}`}
+            </p>
           </div>
 
           <div className={styles.edit__options}>
             <LayoutInfo
+              isUserActive={isUserActive}
               nameButton="Agregar"
               onOpenInfo={setOpenEditPhoto}
-              title="Foto de perfil"
               setWhatPhotoSelected={setWhatPhotoSelected}
+              title="Foto de perfil"
             >
               <div className={styles.edit__profile_photo}>
                 <img
-                  src={infoUserActive?.photoUrl || photoUser}
+                  src={userMatchUsername?.photoUrl || photoUser}
                   alt="Foto del usuario"
                 />
               </div>
             </LayoutInfo>
 
             <LayoutInfo
+              isUserActive={isUserActive}
               nameButton="Agregar"
               onOpenInfo={setOpenEditPhoto}
-              title="Foto de portada"
               setWhatPhotoSelected={setWhatPhotoSelected}
+              title="Foto de portada"
             >
-              {infoUserActive?.coverPhoto ? (
+              {userMatchUsername?.coverPhoto ? (
                 <figure className={styles.edit__image_cover}>
-                  <img src={infoUserActive?.coverPhoto || photoUser} alt="" />
+                  <img
+                    src={userMatchUsername?.coverPhoto || photoUser}
+                    alt=""
+                  />
                 </figure>
               ) : (
                 <div className={styles.edit__not_image_cover}>
@@ -86,45 +99,52 @@ export const EditProfile = ({ setOpenEditProfile }) => {
             </LayoutInfo>
 
             <LayoutInfo
+              isUserActive={isUserActive}
               nameButton="Agregar"
               onOpenInfo={setOpenEditStateBio}
-              title="Estado"
               setWhatPhotoSelected={setWhatPhotoSelected}
+              title="Estado"
             >
               <div className={styles.edit__state_bio}>
-                {infoUserActive?.stateBio || "Describete a ti mismo..."}
+                {userMatchUsername?.stateBio || "Describete a ti mismo..."}
               </div>
             </LayoutInfo>
 
             <LayoutInfo
+              isUserActive={isUserActive}
               nameButton="Editar"
               onOpenInfo={setOpenEditDetails}
-              title="Detalles"
               setWhatPhotoSelected={setWhatPhotoSelected}
+              title="Detalles"
             >
-              <EditDetailsItem />
+              <EditDetailsItem userMatchUsername={userMatchUsername} />
             </LayoutInfo>
 
             <LayoutInfo
+              isUserActive={isUserActive}
               nameButton="Agregar"
               onOpenInfo={setOpenEditHobbies}
-              title="Pasatiempos"
               setWhatPhotoSelected={setWhatPhotoSelected}
+              title="Pasatiempos"
             >
               <div className={styles.edit__lists_hobbies}>
                 {listHobbies.map(
                   ({ name, img }) =>
-                    infoUserActive?.infoPersonal?.hobbies?.includes(name) && (
+                    userMatchUsername?.infoPersonal?.hobbies?.includes(
+                      name
+                    ) && (
                       <div key={name} className={styles.edit__hobbies_item}>
                         <img src={img} alt="" />
                         <p>{name}</p>
 
-                        <button
-                          className={styles.edit__btn_delete_hobbie}
-                          onClick={() => onRemoveHobbie(name)}
-                        >
-                          X
-                        </button>
+                        {isUserActive && (
+                          <button
+                            className={styles.edit__btn_delete_hobbie}
+                            onClick={() => onRemoveHobbie(name)}
+                          >
+                            X
+                          </button>
+                        )}
                       </div>
                     )
                 )}
@@ -149,7 +169,11 @@ export const EditProfile = ({ setOpenEditProfile }) => {
         />
       )}
       {openEditDetails && (
-        <EditDetailsPage setOpenEditDetails={setOpenEditDetails} />
+        <EditDetailsPage
+          infoUserActive={infoUserActive}
+          setOpenEditDetails={setOpenEditDetails}
+          userMatchUsername={userMatchUsername}
+        />
       )}
       {openEditHobbies && (
         <EditHobbies

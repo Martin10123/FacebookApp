@@ -2,12 +2,19 @@ import { photoUser } from "../../../assets";
 
 import styles from "./tags.module.css";
 
-export const TagFriends = () => {
+export const TagFriends = ({
+  listTagFriends,
+  setListTagFriends,
+  setOpenTagFriends,
+}) => {
   return (
     <div className={styles.tag__container}>
       <div className={styles.tag__content}>
         <div className={styles.tag__nav}>
-          <div className={styles.tag__btn_close}>
+          <div
+            className={styles.tag__btn_close}
+            onClick={() => setOpenTagFriends(false)}
+          >
             <i className="fa-solid fa-arrow-left"></i>
           </div>
           <p>Etiquetar amigos</p>
@@ -20,6 +27,7 @@ export const TagFriends = () => {
         </div>
 
         <h2>Todos los amigos</h2>
+
         <div className={styles.tag__content_users}>
           <div className={styles.tag__info_user}>
             <figure className={styles.tag__user_img_name}>

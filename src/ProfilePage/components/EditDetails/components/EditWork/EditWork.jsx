@@ -48,7 +48,7 @@ export const EditWork = ({ setOpenWork, infoUserActive }) => {
           styleIcon="fa-regular fa-building"
           textError={placeWorkValid || ""}
           type="text"
-          value={job?.placeWork || placeWork}
+          value={placeWork}
         />
 
         <div className={styles.options__form}>
@@ -63,11 +63,7 @@ export const EditWork = ({ setOpenWork, infoUserActive }) => {
               <p style={{ color: "red" }}>Debes elegir una</p>
             ) : (
               <>
-                {selectedJob.length === 1 ? (
-                  <p>{selectedJob[0] || "Nombre de tu trabajo"}</p>
-                ) : (
-                  <p>{job?.job || selectedJob[0] || "Nombre de tu trabajo"}</p>
-                )}
+                <p>{selectedJob[0] || "Nombre de tu trabajo"}</p>
               </>
             )}
           </div>

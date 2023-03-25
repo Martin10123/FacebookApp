@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { photoUser } from "../../assets";
-import { SearchFriends } from "../../Friends";
-import { YourFriends } from "../components";
+import { photoUser } from "../../../assets";
+import { SearchFriends } from "../../../Friends";
+import { YourFriends } from "../../components";
 
-import styles from "./profile.module.css";
+import styles from "./listFriendsUsers.module.css";
 
 export const ListFriendsUser = () => {
   const [openYourFriends, setOpenYourFriends] = useState(false);

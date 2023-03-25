@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { EditDetailsItem, EditProfile } from "../components";
+import { EditDetailsItem, EditProfile } from "../../components";
 
-import styles from "./profile.module.css";
+import styles from "./detailsUser.module.css";
 
-export const DetailsUser = () => {
+export const DetailsUser = ({ isUserActive, userMatchUsername }) => {
   const [openEditProfile, setOpenEditProfile] = useState(false);
 
   return (
@@ -16,18 +16,22 @@ export const DetailsUser = () => {
         <h3 className={styles.title_details}>Detalles</h3>
 
         <ul className={styles.profile__list_details}>
-          <EditDetailsItem />
+          <EditDetailsItem userMatchUsername={userMatchUsername} />
 
           <button
             className={styles.profile__edit_public_details}
             onClick={() => setOpenEditProfile(true)}
           >
-            Editar detalles
+            {isUserActive ? "Editar detalles" : "Ver detalles"}
           </button>
         </ul>
       </div>
       {openEditProfile && (
-        <EditProfile setOpenEditProfile={setOpenEditProfile} />
+        <EditProfile
+          isUserActive={isUserActive}
+          setOpenEditProfile={setOpenEditProfile}
+          userMatchUsername={userMatchUsername}
+        />
       )}
     </>
   );

@@ -3,8 +3,6 @@ import { useState } from "react";
 import { firebaseDB } from "../../../../../../firebase/firebaseConfig";
 import { useForm } from "../../../../../../hooks";
 
-const formJob = { placeWork: "" };
-
 const validateField = {
   placeWork: [
     (value) => {
@@ -19,12 +17,15 @@ const validateField = {
 export const useEditWork = ({ infoUserActive, setOpenWork }) => {
   const [openJobs, setOpenJobs] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedJob, setSelectedJob] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(
+    [infoUserActive?.infoPersonal.job?.job] || []
+  );
   const [startLoading, setStartLoading] = useState(false);
   const [startLoadingDelete, setStartLoadingDelete] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const { placeWork, onInputChange, isFormValid, placeWorkValid } = useForm(
-    formJob,
+    { placeWork: infoUserActive?.infoPersonal.job?.placeWork || "" },
+
     validateField
   );
 

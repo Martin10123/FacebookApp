@@ -2,6 +2,7 @@ import styles from "../editProfile.module.css";
 
 export const LayoutInfo = ({
   children,
+  isUserActive,
   nameButton,
   onOpenInfo,
   setWhatPhotoSelected,
@@ -16,9 +17,12 @@ export const LayoutInfo = ({
     <div className={styles.edit__contain_all_info}>
       <div className={styles.edit__header_options}>
         <p>{title}</p>
-        <button className={styles.edit__btn_add} onClick={onSelectedOption}>
-          {nameButton}
-        </button>
+
+        {isUserActive && (
+          <button className={styles.edit__btn_add} onClick={onSelectedOption}>
+            {nameButton}
+          </button>
+        )}
       </div>
 
       {children}

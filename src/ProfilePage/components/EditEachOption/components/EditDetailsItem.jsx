@@ -2,14 +2,14 @@ import { useEditDetailsPage } from "../../EditDetails/hook";
 
 import styles from "../editProfile.module.css";
 
-export const EditDetailsItem = () => {
+export const EditDetailsItem = ({ userMatchUsername }) => {
   const {
     country,
-    infoUserActive,
+    createAccount,
     job,
     showDetailsEducation,
     showDetailsRelation,
-  } = useEditDetailsPage();
+  } = useEditDetailsPage({ userMatchUsername });
 
   return (
     <div className={styles.edit__details}>
@@ -23,7 +23,7 @@ export const EditDetailsItem = () => {
       </div>
       <div className={styles.edit__details_item}>
         <i className="fa-solid fa-clock"></i>
-        <p>{infoUserActive?.createAccount}</p>
+        <p>{createAccount}</p>
       </div>
       <div className={styles.edit__details_item}>
         <i className="fa-solid fa-location-dot"></i>

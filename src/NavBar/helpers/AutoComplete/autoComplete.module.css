@@ -20,9 +20,30 @@
   cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 0fr;
+  padding: 0.5rem;
+  transition: 0.3s ease-in-out;
 }
 
-.auto__li_item > p {
+.auto__li_item:hover {
+  background: #8080804d;
+  border-radius: 0.4rem;
+  transition: 0.3s ease-in-out;
+}
+
+.auto__user_info {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.auto__user_info > img {
+  border-radius: 50%;
+  height: 3rem;
+  object-fit: cover;
+  width: 3rem;
+}
+
+.auto__user_info > figcaption {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -30,4 +51,5 @@
 
 .auto__li_item > i {
   color: #00000059;
+  font-size: 1.2rem;
 }

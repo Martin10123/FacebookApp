@@ -1,29 +1,33 @@
 import { photoUser } from "../assets";
-import { AutoComplete } from "../helpers";
 import { MenuDesk } from "../MenuApp";
 import { WindownChats } from "../MessagesApp";
 import { WindownNotifications } from "../WindownNotifications/WindownNotifications";
+import { AutoComplete } from "./helpers";
 import { useNavbar } from "./hook/useNavbar";
 
 import styles from "./navbar.module.css";
 
 export const NavIconsDesk = () => {
   const {
-    refAutoComplete,
+    infoUserActive,
+    onInputChange,
+    onResetForm,
     onStartLogout,
     openAutoComplete,
     openMenuDesk,
     openWindownChat,
     openWindownNotifi,
+    refAutoCom,
     refChat,
     refMenu,
     refNotifi,
+    searchFriend,
     setOpenAutoComplete,
     setOpenMenuDesk,
     setOpenWindownChat,
     setOpenWindownNotifi,
     stylesIcons,
-    infoUserActive,
+    users,
   } = useNavbar();
 
   return (
@@ -31,12 +35,24 @@ export const NavIconsDesk = () => {
       <div
         className={styles.nav__search_friends}
         onClick={() => setOpenAutoComplete(true)}
-        ref={refAutoComplete}
+        ref={refAutoCom}
       >
         <i className="fa-solid fa-magnifying-glass"></i>
-        <input type="text" name="searchFriend" placeholder="Buscar amigos..." />
+        <input
+          name="searchFriend"
+          onChange={onInputChange}
+          placeholder="Buscar amigos..."
+          type="text"
+          value={searchFriend}
+        />
 
-        {openAutoComplete && <AutoComplete />}
+        {openAutoComplete && (
+          <AutoComplete
+            onResetForm={onResetForm}
+            searchFriend={searchFriend}
+            users={users}
+          />
+        )}
       </div>
 
       <div className={styles.nav__buttons_desk}>
@@ -57,6 +73,7 @@ export const NavIconsDesk = () => {
           style={stylesIcons.openWindownNotifi}
         >
           <i className="fa-solid fa-bell"></i>
+
           {openWindownNotifi && <WindownNotifications />}
         </div>
 

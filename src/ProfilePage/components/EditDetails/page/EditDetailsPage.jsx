@@ -9,10 +9,13 @@ import { LayoutDetails } from "../layout/LayoutDetails";
 
 import styles from "./editDetails.module.css";
 
-export const EditDetailsPage = ({ setOpenEditDetails }) => {
+export const EditDetailsPage = ({
+  infoUserActive,
+  setOpenEditDetails,
+  userMatchUsername,
+}) => {
   const {
     country,
-    infoUserActive,
     job,
     openCountry,
     openEducation,
@@ -24,7 +27,7 @@ export const EditDetailsPage = ({ setOpenEditDetails }) => {
     setOpenWork,
     showDetailsEducation,
     showDetailsRelation,
-  } = useEditDetailsPage();
+  } = useEditDetailsPage({ userMatchUsername });
 
   return (
     <>
