@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { FriendsRequest } from "../Friends";
-import { MainApp } from "../MainApp/MainApp";
-import { MenuApp } from "../MenuApp";
-import { Navbar } from "../NavBar/Navbar";
-import { ProfilePage } from "../ProfilePage";
-import { MainStore } from "../StoreApp";
-import { WindownNotifications } from "../WindownNotifications/WindownNotifications";
+import { MainApp, MainStore, ProfilePage } from "../modules";
+import {
+  FriendsRequest,
+  MenuApp,
+  Navbar,
+  WindownNotifications,
+} from "../components";
 
 export const SecondRouter = () => {
   return (

@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { AuthRoutes } from "../Auth";
+import { AuthRoutes } from "../modules";
 import { AuthUserContext } from "../context";
-import { StartLoading } from "../StartLoading/StartLoading";
 import { SecondRouter } from "./SecondRouter";
+import { StartLoading } from "../components";
 
 export const AppRouter = () => {
   const { isLoggedIn, startLoading, startLoadingOther } =
