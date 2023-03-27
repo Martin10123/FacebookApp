@@ -12,7 +12,7 @@ import styles from "./editDetails.module.css";
 export const EditDetailsPage = ({
   infoUserActive,
   setOpenEditDetails,
-  userMatchUsername,
+  matchedUser,
 }) => {
   const {
     country,
@@ -27,7 +27,7 @@ export const EditDetailsPage = ({
     setOpenWork,
     showDetailsEducation,
     showDetailsRelation,
-  } = useEditDetailsPage({ userMatchUsername });
+  } = useEditDetailsPage({ matchedUser });
 
   return (
     <>

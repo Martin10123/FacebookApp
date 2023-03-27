@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-export const useEditDetailsPage = ({ userMatchUsername }) => {
+export const useEditDetailsPage = ({ matchedUser }) => {
   const [openCountry, setOpenCountry] = useState(false);
   const [openEducation, setOpenEducation] = useState(false);
   const [openRelationship, setOpenRelationship] = useState(false);
   const [openWork, setOpenWork] = useState(false);
 
-  if (!userMatchUsername) {
+  if (!matchedUser) {
     return null;
   }
 
-  const { infoPersonal } = userMatchUsername;
+  const { infoPersonal } = matchedUser;
 
   const showDetailsEducation = () => {
     if (infoPersonal && infoPersonal.college) {
@@ -44,7 +44,7 @@ export const useEditDetailsPage = ({ userMatchUsername }) => {
 
   return {
     country: infoPersonal?.country,
-    createAccount: userMatchUsername?.createAccount,
+    createAccount: matchedUser?.createAccount,
     job: infoPersonal?.job,
     openCountry,
     openEducation,

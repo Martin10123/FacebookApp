@@ -1,27 +1,26 @@
 import { useState } from "react";
 import { photoUser } from "../../../../assets";
 import { EditPhoto, EditProfile } from "../../components";
-import { useAddFriends } from "../../hook";
 import { ProfileButtons } from "./ProfileButtons/ProfileButtons";
 
 import styles from "./photosUserName.module.css";
 
 export const PhotosUserName = ({
   infoUserActive,
-  userMatchUsername,
   isUserActive,
+  currentUserFriendsList,
+  matchedUser,
+  searchFriendListByUid,
 }) => {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
-
-  const { onAddFriends } = useAddFriends({ infoUserActive, userMatchUsername });
 
   return (
     <>
       <div className={styles.profile__content_images_user_info}>
         <div className={styles.profile__cover_photo}>
-          {userMatchUsername?.coverPhoto ? (
-            <img src={userMatchUsername?.coverPhoto} alt="" />
+          {matchedUser?.coverPhoto ? (
+            <img src={matchedUser?.coverPhoto} alt="" />
           ) : (
             <div className={styles.profile__img_cover}>
               <p>
@@ -35,7 +34,7 @@ export const PhotosUserName = ({
         <div className={styles.profile__content_photo_user}>
           <div className={styles.profile__photo_user}>
             <img
-              src={userMatchUsername?.photoUrl || photoUser}
+              src={matchedUser?.photoUrl || photoUser}
               alt="Foto del perfil"
             />
             {isUserActive && (
@@ -50,14 +49,17 @@ export const PhotosUserName = ({
 
           <div className={styles.profile__name_state}>
             <p className={styles.profile__name_user}>
-              {userMatchUsername?.displayName}
+              {matchedUser?.displayName}
             </p>
-            <span>{userMatchUsername?.stateBio || "Escribe un estado..."}</span>
+            <span>{matchedUser?.stateBio || "Escribe un estado..."}</span>
           </div>
 
           <ProfileButtons
+            currentUserFriendsList={currentUserFriendsList}
+            infoUserActive={infoUserActive}
             isUserActive={isUserActive}
-            onAddFriends={onAddFriends}
+            matchedUser={matchedUser}
+            searchFriendListByUid={searchFriendListByUid}
             setOpenEditProfile={setOpenEditProfile}
           />
         </div>
@@ -67,7 +69,7 @@ export const PhotosUserName = ({
         <EditProfile
           isUserActive={isUserActive}
           setOpenEditProfile={setOpenEditProfile}
-          userMatchUsername={userMatchUsername}
+          matchedUser={matchedUser}
         />
       )}
 

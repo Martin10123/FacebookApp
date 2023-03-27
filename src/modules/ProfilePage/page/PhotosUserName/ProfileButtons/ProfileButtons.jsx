@@ -1,10 +1,38 @@
+import { useAddNewFriends } from "../../../hook";
+import { ButtonsFloatOptions } from "./ButtonsFloatOptions";
+
 import styles from "./profilebuttons.module.css";
 
 export const ProfileButtons = ({
+  currentUserFriendsList,
+  infoUserActive,
   isUserActive,
-  onAddFriends,
+  matchedUser,
+  searchFriendListByUid,
   setOpenEditProfile,
 }) => {
+  const {
+    // atributos
+    isCurrentUserInListFriendsOtherUser,
+    isCurrentUserInListReceivedOtherUser,
+    isOtherUserInListReceivedCurrentUser,
+    isOtherUserInListRequestSent,
+    openResponseRequest,
+    refButtons,
+
+    // metodos
+    onAcceptRequestOfFriend,
+    onAddNewFriend,
+    onDeleteSomebodyFriendsList,
+    onRechacedRequestOfFriend,
+    setOpenResponseRequest,
+  } = useAddNewFriends({
+    infoUserActive,
+    currentUserFriendsList,
+    matchedUser,
+    searchFriendListByUid,
+  });
+
   return (
     <div
       className={
@@ -13,7 +41,7 @@ export const ProfileButtons = ({
           : styles.profile__buttons_history_other
       }
     >
-      {isUserActive ? (
+      {isUserActive && (
         <>
           <button className={styles.profile__add_history}>
             <i className="fa-solid fa-circle-plus"></i>
@@ -26,12 +54,59 @@ export const ProfileButtons = ({
             <i className="fa-regular fa-pen-to-square"></i>
           </button>
         </>
-      ) : (
+      )}
+
+      {!isUserActive && (
         <>
-          <button className={styles.profile__btn_other}>
-            <i className="fa-solid fa-user-plus"></i>
-            Agregar
-          </button>
+          {isCurrentUserInListFriendsOtherUser ? (
+            <button
+              className={styles.profile__btn_other_ok}
+              onClick={() => setOpenResponseRequest(true)}
+            >
+              <i className="fa-solid fa-user-check"></i>
+              Amigos
+            </button>
+          ) : (
+            <>
+              {isOtherUserInListReceivedCurrentUser ? (
+                <>
+                  <button
+                    className={styles.profile__btn_other_sent}
+                    onClick={() => setOpenResponseRequest(true)}
+                  >
+                    <i className="fa-solid fa-user-check"></i>
+                    {!isCurrentUserInListReceivedOtherUser && "Responder"}
+                  </button>
+                </>
+              ) : (
+                <button
+                  className={styles.profile__btn_other_add}
+                  onClick={() => onAddNewFriend(matchedUser.displayName)}
+                  style={{
+                    background: !isOtherUserInListRequestSent ? "" : "#ff0000",
+                  }}
+                >
+                  {!isOtherUserInListRequestSent
+                    ? "Agregar"
+                    : "Eliminar solicitud"}
+                </button>
+              )}
+            </>
+          )}
+
+          {openResponseRequest && (
+            <ButtonsFloatOptions
+              matchedUser={matchedUser}
+              onAcceptRequestOfFriend={onAcceptRequestOfFriend}
+              onRechacedRequestOfFriend={onRechacedRequestOfFriend}
+              refButtons={refButtons}
+              isCurrentUserInListFriendsOtherUser={
+                isCurrentUserInListFriendsOtherUser
+              }
+              onDeleteSomebodyFriendsList={onDeleteSomebodyFriendsList}
+            />
+          )}
+
           <button className={styles.profile__btn_other}>
             <i className="fa-brands fa-facebook-messenger"></i>
             Mensaje

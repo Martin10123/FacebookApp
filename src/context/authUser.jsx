@@ -8,6 +8,7 @@ export const AuthUserContext = createContext();
 
 export const AuthUserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
+  const [friendsEachUsers, setFriendsEachUsers] = useState([]);
   const [userActive, setUserActive] = useState({});
   const [startLoading, setStartLoading] = useState(true);
   const [startLoadingOther, setStartLoadingOther] = useState(true);
@@ -39,8 +40,27 @@ export const AuthUserProvider = ({ children }) => {
       });
 
       setUsers([...arrayUsers]);
-      setStartLoadingOther(false);
     });
+
+    return () => unSuscribed();
+  }, []);
+
+  useEffect(() => {
+    const unSuscribed = onSnapshot(
+      collection(firebaseDB, "friendsEachUsers"),
+      (listUserFriends) => {
+        const arrayFriendsEachUsers = listUserFriends.docs.map((doc) => {
+          return {
+            uidDocUser: doc.id,
+            ...doc.data(),
+          };
+        });
+
+        setFriendsEachUsers([...arrayFriendsEachUsers]);
+
+        setStartLoadingOther(false);
+      }
+    );
 
     return () => unSuscribed();
   }, []);
@@ -49,16 +69,28 @@ export const AuthUserProvider = ({ children }) => {
     return users?.find((user) => user.username === username);
   };
 
+  const searchFriendListByUid = (uidUser) => {
+    return friendsEachUsers?.find(
+      (listFriends) => listFriends.uidDocUser === uidUser
+    );
+  };
+
   const infoUserActive = users?.find((user) => user.uid === userActive?.uid);
+  const currentUserFriendsList = friendsEachUsers?.find(
+    (listFriends) => listFriends.uidDocUser === userActive?.uid
+  );
 
   const providerState = {
+    friendsEachUsers,
     infoUserActive,
     isLoggedIn,
+    searchFriendListByUid,
     searchUserByUsername,
     startLoading,
     startLoadingOther,
     userActive,
     users,
+    currentUserFriendsList,
   };
 
   return (

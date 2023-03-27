@@ -3,7 +3,7 @@ import { EditDetailsItem, EditProfile } from "../../components";
 
 import styles from "./detailsUser.module.css";
 
-export const DetailsUser = ({ isUserActive, userMatchUsername }) => {
+export const DetailsUser = ({ isUserActive, matchedUser }) => {
   const [openEditProfile, setOpenEditProfile] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ export const DetailsUser = ({ isUserActive, userMatchUsername }) => {
         <h3 className={styles.title_details}>Detalles</h3>
 
         <ul className={styles.profile__list_details}>
-          <EditDetailsItem userMatchUsername={userMatchUsername} />
+          <EditDetailsItem matchedUser={matchedUser} />
 
           <button
             className={styles.profile__edit_public_details}
@@ -30,7 +30,7 @@ export const DetailsUser = ({ isUserActive, userMatchUsername }) => {
         <EditProfile
           isUserActive={isUserActive}
           setOpenEditProfile={setOpenEditProfile}
-          userMatchUsername={userMatchUsername}
+          matchedUser={matchedUser}
         />
       )}
     </>

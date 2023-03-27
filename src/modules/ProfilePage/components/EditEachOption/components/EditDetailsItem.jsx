@@ -2,14 +2,14 @@ import { useEditDetailsPage } from "../../EditDetails/hook";
 
 import styles from "../editProfile.module.css";
 
-export const EditDetailsItem = ({ userMatchUsername }) => {
+export const EditDetailsItem = ({ matchedUser }) => {
   const {
     country,
     createAccount,
     job,
     showDetailsEducation,
     showDetailsRelation,
-  } = useEditDetailsPage({ userMatchUsername });
+  } = useEditDetailsPage({ matchedUser });
 
   return (
     <div className={styles.edit__details}>

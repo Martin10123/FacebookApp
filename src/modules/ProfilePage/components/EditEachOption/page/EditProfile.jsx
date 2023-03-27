@@ -18,7 +18,7 @@ import styles from "../editProfile.module.css";
 export const EditProfile = ({
   isUserActive,
   setOpenEditProfile,
-  userMatchUsername,
+  matchedUser,
 }) => {
   usePreventScroll();
 
@@ -57,7 +57,7 @@ export const EditProfile = ({
             <p>
               {isUserActive
                 ? "Editar perfil"
-                : `Detalles de ${userMatchUsername.displayName}`}
+                : `Detalles de ${matchedUser.displayName}`}
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export const EditProfile = ({
             >
               <div className={styles.edit__profile_photo}>
                 <img
-                  src={userMatchUsername?.photoUrl || photoUser}
+                  src={matchedUser?.photoUrl || photoUser}
                   alt="Foto del usuario"
                 />
               </div>
@@ -84,12 +84,9 @@ export const EditProfile = ({
               setWhatPhotoSelected={setWhatPhotoSelected}
               title="Foto de portada"
             >
-              {userMatchUsername?.coverPhoto ? (
+              {matchedUser?.coverPhoto ? (
                 <figure className={styles.edit__image_cover}>
-                  <img
-                    src={userMatchUsername?.coverPhoto || photoUser}
-                    alt=""
-                  />
+                  <img src={matchedUser?.coverPhoto || photoUser} alt="" />
                 </figure>
               ) : (
                 <div className={styles.edit__not_image_cover}>
@@ -106,7 +103,7 @@ export const EditProfile = ({
               title="Estado"
             >
               <div className={styles.edit__state_bio}>
-                {userMatchUsername?.stateBio || "Describete a ti mismo..."}
+                {matchedUser?.stateBio || "Describete a ti mismo..."}
               </div>
             </LayoutInfo>
 
@@ -117,7 +114,7 @@ export const EditProfile = ({
               setWhatPhotoSelected={setWhatPhotoSelected}
               title="Detalles"
             >
-              <EditDetailsItem userMatchUsername={userMatchUsername} />
+              <EditDetailsItem matchedUser={matchedUser} />
             </LayoutInfo>
 
             <LayoutInfo
@@ -130,9 +127,7 @@ export const EditProfile = ({
               <div className={styles.edit__lists_hobbies}>
                 {listHobbies.map(
                   ({ name, img }) =>
-                    userMatchUsername?.infoPersonal?.hobbies?.includes(
-                      name
-                    ) && (
+                    matchedUser?.infoPersonal?.hobbies?.includes(name) && (
                       <div key={name} className={styles.edit__hobbies_item}>
                         <img src={img} alt="" />
                         <p>{name}</p>
@@ -172,7 +167,7 @@ export const EditProfile = ({
         <EditDetailsPage
           infoUserActive={infoUserActive}
           setOpenEditDetails={setOpenEditDetails}
-          userMatchUsername={userMatchUsername}
+          matchedUser={matchedUser}
         />
       )}
       {openEditHobbies && (
