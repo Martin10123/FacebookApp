@@ -1,8 +1,8 @@
-import { useState } from "react";
-
+import { usePreventScroll } from "../../../../hooks";
 import { photoUser } from "../../../../assets";
-import { TagFriends } from "../components/TagFriends";
-import { useForm, usePreventScroll } from "../../../../hooks";
+import { TagFriends, ShowImagesSelected } from "../components";
+import { useAddPost } from "../hook/useAddPost";
+import { Toaster } from "react-hot-toast";
 
 import styles from "./createPost.module.css";
 
@@ -13,12 +13,26 @@ export const CreatePost = ({
 }) => {
   usePreventScroll();
 
-  const [openTagFriends, setOpenTagFriends] = useState(false);
-  const [listTagFriends, setListTagFriends] = useState([]);
-  const { post, privacity, onInputChange } = useForm({
-    post: "",
-    privacity: "",
-  });
+  const {
+    // estados - referencias
+    fileInputRef,
+    listTagFriends,
+    openTagFriends,
+    openViewImagesSelected,
+    post,
+    privacity,
+    selectedImages,
+    startLoadingPost,
+
+    // metodos
+    onCreateNewPost,
+    onDeletePhotoSelected,
+    onFileInputchange,
+    onInputChange,
+    setListTagFriends,
+    setOpenTagFriends,
+    setOpenViewImagesSelected,
+  } = useAddPost({ infoUserActive, setOpenCreatePost });
 
   return (
     <>
@@ -28,14 +42,24 @@ export const CreatePost = ({
             <div className={styles.create__center_div}></div>
 
             <div className={styles.create__return_arrow}>
-              <i className="fa-solid fa-arrow-left"></i>
+              <i
+                className="fa-solid fa-arrow-left"
+                onClick={() => setOpenCreatePost(false)}
+              ></i>
               <p>Crear publicación</p>
             </div>
 
-            <button className={styles.create__btn_create}>Publicar</button>
+            <button
+              className={styles.create__btn_create}
+              disabled={startLoadingPost}
+              onClick={onCreateNewPost}
+            >
+              {startLoadingPost ? "Publicando..." : "Publicar"}
+            </button>
 
             <button
               className={styles.create__btn_close}
+              disabled={startLoadingPost}
               onClick={() => setOpenCreatePost(false)}
             >
               X
@@ -79,7 +103,11 @@ export const CreatePost = ({
               Agregar a tu publicación
             </p>
             <div className={styles.create__content_icons}>
-              <i className="fa-solid fa-images"></i>
+              <i
+                className="fa-solid fa-images"
+                onClick={() => fileInputRef.current.click()}
+              ></i>
+
               <i
                 className="fa-solid fa-user-tag"
                 onClick={() => setOpenTagFriends(true)}
@@ -87,11 +115,33 @@ export const CreatePost = ({
               <i className="fa-solid fa-face-laugh"></i>
               <i className="fa-solid fa-location-dot"></i>
               <i className="fa-solid fa-video"></i>
+
+              {selectedImages.length !== 0 && (
+                <p
+                  className={styles.create__count_imgs}
+                  onClick={() => setOpenViewImagesSelected(true)}
+                >
+                  {selectedImages.length}
+                </p>
+              )}
             </div>
           </div>
 
-          <div className={styles.create__btn_create_post_desk}>
-            <button>Publicar</button>
+          <input
+            multiple
+            onChange={onFileInputchange}
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            type="file"
+          />
+
+          <div
+            className={styles.create__btn_create_post_desk}
+            onClick={onCreateNewPost}
+          >
+            <button disabled={startLoadingPost}>
+              {startLoadingPost ? "Publicando..." : "Publicar"}
+            </button>
           </div>
         </div>
       </div>
@@ -103,6 +153,16 @@ export const CreatePost = ({
           setOpenTagFriends={setOpenTagFriends}
         />
       )}
+
+      {openViewImagesSelected && (
+        <ShowImagesSelected
+          images={selectedImages}
+          onDeletePhotoSelected={onDeletePhotoSelected}
+          setOpenViewImagesSelected={setOpenViewImagesSelected}
+        />
+      )}
+
+      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 };

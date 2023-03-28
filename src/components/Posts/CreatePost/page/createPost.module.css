@@ -30,26 +30,25 @@
 .create__return_arrow {
   align-items: center;
   display: flex;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 .create__return_arrow > i {
   cursor: pointer;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .create__btn_create {
-  background: #80808082;
+  background: #0099ff;
   border-radius: 0.6rem;
   border: gainsboro;
-  color: gray;
+  color: #fff;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 500;
   padding: 0.6rem;
-  pointer-events: none;
 }
 
 .create__info_user {
@@ -99,30 +98,46 @@
   font-size: 1.8rem;
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
+  position: relative;
   width: 100%;
 }
 
 .create__content_icons > i {
   cursor: pointer;
+  position: relative;
 }
 
 .create__content_icons > i:nth-child(1) {
   color: #00ff00;
 }
 
-.create__content_icons > i:nth-child(2) {
+.create__count_imgs {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 6px gray;
+  cursor: pointer;
+  font-size: 2rem;
+  left: 0.6rem;
+  padding: 0.5rem;
+  position: absolute;
+  text-align: center;
+  top: -4.7rem;
+  width: 3rem;
+}
+
+.create__content_icons i:nth-child(2) {
   color: #0000ff;
 }
 
-.create__content_icons > i:nth-child(3) {
+.create__content_icons i:nth-child(3) {
   color: #ffff00;
 }
 
-.create__content_icons > i:nth-child(4) {
+.create__content_icons i:nth-child(4) {
   color: #ff4500;
 }
 
-.create__content_icons > i:nth-child(5) {
+.create__content_icons i:nth-child(5) {
   color: #ff0000;
 }
 
@@ -197,13 +212,13 @@
   }
 
   .create__btn_create_post_desk > button {
-    background: #8080803b;
+    background: #0099ff;
     border-radius: 0.5rem;
     border: none;
-    color: #979797;
+    color: #fff;
+    cursor: pointer;
     font-size: 1.2rem;
     height: 3rem;
-    pointer-events: none;
     width: 100%;
   }
 }

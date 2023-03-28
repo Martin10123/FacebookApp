@@ -76,21 +76,33 @@ export const AuthUserProvider = ({ children }) => {
   };
 
   const infoUserActive = users?.find((user) => user.uid === userActive?.uid);
+
   const currentUserFriendsList = friendsEachUsers?.find(
     (listFriends) => listFriends.uidDocUser === userActive?.uid
   );
 
+  const getFriendsListCurrentUser = () => {
+    return users.filter((user) =>
+      currentUserFriendsList.friendsList.includes(user.uid)
+    );
+  };
+
   const providerState = {
-    friendsEachUsers,
+    // estados
     infoUserActive,
     isLoggedIn,
-    searchFriendListByUid,
-    searchUserByUsername,
     startLoading,
     startLoadingOther,
     userActive,
     users,
+
+    // metodos
+    searchFriendListByUid,
+    searchUserByUsername,
+
+    // atributos
     currentUserFriendsList,
+    friendsListCurrentUser: getFriendsListCurrentUser(),
   };
 
   return (
