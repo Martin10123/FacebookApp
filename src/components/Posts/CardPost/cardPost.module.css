@@ -1,6 +1,18 @@
-.post__image > img {
+.post__image_list {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.post__content_photo {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.post__content_photo > img {
   cursor: pointer;
   object-fit: cover;
+  height: 100%;
   width: 100%;
 }
 

@@ -18,7 +18,7 @@
   grid-template-columns: 0fr 1fr;
 }
 
-.layout__name_date > img {
+.layout__name_date > a > img {
   border-radius: 50%;
   cursor: pointer;
   height: 2.8rem;

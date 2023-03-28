@@ -16,8 +16,8 @@ export const MainApp = () => {
       <div className={styles.main__content_posts}>
         <FormPost />
         <HistoryPage />
-        <CardPost />
-        <CardSharePost />
+        {/* <CardPost /> */}
+        {/* <CardSharePost /> */}
       </div>
       <SideMessage />
     </main>

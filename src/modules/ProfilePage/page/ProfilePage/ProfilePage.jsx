@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import { AuthUserContext } from "../../../../context";
+import { AuthUserContext, GetPostsContext } from "../../../../context";
 import { CardPost, FormPost } from "../../../../components";
 import { DetailsUser } from "../DetailsUser/DetailsUser";
 import { ListFriendsUser } from "../ListFriendsUsers/ListFriendsUser";
@@ -18,6 +18,7 @@ export const ProfilePage = () => {
     searchUserByUsername,
     userActive,
   } = useContext(AuthUserContext);
+  const { getPosts, startLoading } = useContext(GetPostsContext);
   const { username } = useParams();
 
   const matchedUser = searchUserByUsername(username);
@@ -48,7 +49,20 @@ export const ProfilePage = () => {
           <div className={styles.profile__content_form_post}>
             <FormPost />
 
-            <CardPost />
+            {startLoading ? (
+              <div className={styles.profile__content_spinner}>
+                <div className="spinner"></div>
+              </div>
+            ) : (
+              <>
+                {getPosts.map(
+                  (post) =>
+                    infoUserActive?.uid === post?.uid && (
+                      <CardPost key={post.idDoc} post={post} />
+                    )
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

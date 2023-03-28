@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { toast } from "react-hot-toast";
 
 import { addPhotoToCloudinary } from "../../../../helpers";
 import { firebaseDB } from "../../../../services";
@@ -40,13 +39,10 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
         uid: infoUserActive.uid,
       });
 
-      toast.success("Agregaste una nueva publicación");
-
       setStartLoadingPost(false);
       setOpenCreatePost(false);
     } catch (error) {
       console.log(error);
-      toast.error("No pudimos agregar una nueva publicación");
       setStartLoadingPost(false);
     }
   };

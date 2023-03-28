@@ -10,8 +10,10 @@
 }
 
 .main__content_posts {
+  align-items: start;
   display: grid;
   gap: 1rem;
+  grid-template-rows: 0fr;
 }
 
 @media (min-width: 800px) {

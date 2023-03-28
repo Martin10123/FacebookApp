@@ -2,7 +2,6 @@ import { usePreventScroll } from "../../../../hooks";
 import { photoUser } from "../../../../assets";
 import { TagFriends, ShowImagesSelected } from "../components";
 import { useAddPost } from "../hook/useAddPost";
-import { Toaster } from "react-hot-toast";
 
 import styles from "./createPost.module.css";
 
@@ -129,6 +128,8 @@ export const CreatePost = ({
 
           <input
             multiple
+            max={4}
+            maxLength={4}
             onChange={onFileInputchange}
             ref={fileInputRef}
             style={{ display: "none" }}
@@ -161,8 +162,6 @@ export const CreatePost = ({
           setOpenViewImagesSelected={setOpenViewImagesSelected}
         />
       )}
-
-      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 };

@@ -60,17 +60,17 @@ export const getTimeAgo = (timestamp, locale) => {
     dateTime.split(" ")[2] === "días" ||
     dateTime.split(" ")[2] === "día"
   ) {
-    dateNew = `${dateTime.split(" ")[1]} d`;
+    dateNew = `${dateTime.split(" ")[1]}d`;
   } else if (
     dateTime.split(" ")[2] === "hora" ||
     dateTime.split(" ")[2] === "horas"
   ) {
-    dateNew = `${dateTime.split(" ")[1]} h`;
+    dateNew = `${dateTime.split(" ")[1]}h`;
   } else if (
     dateTime.split(" ")[2] === "minutos" ||
     dateTime.split(" ")[2] === "minuto"
   ) {
-    dateNew = `${dateTime.split(" ")[1]} min`;
+    dateNew = `${dateTime.split(" ")[1]}min`;
   }
 
   return dateNew;
