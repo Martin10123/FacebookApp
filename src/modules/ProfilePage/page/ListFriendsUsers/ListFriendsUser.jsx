@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { photoUser } from "../../../../assets";
 import { SearchFriends } from "../../../../components";
-import { YourFriends } from "../../components";
 
 import styles from "./listFriendsUsers.module.css";
 
-export const ListFriendsUser = () => {
-  const [openYourFriends, setOpenYourFriends] = useState(false);
+export const ListFriendsUser = ({
+  friendsList,
+  otherUserFriendsList,
+  setOpenYourFriends,
+}) => {
   const [openSearchFriends, setOpenSearchFriends] = useState(false);
 
   return (
@@ -16,7 +19,7 @@ export const ListFriendsUser = () => {
         <div className={styles.profile__content_titles}>
           <span className={styles.profile__span_title_friend}>
             <p>Amigos</p>
-            <p>0 amigos</p>
+            <p>{otherUserFriendsList.friendsList.length} amigos</p>
           </span>
 
           <button
@@ -29,10 +32,17 @@ export const ListFriendsUser = () => {
 
         <div className={styles.profile__all_info_friends}>
           <div className={styles.profile__list_friends}>
-            <figure className={styles.profile__friend_info}>
-              <img src={photoUser} alt="Foto de perfil del usuario" />
-              <p>Martin Elias</p>
-            </figure>
+            {friendsList.map((friend) => (
+              <Link to={`/${friend.username}`} key={friend.uid}>
+                <figure className={styles.profile__friend_info}>
+                  <img
+                    src={friend.photoUrl || photoUser}
+                    alt="Foto de perfil del usuario"
+                  />
+                  <p>{friend.displayName}</p>
+                </figure>
+              </Link>
+            ))}
           </div>
           <button
             className={styles.profile__see_all_friends}
@@ -42,10 +52,6 @@ export const ListFriendsUser = () => {
           </button>
         </div>
       </div>
-
-      {openYourFriends && (
-        <YourFriends setOpenYourFriends={setOpenYourFriends} />
-      )}
 
       {openSearchFriends && (
         <SearchFriends setOpenSearchFriends={setOpenSearchFriends} />

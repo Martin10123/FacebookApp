@@ -45,6 +45,7 @@
 }
 
 .profile__friend_info > p {
+  color: #000;
   font-weight: 500;
 }
 

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { photoUser } from "../../../../assets";
-import { EditPhoto, EditProfile } from "../../components";
+import { EditPhoto } from "../../components";
 import { ProfileButtons } from "./ProfileButtons/ProfileButtons";
 
 import styles from "./photosUserName.module.css";
 
 export const PhotosUserName = ({
+  currentUserFriendsList,
   infoUserActive,
   isUserActive,
-  currentUserFriendsList,
   matchedUser,
   searchFriendListByUid,
+  setOpenEditProfile,
 }) => {
-  const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
 
   return (
@@ -64,14 +64,6 @@ export const PhotosUserName = ({
           />
         </div>
       </div>
-
-      {openEditProfile && (
-        <EditProfile
-          isUserActive={isUserActive}
-          setOpenEditProfile={setOpenEditProfile}
-          matchedUser={matchedUser}
-        />
-      )}
 
       {openEditPhoto && (
         <EditPhoto setOpenEditPhoto={setOpenEditPhoto} typePhoto="photoUrl" />
