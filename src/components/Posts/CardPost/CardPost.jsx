@@ -1,15 +1,19 @@
 import { useContext } from "react";
 import { photoUser } from "../../../assets";
-import { AuthUserContext } from "../../../context";
+import { AuthUserContext, GetPostsContext } from "../../../context";
 import { getTimeAgo } from "../../../helpers";
-import { CardLayout, CountReactions } from "../layout";
+import { ButtonsReactions, CardLayout, CountReactions } from "../layout";
 
 import styles from "./cardPost.module.css";
 
 export const CardPost = ({ post }) => {
-  const { users } = useContext(AuthUserContext);
+  const { users, infoUserActive } = useContext(AuthUserContext);
+  const { getReactionsPosts } = useContext(GetPostsContext);
 
   const userCreatePost = users.find((user) => user?.uid === post?.uid);
+  const foundPost = getReactionsPosts.find(
+    (postReaction) => postReaction.idDoc === post.idDoc
+  );
 
   return (
     <CardLayout
@@ -35,7 +39,13 @@ export const CardPost = ({ post }) => {
         ))}
       </div>
 
-      <CountReactions />
+      <CountReactions foundPost={foundPost} />
+
+      <ButtonsReactions
+        foundPost={foundPost}
+        idDocPost={post.idDoc}
+        infoUserActive={infoUserActive}
+      />
     </CardLayout>
   );
 };

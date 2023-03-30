@@ -1,47 +1,37 @@
-import { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import { AuthUserContext, GetPostsContext } from "../../../../context";
 import { CardPost, FormPost } from "../../../../components";
 import { DetailsUser } from "../DetailsUser/DetailsUser";
 import { ListFriendsUser } from "../ListFriendsUsers/ListFriendsUser";
 import { PhotosUserName } from "../PhotosUserName/PhotosUserName";
+import { EditProfile, YourFriends } from "../../components";
+import { useProfile } from "../../hook";
 
 import styles from "./profilePage.module.css";
-import { EditProfile, YourFriends } from "../../components";
 
 export const ProfilePage = () => {
   const {
-    infoUserActive,
     currentUserFriendsList,
+    friendsList,
+    getPosts,
+    infoUserActive,
+    isUserActive,
+    matchedUser,
+    openEditProfile,
+    openYourFriends,
+    otherUserFriendsList,
     searchFriendListByUid,
-    searchUserByUsername,
-    userActive,
-    users,
-  } = useContext(AuthUserContext);
-  const { getPosts, startLoading } = useContext(GetPostsContext);
-  const { username } = useParams();
-  const matchedUser = searchUserByUsername(username);
-
-  const [openEditProfile, setOpenEditProfile] = useState(false);
-  const [openYourFriends, setOpenYourFriends] = useState(false);
-  const otherUserFriendsList = searchFriendListByUid(matchedUser.uid);
-  const friendsList = users.filter((user) =>
-    otherUserFriendsList.friendsList.includes(user.uid)
-  );
-
-  const isUserActive = matchedUser?.uid === userActive?.uid;
+    setOpenEditProfile,
+    setOpenYourFriends,
+    startLoading,
+  } = useProfile();
 
   return (
     <div className={styles.profile__container}>
       <div className={styles.profile__content}>
         <PhotosUserName
-          currentUserFriendsList={currentUserFriendsList}
-          infoUserActive={infoUserActive}
           isUserActive={isUserActive}
           matchedUser={matchedUser}
-          searchFriendListByUid={searchFriendListByUid}
           setOpenEditProfile={setOpenEditProfile}
         />
 

@@ -6,11 +6,8 @@ import { ProfileButtons } from "./ProfileButtons/ProfileButtons";
 import styles from "./photosUserName.module.css";
 
 export const PhotosUserName = ({
-  currentUserFriendsList,
-  infoUserActive,
   isUserActive,
   matchedUser,
-  searchFriendListByUid,
   setOpenEditProfile,
 }) => {
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
@@ -55,11 +52,8 @@ export const PhotosUserName = ({
           </div>
 
           <ProfileButtons
-            currentUserFriendsList={currentUserFriendsList}
-            infoUserActive={infoUserActive}
             isUserActive={isUserActive}
             matchedUser={matchedUser}
-            searchFriendListByUid={searchFriendListByUid}
             setOpenEditProfile={setOpenEditProfile}
           />
         </div>

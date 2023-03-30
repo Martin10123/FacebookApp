@@ -4,11 +4,8 @@ import { ButtonsFloatOptions } from "./ButtonsFloatOptions";
 import styles from "./profilebuttons.module.css";
 
 export const ProfileButtons = ({
-  currentUserFriendsList,
-  infoUserActive,
   isUserActive,
   matchedUser,
-  searchFriendListByUid,
   setOpenEditProfile,
 }) => {
   const {
@@ -27,10 +24,7 @@ export const ProfileButtons = ({
     onRechacedRequestOfFriend,
     setOpenResponseRequest,
   } = useAddNewFriends({
-    infoUserActive,
-    currentUserFriendsList,
     matchedUser,
-    searchFriendListByUid,
   });
 
   return (

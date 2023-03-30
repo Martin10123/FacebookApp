@@ -65,44 +65,17 @@ export const AuthUserProvider = ({ children }) => {
     return () => unSuscribed();
   }, []);
 
-  const searchUserByUsername = (username) => {
-    return users?.find((user) => user.username === username);
-  };
-
-  const searchFriendListByUid = (uidUser) => {
-    return friendsEachUsers?.find(
-      (listFriends) => listFriends.uidDocUser === uidUser
-    );
-  };
-
   const infoUserActive = users?.find((user) => user.uid === userActive?.uid);
-
-  const currentUserFriendsList = friendsEachUsers?.find(
-    (listFriends) => listFriends.uidDocUser === userActive?.uid
-  );
-
-  const getFriendsListCurrentUser = () => {
-    return users.filter((user) =>
-      currentUserFriendsList.friendsList.includes(user.uid)
-    );
-  };
 
   const providerState = {
     // estados
+    friendsEachUsers,
     infoUserActive,
     isLoggedIn,
     startLoading,
     startLoadingOther,
     userActive,
     users,
-
-    // metodos
-    searchFriendListByUid,
-    searchUserByUsername,
-
-    // atributos
-    currentUserFriendsList,
-    friendsListCurrentUser: getFriendsListCurrentUser(),
   };
 
   return (

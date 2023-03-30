@@ -1,23 +1,57 @@
-import { care, like, haha, angry, love, sad, wow } from "../../../assets";
+import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
+import { firebaseDB } from "../../../services";
+import { reactionsDataPost } from "../helpers";
 
 import styles from "./layout.module.css";
 
-const reactionsData = [
-  { name: "Me gusta", img: like, classE: "profile__like" },
-  { name: "Me encanta", img: love, classE: "profile__love" },
-  { name: "Me importa", img: care, classE: "profile__care" },
-  { name: "Me divierte", img: haha, classE: "profile__haha" },
-  { name: "Me asombra", img: wow, classE: "profile__wow" },
-  { name: "Me entristece", img: sad, classE: "profile__sad" },
-  { name: "Me enoja", img: angry, classE: "profile__angry" },
-];
+export const ReactionsPost = ({ foundPost, infoUserActive, idDocPost }) => {
+  const onUpdateReactionPost = async (saveReactionFire) => {
+    const existingReaction = foundPost?.reactions
+      ? Object.keys(foundPost.reactions).find((reaction) =>
+          foundPost.reactions[reaction].includes(infoUserActive.uid)
+        )
+      : null;
 
-export const ReactionsPost = ({ style }) => {
+    try {
+      const reactionsRef = doc(firebaseDB, "reactionsPost", idDocPost);
+
+      if (existingReaction) {
+        setDoc(
+          reactionsRef,
+          {
+            reactions: {
+              [existingReaction]: arrayRemove(infoUserActive.uid),
+            },
+          },
+          { merge: true }
+        );
+      }
+
+      if (existingReaction !== saveReactionFire) {
+        setDoc(
+          reactionsRef,
+          {
+            reactions: {
+              [saveReactionFire]: arrayUnion(infoUserActive.uid),
+            },
+          },
+          { merge: true }
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.reactions__container}>
       <div className={styles.reactions__content}>
-        {reactionsData.map(({ name, img, classE }) => (
-          <div className={styles.reactions__emoji} key={name}>
+        {reactionsDataPost.map(({ name, tofire, img, classE }) => (
+          <div
+            className={styles.reactions__emoji}
+            key={name}
+            onClick={() => onUpdateReactionPost(tofire)}
+          >
             <img src={img} alt={name} />
             <p className={styles[classE]}>{name}</p>
           </div>

@@ -4,13 +4,12 @@ import { toast } from "react-hot-toast";
 
 import { firebaseDB } from "../../../services";
 import { useCloseModal } from "../../../hooks";
+import { useProfile } from "./useProfile";
 
-export const useAddNewFriends = ({
-  infoUserActive,
-  currentUserFriendsList,
-  searchFriendListByUid,
-  matchedUser,
-}) => {
+export const useAddNewFriends = ({ matchedUser }) => {
+  const { currentUserFriendsList, infoUserActive, searchFriendListByUid } =
+    useProfile();
+
   const [openResponseRequest, setOpenResponseRequest] = useState(false);
   const activeUserUid = infoUserActive.uid;
   const otherUserUid = matchedUser.uid;

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePositionElement } from "../../../hooks";
 import { OptionsPost } from "../CardPost";
-import { ButtonsReactions } from "./ButtonsReactions";
 
 import styles from "./layout.module.css";
 
@@ -58,8 +57,6 @@ export const CardLayout = ({
       </div>
 
       {children}
-
-      {!isCardShare && <ButtonsReactions />}
     </div>
   );
 };

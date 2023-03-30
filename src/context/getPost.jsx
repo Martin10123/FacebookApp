@@ -6,6 +6,7 @@ export const GetPostsContext = createContext();
 
 export const GetPostsProvider = ({ children }) => {
   const [getPosts, setGetPosts] = useState([]);
+  const [getReactionsPosts, setGetReactionsPosts] = useState([]);
   const [startLoading, setStartLoading] = useState(true);
 
   useEffect(() => {
@@ -24,8 +25,27 @@ export const GetPostsProvider = ({ children }) => {
     return () => unSuscribed();
   }, []);
 
+  useEffect(() => {
+    const unSuscribed = onSnapshot(
+      collection(firebaseDB, "reactionsPost"),
+      (reactionsPosts) => {
+        const arrayReactionsPosts = reactionsPosts.docs.map((doc) => {
+          return {
+            idDoc: doc.id,
+            ...doc.data(),
+          };
+        });
+
+        setGetReactionsPosts([...arrayReactionsPosts]);
+      }
+    );
+
+    return () => unSuscribed();
+  }, []);
+
   const providerState = {
     getPosts,
+    getReactionsPosts,
     startLoading,
   };
 
