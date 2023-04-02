@@ -37,6 +37,11 @@
   padding: 1rem;
 }
 
+.share__content_photo_user {
+  display: flex;
+  justify-content: space-between;
+}
+
 .share__photo_user {
   display: grid;
   gap: 1rem;
@@ -53,6 +58,18 @@
 .share__figcaption > p {
   font-size: 1.1rem;
   font-weight: 500;
+}
+
+.share__content_tag_friends {
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid gray;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.3rem;
+  height: 3rem;
+  justify-content: center;
+  width: 3rem;
 }
 
 .share__select_state {

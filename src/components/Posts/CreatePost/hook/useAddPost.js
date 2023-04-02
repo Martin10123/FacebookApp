@@ -14,7 +14,7 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
   const fileInputRef = useRef();
   const { post, privacity, onInputChange } = useForm({
     post: "",
-    privacity: "",
+    privacity: "Publico",
   });
 
   const onCreateNewPost = async () => {
@@ -32,6 +32,7 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
       await addDoc(collection(firebaseDB, "posts"), {
         date: new Date().getTime(),
         displayName: infoUserActive.displayName,
+        howManyPeopleSharePost: [],
         listTagFriends,
         photosUrls: photosUrls || [],
         post,

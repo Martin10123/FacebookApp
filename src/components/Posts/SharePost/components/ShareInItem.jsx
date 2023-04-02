@@ -1,4 +1,4 @@
-import styles from "./sharePost.module.css";
+import styles from "../sharePost.module.css";
 
 export const ShareInItem = () => {
   return (

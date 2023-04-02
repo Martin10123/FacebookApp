@@ -1,13 +1,16 @@
 import { ReactionsPost } from "./ReactionsPost";
-
 import { getWhatReactionSelected } from "../helpers";
 
 import styles from "./layout.module.css";
 
-export const ButtonsReactions = ({ foundPost, idDocPost, infoUserActive }) => {
+export const ButtonsReactions = ({
+  post,
+  infoUserActive,
+  setOpenSharePost,
+}) => {
   const getReactionSelected = getWhatReactionSelected({
     infoUserActive,
-    reactions: foundPost?.reactions,
+    reactions: post?.reactions,
   });
 
   return (
@@ -27,17 +30,16 @@ export const ButtonsReactions = ({ foundPost, idDocPost, infoUserActive }) => {
         )}
         {getReactionSelected?.name || "Like"}
 
-        <ReactionsPost
-          foundPost={foundPost}
-          idDocPost={idDocPost}
-          infoUserActive={infoUserActive}
-        />
+        <ReactionsPost post={post} infoUserActive={infoUserActive} />
       </button>
       <button className={styles.layout__button}>
         <i className="fa-regular fa-comment"></i>
         Comentar
       </button>
-      <button className={styles.layout__button}>
+      <button
+        className={styles.layout__button}
+        onClick={() => setOpenSharePost(true)}
+      >
         <i className="fa-regular fa-share-from-square"></i>
         Compartir
       </button>

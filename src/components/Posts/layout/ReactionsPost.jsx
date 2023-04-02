@@ -4,16 +4,16 @@ import { reactionsDataPost } from "../helpers";
 
 import styles from "./layout.module.css";
 
-export const ReactionsPost = ({ foundPost, infoUserActive, idDocPost }) => {
+export const ReactionsPost = ({ post, infoUserActive }) => {
   const onUpdateReactionPost = async (saveReactionFire) => {
-    const existingReaction = foundPost?.reactions
-      ? Object.keys(foundPost.reactions).find((reaction) =>
-          foundPost.reactions[reaction].includes(infoUserActive.uid)
+    const existingReaction = post?.reactions
+      ? Object.keys(post.reactions).find((reaction) =>
+          post.reactions[reaction].includes(infoUserActive.uid)
         )
       : null;
 
     try {
-      const reactionsRef = doc(firebaseDB, "reactionsPost", idDocPost);
+      const reactionsRef = doc(firebaseDB, "posts", post.idDoc);
 
       if (existingReaction) {
         setDoc(

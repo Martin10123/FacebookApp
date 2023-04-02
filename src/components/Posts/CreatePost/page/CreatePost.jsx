@@ -1,7 +1,12 @@
 import { usePreventScroll } from "../../../../hooks";
 import { photoUser } from "../../../../assets";
-import { TagFriends, ShowImagesSelected } from "../components";
+import {
+  TagFriends,
+  ShowImagesSelected,
+  OptionsCreatePost,
+} from "../components";
 import { useAddPost } from "../hook/useAddPost";
+import { getTextNameUserAndFriendsTag } from "../../CardPost/helper";
 
 import styles from "./createPost.module.css";
 
@@ -73,7 +78,7 @@ export const CreatePost = ({
             />
 
             <div className={styles.create__name_user}>
-              <p>{infoUserActive?.displayName}</p>
+              {getTextNameUserAndFriendsTag({ infoUserActive, listTagFriends })}
 
               <select
                 className={styles.create__select_privacity}
@@ -97,34 +102,13 @@ export const CreatePost = ({
             />
           </div>
 
-          <div className={styles.create__footer}>
-            <p className={styles.create__title_add_post}>
-              Agregar a tu publicación
-            </p>
-            <div className={styles.create__content_icons}>
-              <i
-                className="fa-solid fa-images"
-                onClick={() => fileInputRef.current.click()}
-              ></i>
-
-              <i
-                className="fa-solid fa-user-tag"
-                onClick={() => setOpenTagFriends(true)}
-              ></i>
-              <i className="fa-solid fa-face-laugh"></i>
-              <i className="fa-solid fa-location-dot"></i>
-              <i className="fa-solid fa-video"></i>
-
-              {selectedImages.length !== 0 && (
-                <p
-                  className={styles.create__count_imgs}
-                  onClick={() => setOpenViewImagesSelected(true)}
-                >
-                  {selectedImages.length}
-                </p>
-              )}
-            </div>
-          </div>
+          <OptionsCreatePost
+            fileInputRef={fileInputRef}
+            selectedImages={selectedImages}
+            setOpenTagFriends={setOpenTagFriends}
+            setOpenViewImagesSelected={setOpenViewImagesSelected}
+            showPhotos={true}
+          />
 
           <input
             multiple

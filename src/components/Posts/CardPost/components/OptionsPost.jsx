@@ -1,6 +1,6 @@
-import { useCloseModal } from "../../../hooks";
+import { useCloseModal } from "../../../../hooks";
 
-import styles from "./cardPost.module.css";
+import styles from "../cardPost.module.css";
 
 export const OptionsPost = ({ isAtBottom, setOpenOptions }) => {
   const ref = useCloseModal(() => setOpenOptions(false));

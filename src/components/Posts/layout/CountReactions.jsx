@@ -3,9 +3,9 @@ import { countReactionsSelected } from "../helpers";
 
 import styles from "./layout.module.css";
 
-export const CountReactions = ({ foundPost }) => {
+export const CountReactions = ({ post }) => {
   const [totalReactions, setTotalReactions] = useState(0);
-  const reactions = foundPost?.reactions;
+  const reactions = post?.reactions;
 
   useEffect(() => {
     let total = 0;
@@ -34,7 +34,7 @@ export const CountReactions = ({ foundPost }) => {
       </div>
       <span>
         <p>300 comentarios</p>
-        <p>20 compartidas</p>
+        <p>{post?.howManyPeopleSharePost?.length || 0} compartidas</p>
       </span>
     </div>
   );

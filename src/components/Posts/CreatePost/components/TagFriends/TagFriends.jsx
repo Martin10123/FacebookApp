@@ -1,6 +1,7 @@
-import { useContext } from "react";
-import { photoUser } from "../../../../assets";
-import { AuthUserContext } from "../../../../context";
+import { useMemo, useState } from "react";
+import { photoUser } from "../../../../../assets";
+import { useProfile } from "../../../../../modules/ProfilePage/hook";
+import { searchFriendByName } from "../../../../../modules/ProfilePage/helpers/searchFriendByName";
 
 import styles from "./tags.module.css";
 
@@ -9,8 +10,15 @@ export const TagFriends = ({
   setListTagFriends,
   setOpenTagFriends,
 }) => {
-  const { friendsListCurrentUser } = useContext(AuthUserContext);
+  const { friendsListCurrentUser } = useProfile();
   const isFriendSelected = listTagFriends.map((friend) => friend.uidUser);
+
+  const [inputForm, setInputForm] = useState("");
+
+  const searchFriend = useMemo(
+    () => searchFriendByName(inputForm, friendsListCurrentUser),
+    [inputForm, friendsListCurrentUser]
+  );
 
   const onSelectFriendTag = ({ displayName, uidUser, username }) => {
     if (isFriendSelected.includes(uidUser)) {
@@ -41,13 +49,18 @@ export const TagFriends = ({
 
         <div className={styles.tag__input_form}>
           <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Buscar..." />
+          <input
+            onChange={({ target }) => setInputForm(target.value)}
+            placeholder="Buscar..."
+            type="text"
+            value={inputForm}
+          />
         </div>
 
         <h2>Todos los amigos</h2>
 
         <div className={styles.tag__content_users}>
-          {friendsListCurrentUser.map((friend) => (
+          {searchFriend.map((friend) => (
             <div key={friend.uid} className={styles.tag__info_user}>
               <figure className={styles.tag__user_img_name}>
                 <img

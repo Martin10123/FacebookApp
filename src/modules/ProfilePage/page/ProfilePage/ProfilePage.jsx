@@ -1,6 +1,6 @@
 import { Toaster } from "react-hot-toast";
 
-import { CardPost, FormPost } from "../../../../components";
+import { CardPost, FormPost, CardSharePost } from "../../../../components";
 import { DetailsUser } from "../DetailsUser/DetailsUser";
 import { ListFriendsUser } from "../ListFriendsUsers/ListFriendsUser";
 import { PhotosUserName } from "../PhotosUserName/PhotosUserName";
@@ -61,8 +61,14 @@ export const ProfilePage = () => {
               <>
                 {getPosts.map(
                   (post) =>
-                    infoUserActive?.uid === post?.uid && (
-                      <CardPost key={post.idDoc} post={post} />
+                    matchedUser?.uid === post?.uid && (
+                      <div key={post.idDoc}>
+                        {!post.isShared ? (
+                          <CardPost post={post} />
+                        ) : (
+                          <CardSharePost post={post} />
+                        )}
+                      </div>
                     )
                 )}
               </>

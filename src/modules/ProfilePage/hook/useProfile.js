@@ -24,15 +24,22 @@ export const useProfile = () => {
   };
 
   const otherUserFriendsList = searchFriendListByUid(matchedUser.uid);
+
   const friendsList = users.filter((user) =>
     otherUserFriendsList.friendsList.includes(user.uid)
+  );
+
+  const friendsListCurrentUser = users.filter((user) =>
+    currentUserFriendsList.friendsList.includes(user.uid)
   );
 
   const isUserActive = matchedUser?.uid === userActive?.uid;
 
   return {
+    // atributos
     currentUserFriendsList,
     friendsList,
+    friendsListCurrentUser,
     getPosts,
     infoUserActive,
     isUserActive,
@@ -40,9 +47,11 @@ export const useProfile = () => {
     openEditProfile,
     openYourFriends,
     otherUserFriendsList,
+    startLoading,
+
+    // metodos
     searchFriendListByUid,
     setOpenEditProfile,
     setOpenYourFriends,
-    startLoading,
   };
 };

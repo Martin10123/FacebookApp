@@ -16,11 +16,25 @@
   width: 100%;
 }
 
+.post__tag_friends {
+  color: #1c75e0;
+}
+
+.post__tag_friends:hover {
+  text-decoration: underline;
+}
+
 /*  */
 
 .card_share__container {
   margin: 0 auto;
   width: 97%;
+}
+
+.card_share__image > img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 /*  */

@@ -1,4 +1,4 @@
-const month = [
+const monthNames = [
   "enero",
   "febrero",
   "marzo",
@@ -13,7 +13,7 @@ const month = [
   "diciembre",
 ];
 
-const days = [
+const dayNames = [
   "domingo",
   "lunes",
   "martes",
@@ -23,57 +23,29 @@ const days = [
   "sábado",
 ];
 
-const dateUnits = {
-  day: 86400,
-  hour: 3600,
-  minute: 60,
-  second: 1,
-};
+const timeUnits = [
+  { unit: "día", seconds: 86400 },
+  { unit: "hora", seconds: 3600 },
+  { unit: "minute", seconds: 60 },
+  { unit: "segundo", seconds: 1 },
+];
 
-const getSecondsDiff = (timestamp) => (Date.now() - timestamp) / 1000;
-
-const getUnitAndValueDate = (secondsElapsed) => {
-  for (const [unit, secondsInUnit] of Object.entries(dateUnits)) {
-    if (secondsElapsed >= secondsInUnit || unit === "second") {
-      const value = Math.floor(secondsElapsed / secondsInUnit) * -1;
-      return { value, unit };
-    }
+export const getTimeAgo = (timestamp) => {
+  const now = new Date();
+  const secondsPast = (now.getTime() - timestamp) / 1000;
+  if (secondsPast < 60) {
+    return parseInt(secondsPast) + "s";
   }
-};
-
-export const getTimeAgo = (timestamp, locale) => {
-  const rtf = new Intl.RelativeTimeFormat(locale);
-
-  const secondsElapsed = getSecondsDiff(timestamp);
-  const { value, unit } = getUnitAndValueDate(secondsElapsed);
-
-  const dateTime = rtf.format(value, unit);
-
-  let dateNew;
-
-  if (
-    dateTime.split(" ")[2] === "segundos" ||
-    dateTime.split(" ")[2] === "segundo"
-  ) {
-    dateNew = `Justo ahora`;
-  } else if (
-    dateTime.split(" ")[2] === "días" ||
-    dateTime.split(" ")[2] === "día"
-  ) {
-    dateNew = `${dateTime.split(" ")[1]}d`;
-  } else if (
-    dateTime.split(" ")[2] === "hora" ||
-    dateTime.split(" ")[2] === "horas"
-  ) {
-    dateNew = `${dateTime.split(" ")[1]}h`;
-  } else if (
-    dateTime.split(" ")[2] === "minutos" ||
-    dateTime.split(" ")[2] === "minuto"
-  ) {
-    dateNew = `${dateTime.split(" ")[1]}min`;
+  if (secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + "m";
   }
-
-  return dateNew;
+  if (secondsPast < 86400) {
+    return parseInt(secondsPast / 3600) + "h";
+  }
+  if (secondsPast < 604800) {
+    return parseInt(secondsPast / 86400) + "d";
+  }
+  return new Date(timestamp).toLocaleDateString();
 };
 
 export const createAccountDate = (date) => {

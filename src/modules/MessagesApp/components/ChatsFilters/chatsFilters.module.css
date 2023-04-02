@@ -108,13 +108,18 @@
 
 .filters__photo_user > i {
   border: 3.5px solid #fff;
-  bottom: 0.5rem;
+  bottom: 0.2rem;
   right: 0.3rem;
   background: lime;
   border-radius: 100%;
   color: lime;
   font-size: 0.9rem;
   position: absolute;
+}
+
+.filters__user_no_active {
+  background: gray !important;
+  color: gray !important;
 }
 
 .filters__content_photo > p {
