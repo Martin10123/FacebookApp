@@ -96,7 +96,7 @@
     right: 0.5rem;
     top: 2rem;
     width: fit-content;
-    z-index: 1;
+    z-index: 1000;
   }
 
   .options_post__close_modal {
@@ -108,5 +108,9 @@
     border-radius: 1rem;
     box-shadow: 1px 1px 6px grey;
     padding: 0;
+  }
+
+  .options__post_top {
+    top: -15rem;
   }
 }

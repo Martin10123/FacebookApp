@@ -1,10 +1,7 @@
 import { useContext, useState } from "react";
 
-import { photoUser } from "../../../../assets";
 import { AuthUserContext } from "../../../../context";
 import { ButtonsReactions, CardLayout, CountReactions } from "../../layout";
-import { getTextPost } from "../helper/getTextPost";
-import { getTimeAgo } from "../../../../helpers";
 import { ListImagesPost, SharePost } from "../../..";
 
 import styles from "../cardPost.module.css";
@@ -21,22 +18,16 @@ export const CardSharePost = ({ post }) => {
   return (
     <>
       <CardLayout
-        createdDate={getTimeAgo(post?.date)}
-        iconStyle="fa-solid fa-earth-americas"
-        nameUser={userCreatePost?.displayName}
-        photoUser={userCreatePost?.photoUrl || photoUser}
-        textPost={getTextPost({ post })}
-        usernameProfile={userCreatePost?.username}
+        infoUserActive={infoUserActive}
+        post={post}
+        userCreatePost={userCreatePost}
       >
         <div className={styles.card_share__container}>
           <CardLayout
-            createdDate={getTimeAgo(post?.postShared?.date)}
-            iconStyle="fa-solid fa-earth-americas"
+            infoUserActive={infoUserActive}
             isCardShare={true}
-            nameUser={userCreatePostShared?.displayName}
-            photoUser={userCreatePostShared?.photoUrl || photoUser}
-            textPost={getTextPost({ post: post.postShared })}
-            usernameProfile={userCreatePostShared?.username}
+            post={post}
+            userCreatePost={userCreatePostShared}
           >
             {post?.photosUrls?.length !== 0 && (
               <ListImagesPost post={post?.postShared} />

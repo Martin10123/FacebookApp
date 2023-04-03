@@ -4,6 +4,7 @@
   display: flex;
   height: 100vh;
   justify-content: center;
+  left: 0;
   position: fixed;
   top: 0;
   width: 100%;
@@ -11,6 +12,7 @@
 }
 
 .delete__content {
+  background: #fff;
   border-radius: 1rem;
   box-shadow: 1px 1px 6px grey;
   display: grid;
