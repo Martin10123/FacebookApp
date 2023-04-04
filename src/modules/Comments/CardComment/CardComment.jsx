@@ -87,13 +87,12 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
                 {comment.comment}
               </span>
             )}
-
-            {comment.photoComment && (
-              <figure className={styles.card_comment__image_comment}>
-                <img src={comment.photoComment} alt="Foto del comentario" />
-              </figure>
-            )}
           </div>
+          {comment.photoComment && (
+            <figure className={styles.card_comment__image_comment}>
+              <img src={comment.photoComment} alt="Foto del comentario" />
+            </figure>
+          )}
 
           <div className={styles.card_comment__date_reaction_response}>
             <div className={styles.comment__content_spans}>
