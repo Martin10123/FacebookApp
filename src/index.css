@@ -19,6 +19,10 @@ html {
   pointer-events: none;
 }
 
+.z_index__toast {
+  z-index: 9999999999999999 !important;
+}
+
 /* Loading component */
 
 .loading_main_box {
@@ -32,6 +36,13 @@ html {
   top: 0;
   width: 100%;
   z-index: 19999900;
+}
+
+.loading_box_dimension {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
 }
 
 .spinner {

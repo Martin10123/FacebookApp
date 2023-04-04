@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 
 import { AuthUserContext } from "../../../../context";
+import { BoxComments } from "../../../../modules";
 import { ButtonsReactions, CardLayout, CountReactions } from "../../layout";
 import { ListImagesPost, SharePost } from "../..";
 
 export const CardPost = ({ post }) => {
   const { users, infoUserActive } = useContext(AuthUserContext);
   const [openSharePost, setOpenSharePost] = useState(false);
+  const [openCommentsPost, setOpenCommentsPost] = useState(false);
 
   const userCreatePost = users.find((user) => user?.uid === post?.uid);
 
@@ -22,8 +24,9 @@ export const CardPost = ({ post }) => {
         <CountReactions post={post} />
 
         <ButtonsReactions
-          post={post}
           infoUserActive={infoUserActive}
+          post={post}
+          setOpenCommentsPost={setOpenCommentsPost}
           setOpenSharePost={setOpenSharePost}
         />
       </CardLayout>
@@ -33,6 +36,16 @@ export const CardPost = ({ post }) => {
           infoUserActive={infoUserActive}
           post={post}
           setOpenSharePost={setOpenSharePost}
+        />
+      )}
+
+      {openCommentsPost && (
+        <BoxComments
+          infoUserActive={infoUserActive}
+          post={post}
+          setOpenCommentsPost={setOpenCommentsPost}
+          userCreatePost={userCreatePost}
+          users={users}
         />
       )}
     </>

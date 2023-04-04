@@ -3,12 +3,14 @@ import { useContext, useState } from "react";
 import { AuthUserContext } from "../../../../context";
 import { ButtonsReactions, CardLayout, CountReactions } from "../../layout";
 import { ListImagesPost, SharePost } from "../../..";
+import { BoxComments } from "../../../../modules";
 
 import styles from "../cardPost.module.css";
 
 export const CardSharePost = ({ post }) => {
   const { users, infoUserActive } = useContext(AuthUserContext);
   const [openSharePost, setOpenSharePost] = useState(false);
+  const [openCommentsPost, setOpenCommentsPost] = useState(false);
 
   const userCreatePost = users.find((user) => user?.uid === post?.uid);
   const userCreatePostShared = users.find(
@@ -40,6 +42,7 @@ export const CardSharePost = ({ post }) => {
         <ButtonsReactions
           post={post}
           infoUserActive={infoUserActive}
+          setOpenCommentsPost={setOpenCommentsPost}
           setOpenSharePost={setOpenSharePost}
         />
       </CardLayout>
@@ -49,6 +52,16 @@ export const CardSharePost = ({ post }) => {
           infoUserActive={infoUserActive}
           post={post}
           setOpenSharePost={setOpenSharePost}
+        />
+      )}
+
+      {openCommentsPost && (
+        <BoxComments
+          infoUserActive={infoUserActive}
+          post={post}
+          setOpenCommentsPost={setOpenCommentsPost}
+          userCreatePost={userCreatePost}
+          users={users}
         />
       )}
     </>

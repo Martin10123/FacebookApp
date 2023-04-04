@@ -1,22 +1,9 @@
-import { useEffect, useState } from "react";
-import { countReactionsSelected } from "../helpers";
+import { useCountReactionsPost } from "../../hook";
 
-import styles from "./layout.module.css";
+import styles from "./layoutComponents.module.css";
 
 export const CountReactions = ({ post }) => {
-  const [totalReactions, setTotalReactions] = useState(0);
-  const reactions = post?.reactions;
-
-  useEffect(() => {
-    let total = 0;
-    for (const key in reactions) {
-      total += reactions[key].length;
-    }
-
-    setTotalReactions(total);
-  }, [reactions]);
-
-  const countReactions = countReactionsSelected({ reactions });
+  const { countReactions, totalReactions } = useCountReactionsPost({ post });
 
   return (
     <div className={styles.layout__content_reactions_comments_share}>

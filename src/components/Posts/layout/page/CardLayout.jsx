@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { getTextPost } from "../CardPost/helper";
-import { getTimeAgo } from "../../../helpers";
-import { OptionsPost } from "../CardPost";
-import { photoUser } from "../../../assets";
-import { usePositionElement } from "../../../hooks";
+import { getTextPost } from "../../CardPost/helper";
+import { getTimeAgo } from "../../../../helpers";
+import { OptionsPost } from "../../CardPost";
+import { photoUser } from "../../../../assets";
+import { usePositionElement } from "../../../../hooks";
 
 import styles from "./layout.module.css";
 

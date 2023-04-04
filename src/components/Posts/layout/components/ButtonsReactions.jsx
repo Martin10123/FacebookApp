@@ -1,11 +1,12 @@
-import { ReactionsPost } from "./ReactionsPost";
-import { getWhatReactionSelected } from "../helpers";
+import { getWhatReactionSelected } from "../../helpers";
+import { ReactionsPost } from "./ReactionsPost/ReactionsPost";
 
-import styles from "./layout.module.css";
+import styles from "./layoutComponents.module.css";
 
 export const ButtonsReactions = ({
-  post,
   infoUserActive,
+  post,
+  setOpenCommentsPost,
   setOpenSharePost,
 }) => {
   const getReactionSelected = getWhatReactionSelected({
@@ -21,7 +22,7 @@ export const ButtonsReactions = ({
       >
         {getReactionSelected?.img ? (
           <img
-            className={styles.loyaout__reaction_selected}
+            className={styles.layout__reaction_selected}
             src={getReactionSelected?.img}
             alt={`Imagen del ${getReactionSelected?.name}`}
           />
@@ -30,9 +31,18 @@ export const ButtonsReactions = ({
         )}
         {getReactionSelected?.name || "Like"}
 
-        <ReactionsPost post={post} infoUserActive={infoUserActive} />
+        <ReactionsPost
+          idDocumentToSave={post.idDoc}
+          nameCollectionFirebase="posts"
+          reactionObjCollection={post?.reactions}
+          styleShowAllContainer={styles.reactions__container}
+          uidUserToSaveReaction={infoUserActive.uid}
+        />
       </button>
-      <button className={styles.layout__button}>
+      <button
+        className={styles.layout__button}
+        onClick={() => setOpenCommentsPost(true)}
+      >
         <i className="fa-regular fa-comment"></i>
         Comentar
       </button>

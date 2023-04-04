@@ -1,16 +1,23 @@
-import { angry, haha, love } from "../../../assets";
+import { useCountReactionsPost } from "../../../components/Posts/hook";
 
 import styles from "./layoutComment.module.css";
 
-export const ReactionsSvgCount = ({ showIcon = false }) => {
+export const ReactionsSvgCount = ({ showIcon = false, post }) => {
+  const { countReactions, totalReactions } = useCountReactionsPost({ post });
+
   return (
     <div className={styles.comments__reactions_svgs}>
       <span>
-        <img src={angry} alt="a" />
-        <img src={haha} alt="a" />
-        <img src={love} alt="a" />
+        {countReactions.map(({ name, img }) => (
+          <img
+            alt={name}
+            className={styles.layout__img_count_reaction}
+            key={name}
+            src={img}
+          />
+        ))}
       </span>
-      <p>37,000</p>
+      {totalReactions !== 0 && <p>{totalReactions}</p>}
 
       {showIcon && <i className="fa-solid fa-chevron-right"></i>}
     </div>

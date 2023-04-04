@@ -1,5 +1,3 @@
-import { Toaster } from "react-hot-toast";
-
 import { CardPost, FormPost, CardSharePost } from "../../../../components";
 import { DetailsUser } from "../DetailsUser/DetailsUser";
 import { ListFriendsUser } from "../ListFriendsUsers/ListFriendsUser";
@@ -95,8 +93,6 @@ export const ProfilePage = () => {
           setOpenYourFriends={setOpenYourFriends}
         />
       )}
-
-      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };

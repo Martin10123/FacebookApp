@@ -1,5 +1,3 @@
-import { Toaster } from "react-hot-toast";
-
 import { getTextNameUserAndFriendsTag } from "../../CardPost/helper";
 import { photoUser } from "../../../../assets";
 import { PhotoUser } from "../../../../modules";
@@ -111,8 +109,6 @@ export const SharePost = ({ infoUserActive, post, setOpenSharePost }) => {
           setOpenTagFriends={setOpenTagFriends}
         />
       )}
-
-      <Toaster />
     </>
   );
 };

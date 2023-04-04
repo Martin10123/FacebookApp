@@ -23,7 +23,7 @@
   background: #fff;
   display: grid;
   gap: 1rem;
-  grid-template-rows: 0fr 1fr;
+  grid-template-rows: 0fr 1fr 0fr;
   height: 97%;
   padding: 1rem;
   width: 100%;
@@ -52,7 +52,27 @@
   display: flex;
 }
 
-.comments__count_reactions > i {
+.comments__reactions_svgs > span > img {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+.comments__reactions_svgs > p {
+  font-size: 1.2rem;
+}
+
+.comments__reaction_post {
+  position: relative;
+}
+
+.comments__reaction_selected {
+  cursor: pointer;
+  height: 1.8rem;
+  object-fit: cover;
+  width: 1.8rem;
+}
+
+.comments__reaction_post > i {
   cursor: pointer;
   font-size: 1.6rem;
 }
@@ -69,8 +89,82 @@
 }
 
 .comments__list::-webkit-scrollbar-thumb {
-  background: #adaeae;
+  background: #c9c9c9;
   border-radius: 5px;
+}
+
+/* Input Form */
+
+.comments__input_form_send_comment {
+  border-top: 1px solid #f1f2f6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem 0 0;
+  width: 100%;
+}
+
+.comments__input_form_send_comment > input {
+  background: #f1f2f6;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1.1rem;
+  height: 2.5rem;
+  outline: none;
+  padding: 0rem 1rem;
+  width: 100%;
+}
+
+.comments__content_svgs {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.comments__content_svgs > div {
+  align-items: center;
+  display: flex;
+  font-size: 1.3rem;
+  gap: 1rem;
+}
+
+.comments__content_svgs > div > i {
+  color: gray;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.comments__content_svgs > span {
+  font-size: 1.2rem;
+}
+
+.comments__button_submit {
+  background: transparent;
+  border: none;
+  color: #818181;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+/* reactions float buttons */
+
+.layout__container_float_buttons {
+  bottom: -4rem;
+  left: -18rem;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  visibility: hidden;
+  width: 20rem;
+  z-index: -1;
+}
+
+.comments__reaction_post:hover .layout__container_float_buttons {
+  visibility: visible;
+  opacity: 1;
+  z-index: 21;
+  transition: all 0.5s ease-in-out;
 }
 
 @media (min-width: 800px) {
@@ -83,7 +177,7 @@
   .comments__content {
     border-radius: 1rem;
     box-shadow: 1px 1px 6px grey;
-    grid-template-rows: 0fr 0fr 1fr;
+    grid-template-rows: 0fr 0fr 1fr 0fr;
     height: 93%;
     width: 90%;
   }
@@ -105,7 +199,7 @@
   }
 
   .comments__btn_close_modal {
-    background: #8080807a;
+    background: #f1f2f6;
     border-radius: 100%;
     border: none;
     box-shadow: 1px 1px 6px #80808087;
@@ -118,7 +212,7 @@
 
 @media (min-width: 1000px) {
   .comments__content {
-    height: 38rem;
-    width: 54rem;
+    height: 90%;
+    width: 50rem;
   }
 }

@@ -5,6 +5,7 @@ import { AuthRoutes } from "../modules";
 import { AuthUserContext } from "../context";
 import { SecondRouter } from "./SecondRouter";
 import { StartLoading } from "../components";
+import { Toaster } from "react-hot-toast";
 
 export const AppRouter = () => {
   const { isLoggedIn, startLoading, startLoadingOther } =
@@ -25,6 +26,12 @@ export const AppRouter = () => {
 
         <Route path="/*" element={<Navigate to="/auth/login" />} />
       </Routes>
+
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        containerClassName="z_index__toast"
+      />
     </>
   );
 };
