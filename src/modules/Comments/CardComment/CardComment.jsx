@@ -13,37 +13,26 @@ import { ReactionsSvgCount } from "../Layout/ReactionsSvgCount";
 import { useCloseModal } from "../../../hooks";
 
 import styles from "./cardComment.module.css";
+import { useCardComment } from "./useCardComment";
 
 export const CardComment = ({ comment, users, infoUserActive }) => {
-  const [openOptions, setOpenOptions] = useState(false);
-  const [openUpdateComment, setOpenUpdateComment] = useState(false);
-  const [openSureDelete, setOpenSureDelete] = useState(false);
-  const ref = useCloseModal(() => setOpenOptions(false));
-  const navigate = useNavigate();
-  const isThisUserCreatedComment = comment.uidUser === infoUserActive.uid;
+  const {
+    // atributos
+    isThisUserCreatedComment,
+    openOptions,
+    openSureDelete,
+    openUpdateComment,
+    ref,
+    userCreateComment,
 
-  const userCreateComment = users.find(
-    (user) => user?.uid === comment?.uidUser
-  );
-
-  const onGoToProfile = () => {
-    navigate(`/${userCreateComment?.username}`);
-  };
-
-  const getReactionSelected = getWhatReactionSelected({
-    infoUserActive,
-    reactions: comment?.reactions,
-  });
-
-  const onDeleteComment = async () => {
-    try {
-      await deleteDoc(doc(firebaseDB, "comments", comment.idComment));
-
-      toast.success("Eliminaste tu comentario");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    // metodos
+    getReactionSelected,
+    onDeleteComment,
+    onGoToProfile,
+    setOpenOptions,
+    setOpenSureDelete,
+    setOpenUpdateComment,
+  } = useCardComment({ comment, users, infoUserActive });
 
   return (
     <>
