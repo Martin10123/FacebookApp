@@ -9,7 +9,7 @@ import { firebaseDB } from "../../../../services";
 
 export const EditHobbies = ({ infoUserActive, setOpenEditHobbies }) => {
   const [selectedHobbies, setSelectedHobbies] = useState(
-    infoUserActive?.infoPersonal.hobbies || []
+    infoUserActive?.infoPersonal?.hobbies || []
   );
   const [startLoading, setStartLoading] = useState(false);
 

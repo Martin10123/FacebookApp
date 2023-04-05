@@ -14,7 +14,7 @@ export const regex =
 
 const validateName = (name, max) => {
   let regEx = /^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/;
-  if (name.match(regEx) && name.length > max) {
+  if (name.match(regEx) && name.trim().length > max) {
     return true;
   } else {
     return false;

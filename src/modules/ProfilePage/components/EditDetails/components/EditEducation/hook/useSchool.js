@@ -14,11 +14,7 @@ export const useSchool = ({
   const [loadingSchool, setLoadingSchool] = useState(false);
   const [loadingDeleteSchool, setLoadingDeleteSchool] = useState(false);
 
-  const {
-    infoPersonal,
-    infoPersonal: { school },
-    uid,
-  } = infoUserActive;
+  const { infoPersonal, uid } = infoUserActive;
 
   const {
     formState: formStateSchool,
@@ -27,9 +23,9 @@ export const useSchool = ({
     onInputChange: onInputChangeSchool,
   } = useForm(
     {
-      schoolName: school?.schoolName || "",
-      yearEnd: school?.yearEnd || "",
-      yearStart: school?.yearStart || "",
+      schoolName: infoPersonal?.school?.schoolName || "",
+      yearEnd: infoPersonal?.school?.yearEnd || "",
+      yearStart: infoPersonal?.school?.yearStart || "",
     },
     validatorEducation
   );
@@ -52,7 +48,7 @@ export const useSchool = ({
         { merge: true }
       );
 
-      if (!!infoPersonal.college) {
+      if (!!infoPersonal?.college) {
         await updateDoc(doc(firebaseDB, "users", uid), {
           "infoPersonal.college": deleteField(),
         });
@@ -67,7 +63,7 @@ export const useSchool = ({
   };
 
   const onDeleteSchool = async () => {
-    if (!infoPersonal.school) return;
+    if (!infoPersonal?.school) return;
 
     setLoadingDeleteSchool(true);
 

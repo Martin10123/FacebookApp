@@ -13,9 +13,9 @@ export const useEditDetailsPage = ({ matchedUser }) => {
   const { infoPersonal } = matchedUser;
 
   const showDetailsEducation = () => {
-    if (infoPersonal && infoPersonal.college) {
+    if (infoPersonal && infoPersonal?.college) {
       const { collegeName, whatStudy, yearStart, yearEnd, graduate } =
-        infoPersonal.college;
+        infoPersonal?.college;
 
       return `${collegeName} - ${whatStudy} (${yearStart} - ${
         yearEnd || "presente"

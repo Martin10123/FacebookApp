@@ -26,11 +26,11 @@ export const useProfile = () => {
   const otherUserFriendsList = searchFriendListByUid(matchedUser.uid);
 
   const friendsList = users.filter((user) =>
-    otherUserFriendsList.friendsList.includes(user.uid)
+    otherUserFriendsList?.friendsList?.includes(user.uid)
   );
 
   const friendsListCurrentUser = users.filter((user) =>
-    currentUserFriendsList.friendsList.includes(user.uid)
+    currentUserFriendsList?.friendsList?.includes(user.uid)
   );
 
   const isUserActive = matchedUser?.uid === userActive?.uid;

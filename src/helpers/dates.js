@@ -1,4 +1,4 @@
-const monthNames = [
+const month = [
   "enero",
   "febrero",
   "marzo",
@@ -13,7 +13,7 @@ const monthNames = [
   "diciembre",
 ];
 
-const dayNames = [
+const days = [
   "domingo",
   "lunes",
   "martes",

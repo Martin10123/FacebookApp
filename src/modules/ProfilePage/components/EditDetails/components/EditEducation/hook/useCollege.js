@@ -15,18 +15,14 @@ export const useCollege = ({
   const [startLoadingDelete, setStartLoadingDelete] = useState(false);
   const [isCheckedGraduate, setIsCheckedGraduate] = useState(false);
 
-  const {
-    infoPersonal,
-    infoPersonal: { college },
-    uid,
-  } = infoUserActive;
+  const { infoPersonal, uid } = infoUserActive;
 
   const { formState, formValidation, isFormValid, onInputChange } = useForm(
     {
-      collegeName: college?.collegeName || "",
-      whatStudy: college?.whatStudy || "",
-      yearEnd: college?.yearEnd || "",
-      yearStart: college?.yearStart || "",
+      collegeName: infoPersonal?.college?.collegeName || "",
+      whatStudy: infoPersonal?.college?.whatStudy || "",
+      yearEnd: infoPersonal?.college?.yearEnd || "",
+      yearStart: infoPersonal?.college?.yearStart || "",
     },
     validatorEducation
   );

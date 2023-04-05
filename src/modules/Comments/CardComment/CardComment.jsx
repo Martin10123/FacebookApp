@@ -1,24 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { deleteDoc, doc } from "firebase/firestore";
-import { toast } from "react-hot-toast";
-
 import { EditComment } from "../EditComment/EditComment";
-import { firebaseDB } from "../../../services";
 import { getTimeAgo } from "../../../helpers";
-import { getWhatReactionSelected } from "../../../components/Posts/helpers";
 import { photoUser } from "../../../assets";
 import { ReactionsPost, SureDelete } from "../../../components";
 import { ReactionsSvgCount } from "../Layout/ReactionsSvgCount";
-import { useCloseModal } from "../../../hooks";
+import { useCardComment } from "./useCardComment";
+import { ListReactions } from "../ListReactions/ListReactions";
 
 import styles from "./cardComment.module.css";
-import { useCardComment } from "./useCardComment";
 
 export const CardComment = ({ comment, users, infoUserActive }) => {
   const {
     // atributos
     isThisUserCreatedComment,
+    openListReactions,
     openOptions,
     openSureDelete,
     openUpdateComment,
@@ -32,6 +26,7 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
     setOpenOptions,
     setOpenSureDelete,
     setOpenUpdateComment,
+    setOpenListReactions,
   } = useCardComment({ comment, users, infoUserActive });
 
   return (
@@ -99,10 +94,20 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
               </span>
               <span>Responder</span>
             </div>
-            <ReactionsSvgCount post={comment} />
+            <ReactionsSvgCount
+              post={comment}
+              onOpenListReaction={() => setOpenListReactions(true)}
+            />
           </div>
         </div>
       </div>
+
+      {openListReactions && (
+        <ListReactions
+          listReactionsUse={comment}
+          setOpenListReactions={setOpenListReactions}
+        />
+      )}
 
       {openUpdateComment && (
         <EditComment

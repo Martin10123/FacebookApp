@@ -19,13 +19,13 @@ export const useEditWork = ({ infoUserActive, setOpenWork }) => {
   const [openJobs, setOpenJobs] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedJob, setSelectedJob] = useState(
-    [infoUserActive?.infoPersonal.job?.job] || []
+    [infoUserActive?.infoPersonal?.job?.job] || []
   );
   const [startLoading, setStartLoading] = useState(false);
   const [startLoadingDelete, setStartLoadingDelete] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const { placeWork, onInputChange, isFormValid, placeWorkValid } = useForm(
-    { placeWork: infoUserActive?.infoPersonal.job?.placeWork || "" },
+    { placeWork: infoUserActive?.infoPersonal?.job?.placeWork || "" },
 
     validateField
   );
@@ -66,7 +66,7 @@ export const useEditWork = ({ infoUserActive, setOpenWork }) => {
   };
 
   const onDeleteJob = async () => {
-    if (!infoUserActive?.infoPersonal.job) return;
+    if (!infoUserActive?.infoPersonal?.job) return;
 
     setStartLoadingDelete(true);
 

@@ -14,13 +14,48 @@ export const reactionsDataPost = [
 // Component: CountReactions
 export const countReactionsSelected = ({ reactions }) => {
   const reactionsData1 = [
-    { name: "Me gusta", img: like, count: reactions?.like?.length },
-    { name: "Me encanta", img: love, count: reactions?.love?.length },
-    { name: "Me importa", img: care, count: reactions?.care?.length },
-    { name: "Me divierte", img: haha, count: reactions?.funny?.length },
-    { name: "Me asombra", img: wow, count: reactions?.amazes?.length },
-    { name: "Me entristece", img: sad, count: reactions?.sad?.length },
-    { name: "Me enoja", img: angry, count: reactions?.angry?.length },
+    {
+      name: "Me gusta",
+      img: like,
+      tofire: "like",
+      count: reactions?.like?.length,
+    },
+    {
+      name: "Me encanta",
+      img: love,
+      tofire: "love",
+      count: reactions?.love?.length,
+    },
+    {
+      name: "Me importa",
+      img: care,
+      tofire: "care",
+      count: reactions?.care?.length,
+    },
+    {
+      name: "Me divierte",
+      img: haha,
+      tofire: "funny",
+      count: reactions?.funny?.length,
+    },
+    {
+      name: "Me asombra",
+      img: wow,
+      tofire: "amazes",
+      count: reactions?.amazes?.length,
+    },
+    {
+      name: "Me entristece",
+      img: sad,
+      tofire: "sad",
+      count: reactions?.sad?.length,
+    },
+    {
+      name: "Me enoja",
+      img: angry,
+      tofire: "angry",
+      count: reactions?.angry?.length,
+    },
   ];
 
   return reactionsData1

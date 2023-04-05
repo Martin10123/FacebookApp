@@ -12,11 +12,12 @@ import { addPhotoToCloudinary } from "../../../helpers";
 import { firebaseDB } from "../../../services";
 
 export const useBoxComments = ({ infoUserActive, post }) => {
+  const [getComments, setGetComments] = useState([]);
   const [inputComment, setInputComment] = useState("");
+  const [openListReactions, setOpenListReactions] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [startLoading, setStartLoading] = useState(false);
   const [startLoadingComments, setStartLoadingComments] = useState(true);
-  const [getComments, setGetComments] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef();
 
   const onSubmitComment = async () => {
@@ -81,6 +82,7 @@ export const useBoxComments = ({ infoUserActive, post }) => {
     fileInputRef,
     getComments,
     inputComment,
+    openListReactions,
     selectedImage,
     startLoading,
     startLoadingComments,
@@ -89,5 +91,6 @@ export const useBoxComments = ({ infoUserActive, post }) => {
     onFileInputchange,
     onSubmitComment,
     setInputComment,
+    setOpenListReactions,
   };
 };

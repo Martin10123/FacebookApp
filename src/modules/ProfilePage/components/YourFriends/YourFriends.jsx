@@ -51,10 +51,10 @@ export const YourFriends = ({
 
         <div className={styles.list_friends__content_users}>
           <p className={styles.list_friends__count_friends}>
-            {otherUserFriendsList.friendsList.length} amigos
+            {otherUserFriendsList?.friendsList?.length} amigos
           </p>
 
-          {searchFriendInTheList.map((friend) => (
+          {searchFriendInTheList?.map((friend) => (
             <div
               className={styles.list_friends__info_user}
               key={friend.uid}

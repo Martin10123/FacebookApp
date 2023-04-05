@@ -11,6 +11,7 @@ export const LayoutComment = ({
   onchangeInput,
   onCloseComment,
   onFileInputchange,
+  onOpenListReactions,
   onSubmitFormButton,
   placeholderInput,
   post,
@@ -46,7 +47,11 @@ export const LayoutComment = ({
         </div>
 
         <div className={styles.comments__count_reactions}>
-          <ReactionsSvgCount showIcon={showIconReactionsCount} post={post} />
+          <ReactionsSvgCount
+            onOpenListReaction={onOpenListReactions}
+            post={post}
+            showIcon={showIconReactionsCount}
+          />
 
           {showButtonReaction && (
             <>

@@ -5,10 +5,11 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 9999999;
+  z-index: 999999999;
 }
 
 .list_reactions__content {
+  background: #fff;
   display: grid;
   gap: 0.3rem;
   grid-template-rows: 0fr 0fr 1fr;
@@ -113,13 +114,14 @@
 
 .list_reactions__img_reac {
   bottom: 0;
-  height: 1.5rem !important;
+  height: 1.2rem !important;
   position: absolute;
   right: 0;
-  width: 1.5rem !important;
+  width: 1.2rem !important;
 }
 
 .list_reactions__info_user > p {
+  color: #000;
   font-size: 1.1rem;
   font-weight: 500;
 }

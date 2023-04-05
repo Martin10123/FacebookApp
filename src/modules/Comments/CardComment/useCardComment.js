@@ -9,6 +9,7 @@ import { firebaseDB } from "../../../services";
 
 export const useCardComment = ({ comment, users, infoUserActive }) => {
   const [openOptions, setOpenOptions] = useState(false);
+  const [openListReactions, setOpenListReactions] = useState(false);
   const [openUpdateComment, setOpenUpdateComment] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const ref = useCloseModal(() => setOpenOptions(false));
@@ -41,6 +42,7 @@ export const useCardComment = ({ comment, users, infoUserActive }) => {
   return {
     // atributos
     isThisUserCreatedComment,
+    openListReactions,
     openOptions,
     openSureDelete,
     openUpdateComment,
@@ -51,6 +53,7 @@ export const useCardComment = ({ comment, users, infoUserActive }) => {
     getReactionSelected,
     onDeleteComment,
     onGoToProfile,
+    setOpenListReactions,
     setOpenOptions,
     setOpenSureDelete,
     setOpenUpdateComment,

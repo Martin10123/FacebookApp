@@ -25,10 +25,6 @@ export const EditWork = ({ setOpenWork, infoUserActive }) => {
     startLoadingDelete,
   } = useEditWork({ setOpenWork, infoUserActive });
 
-  const {
-    infoPersonal: { job },
-  } = infoUserActive;
-
   return (
     <>
       <LayoutModalEditDetails

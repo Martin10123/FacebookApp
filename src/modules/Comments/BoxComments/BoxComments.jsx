@@ -1,7 +1,8 @@
 import { CardComment } from "../CardComment/CardComment";
 import { LayoutComment } from "../Layout/LayoutComment";
-import { usePreventScroll } from "../../../hooks";
+import { ListReactions } from "../ListReactions/ListReactions";
 import { useBoxComments } from "./useBoxComments";
+import { usePreventScroll } from "../../../hooks";
 
 export const BoxComments = ({
   infoUserActive,
@@ -17,6 +18,7 @@ export const BoxComments = ({
     fileInputRef,
     getComments,
     inputComment,
+    openListReactions,
     selectedImage,
     startLoading,
     startLoadingComments,
@@ -25,6 +27,7 @@ export const BoxComments = ({
     onFileInputchange,
     onSubmitComment,
     setInputComment,
+    setOpenListReactions,
   } = useBoxComments({ infoUserActive, post });
 
   return (
@@ -35,6 +38,7 @@ export const BoxComments = ({
         onchangeInput={setInputComment}
         onCloseComment={() => setOpenCommentsPost(false)}
         onFileInputchange={onFileInputchange}
+        onOpenListReactions={() => setOpenListReactions(true)}
         onSubmitFormButton={onSubmitComment}
         placeholderInput="Comentar..."
         post={post}
@@ -60,6 +64,13 @@ export const BoxComments = ({
           />
         ))}
       </LayoutComment>
+
+      {openListReactions && (
+        <ListReactions
+          listReactionsUse={post}
+          setOpenListReactions={setOpenListReactions}
+        />
+      )}
     </>
   );
 };

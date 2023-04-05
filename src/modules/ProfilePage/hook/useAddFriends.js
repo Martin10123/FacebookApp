@@ -71,7 +71,7 @@ export const useAddNewFriends = ({ matchedUser }) => {
     }
   };
 
-  const onAcceptRequestOfFriend = async ({ uidOtherUser, displayName }) => {
+  const onAcceptRequestOfFriend = async ({ uidOtherUser }) => {
     try {
       setDoc(
         currentUserRef,
@@ -95,7 +95,7 @@ export const useAddNewFriends = ({ matchedUser }) => {
     }
   };
 
-  const onRechacedRequestOfFriend = async ({ uidOtherUser, displayName }) => {
+  const onRechacedRequestOfFriend = async ({ uidOtherUser }) => {
     try {
       setDoc(
         currentUserRef,
@@ -117,7 +117,7 @@ export const useAddNewFriends = ({ matchedUser }) => {
     }
   };
 
-  const onDeleteSomebodyFriendsList = async ({ uidOtherUser, displayName }) => {
+  const onDeleteSomebodyFriendsList = async ({ uidOtherUser }) => {
     try {
       setDoc(
         doc(firebaseDB, "friendsEachUsers", activeUserUid),

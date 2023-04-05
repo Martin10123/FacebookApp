@@ -13,8 +13,8 @@ export const useYourFriends = ({
 
   const countMutualFriends = (friendUid) => {
     const selectedFriend = searchFriendListByUid(friendUid);
-    const mutualFriends = selectedFriend.friendsList.filter((friend) =>
-      currentUserFriendsList.friendsList.includes(friend)
+    const mutualFriends = selectedFriend?.friendsList?.filter((friend) =>
+      currentUserFriendsList?.friendsList?.includes(friend)
     );
 
     return mutualFriends.length;

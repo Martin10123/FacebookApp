@@ -3,10 +3,7 @@ import { useState } from "react";
 import { firebaseDB } from "../../../../../../../services";
 
 export const useCountry = ({ infoUserActive, setOpenCountry }) => {
-  const {
-    infoPersonal: { country },
-    uid,
-  } = infoUserActive;
+  const { infoPersonal, uid } = infoUserActive;
 
   const [openListCountrys, setOpenListCountrys] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -14,10 +11,10 @@ export const useCountry = ({ infoUserActive, setOpenCountry }) => {
   const [startLoadingDelete, setStartLoadingDelete] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const [selectCity, setSelectCity] = useState(
-    country?.selectCity || "Cartagena"
+    infoPersonal?.country?.selectCity || "Cartagena"
   );
   const [selectCountry, setSelectCountry] = useState(
-    country?.selectCountry || []
+    infoPersonal?.country?.selectCountry || []
   );
 
   const onSavedCity = async () => {
@@ -47,7 +44,7 @@ export const useCountry = ({ infoUserActive, setOpenCountry }) => {
   };
 
   const onDeleteCity = async () => {
-    if (!country) return;
+    if (!infoPersonal?.country) return;
 
     setStartLoadingDelete(true);
     try {

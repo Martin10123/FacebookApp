@@ -2,11 +2,18 @@ import { useCountReactionsPost } from "../../../components/Posts/hook";
 
 import styles from "./layoutComment.module.css";
 
-export const ReactionsSvgCount = ({ showIcon = false, post }) => {
+export const ReactionsSvgCount = ({
+  onOpenListReaction,
+  post,
+  showIcon = false,
+}) => {
   const { countReactions, totalReactions } = useCountReactionsPost({ post });
 
   return (
-    <div className={styles.comments__reactions_svgs}>
+    <div
+      className={styles.comments__reactions_svgs}
+      onClick={onOpenListReaction}
+    >
       <span>
         {countReactions.map(({ name, img }) => (
           <img

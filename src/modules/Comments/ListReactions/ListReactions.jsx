@@ -1,82 +1,71 @@
-import {
-  angry,
-  care,
-  haha,
-  like,
-  love,
-  photoUser,
-  sad,
-  wow,
-} from "../../../assets";
+import { useListReactions } from "./useListReactions";
+import { CardListReactionUser } from "./components/CardListReactionUser";
 
 import styles from "./listReactions.module.css";
 
-export const ListReactions = () => {
+export const ListReactions = ({ listReactionsUse, setOpenListReactions }) => {
+  const {
+    // Atributos
+    countReactions,
+    filteredReactions,
+    filterReactionBy,
+    infoUserActive,
+    totalReactions,
+    friendsEachUsers,
+
+    // Metodos
+    setFilterReactionBy,
+  } = useListReactions({ listReactionsUse });
+
   return (
     <div className={styles.list_reactions__container}>
       <div className={styles.list_reactions__content}>
         <div className={styles.list_reactions__nav}>
           <span>
-            <i className="fa-solid fa-arrow-left"></i>
+            <i
+              className="fa-solid fa-arrow-left"
+              onClick={() => setOpenListReactions(false)}
+            ></i>
             <p>Personas que reaccionaron</p>
           </span>
-
-          <i className="fa-solid fa-magnifying-glass"></i>
         </div>
 
         <div className={styles.list_reactions__count_reactions}>
-          <div className={styles.list_reactions__item}>
-            <p>Todas 30,000</p>
+          <div
+            className={styles.list_reactions__item}
+            onClick={() => setFilterReactionBy("")}
+            style={{
+              borderBottom: filterReactionBy === "" ? "3px solid #0099ff" : "",
+            }}
+          >
+            <p>Todas {totalReactions}</p>
           </div>
-          <div className={styles.list_reactions__item}>
-            <img src={angry} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={care} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={haha} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={like} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={love} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={sad} alt="" />
-            <p>30,000</p>
-          </div>
-          <div className={styles.list_reactions__item}>
-            <img src={wow} alt="" />
-            <p>30,000</p>
-          </div>
+
+          {countReactions.map(({ count, img, name, tofire }) => (
+            <div
+              className={styles.list_reactions__item}
+              key={name}
+              onClick={() => setFilterReactionBy(tofire)}
+              style={{
+                borderBottom:
+                  filterReactionBy === tofire ? "3px solid #0099ff" : "",
+              }}
+            >
+              <img src={img} alt={`foto de ${name}`} />
+              <p>{count}</p>
+            </div>
+          ))}
         </div>
 
         <div className={styles.list_reactions__list_users}>
-          <div className={styles.list_reactions__user}>
-            <div className={styles.list_reactions__info_user}>
-              <figure className={styles.list_reactions__photo}>
-                <img src={photoUser} alt="Foto perfil usuario" />
-                <img
-                  className={styles.list_reactions__img_reac}
-                  src={wow}
-                  alt=""
-                />
-              </figure>
-              <p>Martin Elias</p>
-            </div>
-
-            <button className={styles.list_reactions__btn_add_friend}>
-              <i className="fa-solid fa-user-plus"></i>
-              Agregar
-            </button>
-          </div>
+          {filteredReactions.map((userReaction) => (
+            <CardListReactionUser
+              friendsEachUsers={friendsEachUsers}
+              infoUserActive={infoUserActive}
+              key={userReaction.uid}
+              userReaction={userReaction}
+            />
+          ))}
         </div>
       </div>
     </div>

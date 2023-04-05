@@ -44,7 +44,7 @@ export const useRelationship = ({ infoUserActive, setOpenRelationship }) => {
   };
 
   const onDeleteRelationship = async () => {
-    if (!infoUserActive?.infoPersonal.relationship) return;
+    if (!infoUserActive?.infoPersonal?.relationship) return;
 
     setStartLoadingDelete(true);
     try {

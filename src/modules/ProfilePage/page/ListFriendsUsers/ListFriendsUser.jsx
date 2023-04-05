@@ -19,7 +19,7 @@ export const ListFriendsUser = ({
         <div className={styles.profile__content_titles}>
           <span className={styles.profile__span_title_friend}>
             <p>Amigos</p>
-            <p>{otherUserFriendsList.friendsList.length} amigos</p>
+            <p>{otherUserFriendsList?.friendsList?.length} amigos</p>
           </span>
 
           <button
@@ -32,7 +32,7 @@ export const ListFriendsUser = ({
 
         <div className={styles.profile__all_info_friends}>
           <div className={styles.profile__list_friends}>
-            {friendsList.map((friend) => (
+            {friendsList?.map((friend) => (
               <Link to={`/${friend.username}`} key={friend.uid}>
                 <figure className={styles.profile__friend_info}>
                   <img
