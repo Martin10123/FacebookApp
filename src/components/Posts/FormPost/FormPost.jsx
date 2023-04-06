@@ -11,7 +11,7 @@ export const FormPost = () => {
   const { infoUserActive } = useContext(AuthUserContext);
   const [openCreatePost, setOpenCreatePost] = useState(false);
   const navigate = useNavigate();
-  8;
+
   const goToProfileUser = (setCloseModal = () => {}) => {
     navigate(`/${infoUserActive?.username}`);
     setCloseModal(false);

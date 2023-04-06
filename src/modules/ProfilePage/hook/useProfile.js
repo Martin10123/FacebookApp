@@ -23,7 +23,7 @@ export const useProfile = () => {
     );
   };
 
-  const otherUserFriendsList = searchFriendListByUid(matchedUser.uid);
+  const otherUserFriendsList = searchFriendListByUid(matchedUser?.uid);
 
   const friendsList = users.filter((user) =>
     otherUserFriendsList?.friendsList?.includes(user.uid)
