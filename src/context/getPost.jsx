@@ -21,7 +21,6 @@ export const GetPostsProvider = ({ children }) => {
           ...doc.data(),
         };
       });
-
       setGetPosts([...arrayPosts]);
       setStartLoading(false);
     });

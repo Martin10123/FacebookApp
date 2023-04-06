@@ -12,7 +12,6 @@ export const ProfilePage = () => {
     currentUserFriendsList,
     friendsList,
     getPosts,
-    infoUserActive,
     isUserActive,
     matchedUser,
     openEditProfile,
