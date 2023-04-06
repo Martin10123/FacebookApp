@@ -5,13 +5,17 @@ import { firebaseDB } from "../../../services";
 
 import styles from "./editComment.module.css";
 
-export const EditComment = ({ comment, setOpenUpdateComment }) => {
-  const [inputAnswer, setInputAnswer] = useState(comment.comment || "");
+export const EditComment = ({
+  idDocumentCOA,
+  setOpenUpdateComment,
+  textInfoCOA,
+}) => {
+  const [updateCOA, setUpdateCOA] = useState(textInfoCOA || "");
 
   const onSubmitCommentUpdate = () => {
     try {
-      updateDoc(doc(firebaseDB, "comments", comment.idComment), {
-        comment: inputAnswer,
+      updateDoc(doc(firebaseDB, "comments", idDocumentCOA), {
+        comment: updateCOA,
       });
 
       setOpenUpdateComment(false);
@@ -37,9 +41,9 @@ export const EditComment = ({ comment, setOpenUpdateComment }) => {
 
         <textarea
           className={styles.update__text}
-          onChange={({ target }) => setInputAnswer(target.value)}
+          onChange={({ target }) => setUpdateCOA(target.value)}
           placeholder="Actualizar..."
-          value={inputAnswer}
+          value={updateCOA}
         />
 
         <div className={styles.update__btn_update}>

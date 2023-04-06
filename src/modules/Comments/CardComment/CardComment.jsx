@@ -5,29 +5,44 @@ import { ReactionsPost, SureDelete } from "../../../components";
 import { ReactionsSvgCount } from "../Layout/ReactionsSvgCount";
 import { useCardComment } from "./useCardComment";
 import { ListReactions } from "../ListReactions/ListReactions";
+import { AnswersComments } from "..";
+import { useAnswersComments } from "../AnswersComments/useAnswersComments";
 
 import styles from "./cardComment.module.css";
 
-export const CardComment = ({ comment, users, infoUserActive }) => {
+export const CardComment = ({
+  comment,
+  infoUserActive,
+  isCommentOrAnswer,
+  users,
+}) => {
   const {
     // atributos
+    idDocumentCOA,
     isThisUserCreatedComment,
+    openAnswers,
     openListReactions,
     openOptions,
     openSureDelete,
     openUpdateComment,
+    photoCOA,
     ref,
+    textInfoCOA,
     userCreateComment,
+    whatIsAOC,
 
     // metodos
     getReactionSelected,
     onDeleteComment,
     onGoToProfile,
+    setOpenAnswers,
+    setOpenListReactions,
     setOpenOptions,
     setOpenSureDelete,
     setOpenUpdateComment,
-    setOpenListReactions,
-  } = useCardComment({ comment, users, infoUserActive });
+  } = useCardComment({ comment, users, infoUserActive, isCommentOrAnswer });
+
+  const { countAnswers } = useAnswersComments({ comment, infoUserActive });
 
   return (
     <>
@@ -66,15 +81,16 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
               )}
             </div>
 
-            {comment.comment && (
+            {textInfoCOA && (
               <span className={styles.card_comment__text_comment}>
-                {comment.comment}
+                {textInfoCOA}
               </span>
             )}
           </div>
-          {comment.photoComment && (
+
+          {photoCOA && (
             <figure className={styles.card_comment__image_comment}>
-              <img src={comment.photoComment} alt="Foto del comentario" />
+              <img src={photoCOA} alt="Foto del comentario" />
             </figure>
           )}
 
@@ -85,22 +101,47 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
                 {getReactionSelected?.name || "Me gusta"}
 
                 <ReactionsPost
-                  idDocumentToSave={comment.idComment}
-                  nameCollectionFirebase="comments"
+                  idDocumentToSave={idDocumentCOA}
+                  nameCollectionFirebase={
+                    whatIsAOC ? "comments" : "answersComment"
+                  }
                   reactionObjCollection={comment?.reactions}
                   styleShowAllContainer={styles.comments__container}
                   uidUserToSaveReaction={infoUserActive.uid}
                 />
               </span>
-              <span>Responder</span>
+
+              {whatIsAOC && (
+                <span onClick={() => setOpenAnswers(true)}>Responder</span>
+              )}
             </div>
+
             <ReactionsSvgCount
               post={comment}
               onOpenListReaction={() => setOpenListReactions(true)}
             />
           </div>
+
+          {whatIsAOC && countAnswers !== 0 && !openAnswers && (
+            <div
+              className={styles.comments__show_quality_answers}
+              onClick={() => setOpenAnswers(true)}
+            >
+              <i className="fa-solid fa-arrow-turn-up"></i>
+              <p>{countAnswers} respuesta</p>
+            </div>
+          )}
         </div>
       </div>
+
+      {whatIsAOC && openAnswers && (
+        <AnswersComments
+          comment={comment}
+          infoUserActive={infoUserActive}
+          userCreateComment={userCreateComment}
+          users={users}
+        />
+      )}
 
       {openListReactions && (
         <ListReactions
@@ -111,8 +152,9 @@ export const CardComment = ({ comment, users, infoUserActive }) => {
 
       {openUpdateComment && (
         <EditComment
-          comment={comment}
+          idDocumentCOA={idDocumentCOA}
           setOpenUpdateComment={setOpenUpdateComment}
+          textInfoCOA={textInfoCOA}
         />
       )}
 

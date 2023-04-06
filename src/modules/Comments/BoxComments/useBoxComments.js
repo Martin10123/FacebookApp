@@ -79,6 +79,7 @@ export const useBoxComments = ({ infoUserActive, post }) => {
 
   return {
     // atributos
+    countComment: getComments.length,
     fileInputRef,
     getComments,
     inputComment,

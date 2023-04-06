@@ -1,7 +1,10 @@
 .card_comment__container {
-  display: grid;
+  display: flex;
   gap: 0.5rem;
-  grid-template-columns: 0fr 1fr;
+  width: 100%;
+}
+
+.card_comment__contain_name_info_comment {
   width: 100%;
 }
 
@@ -118,6 +121,21 @@
   opacity: 1;
   z-index: 21;
   transition: all 0.5s ease-in-out;
+}
+
+/*  */
+
+.comments__show_quality_answers {
+  color: gray;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  gap: 1rem;
+  width: fit-content;
+}
+
+.comments__show_quality_answers i {
+  transform: rotate(90deg);
 }
 
 @media (min-width: 800px) {

@@ -7,14 +7,30 @@ import { useCloseModal } from "../../../hooks";
 import { getWhatReactionSelected } from "../../../components/Posts/helpers";
 import { firebaseDB } from "../../../services";
 
-export const useCardComment = ({ comment, users, infoUserActive }) => {
+export const useCardComment = ({
+  comment,
+  users,
+  infoUserActive,
+  isCommentOrAnswer,
+}) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [openListReactions, setOpenListReactions] = useState(false);
   const [openUpdateComment, setOpenUpdateComment] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
+  const [openAnswers, setOpenAnswers] = useState(false);
+
   const ref = useCloseModal(() => setOpenOptions(false));
   const navigate = useNavigate();
   const isThisUserCreatedComment = comment.uidUser === infoUserActive.uid;
+  const whatIsAOC = isCommentOrAnswer === "comments";
+
+  const idDocumentCOA = whatIsAOC ? comment.idComment : comment.idAnswer;
+
+  const pahtToSaveFire = whatIsAOC ? "comments" : "answersComment";
+
+  const textInfoCOA = whatIsAOC ? comment.comment : comment.answer;
+
+  const photoCOA = whatIsAOC ? comment.photoComment : comment.photoAnswer;
 
   const userCreateComment = users.find(
     (user) => user?.uid === comment?.uidUser
@@ -31,9 +47,9 @@ export const useCardComment = ({ comment, users, infoUserActive }) => {
 
   const onDeleteComment = async () => {
     try {
-      await deleteDoc(doc(firebaseDB, "comments", comment.idComment));
+      await deleteDoc(doc(firebaseDB, pahtToSaveFire, idDocumentCOA));
 
-      toast.success("Eliminaste tu comentario");
+      toast.success(`Eliminaste tu ${whatIsAOC ? "comentario" : "respuesta"}`);
     } catch (error) {
       console.error(error);
     }
@@ -41,18 +57,24 @@ export const useCardComment = ({ comment, users, infoUserActive }) => {
 
   return {
     // atributos
+    idDocumentCOA,
     isThisUserCreatedComment,
+    openAnswers,
     openListReactions,
     openOptions,
     openSureDelete,
     openUpdateComment,
+    photoCOA,
     ref,
+    textInfoCOA,
     userCreateComment,
+    whatIsAOC,
 
     // metodos
     getReactionSelected,
     onDeleteComment,
     onGoToProfile,
+    setOpenAnswers,
     setOpenListReactions,
     setOpenOptions,
     setOpenSureDelete,

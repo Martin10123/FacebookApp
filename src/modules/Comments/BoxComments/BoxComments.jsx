@@ -59,6 +59,7 @@ export const BoxComments = ({
           <CardComment
             comment={comment}
             infoUserActive={infoUserActive}
+            isCommentOrAnswer="comments"
             key={comment.idComment}
             users={users}
           />
