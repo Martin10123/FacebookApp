@@ -9,11 +9,13 @@ import {
 } from "../../components";
 import { HistoryPage } from "../Historys/pages/HistoryPage";
 import { GetPostsContext } from "../../context";
+import { useShowPostsPrivacity } from "./useShowPostsPrivacity";
 
 import styles from "./mainApp.module.css";
 
 export const MainApp = () => {
   const { getPosts, startLoading } = useContext(GetPostsContext);
+  const savePostByPrivacity = useShowPostsPrivacity();
 
   return (
     <main className={styles.main__container}>
@@ -28,7 +30,7 @@ export const MainApp = () => {
           </div>
         ) : (
           <>
-            {getPosts
+            {savePostByPrivacity
               .map((post) => (
                 <div key={post.idDoc}>
                   {!post.isShared ? (

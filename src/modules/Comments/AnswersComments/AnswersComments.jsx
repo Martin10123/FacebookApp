@@ -40,7 +40,10 @@ export const AnswersComments = ({ comment, infoUserActive, users }) => {
           ))}
         </div>
 
-        <div className={styles.answers__input_form_send_answer}>
+        <form
+          className={styles.answers__input_form_send_answer}
+          onSubmit={onSubmitAnswer}
+        >
           <input
             className={styles.answers__input_form}
             onChange={({ target }) => setInputAnswer(target.value)}
@@ -70,12 +73,13 @@ export const AnswersComments = ({ comment, infoUserActive, users }) => {
 
             <button
               className={styles.answers__button_submit}
-              onClick={onSubmitAnswer}
+              disabled={startLoading}
+              type="submit"
             >
               <i className="fa-regular fa-paper-plane"></i>
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -1,29 +1,23 @@
 import { useState } from "react";
-import {
-  arrayRemove,
-  arrayUnion,
-  deleteDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
 import { useCloseModal } from "../../../../hooks";
 import { EditStatePosts } from "../../ModalEditStatePost/ModalEditStatePost";
 import { firebaseDB } from "../../../../services";
 import { SureDelete } from "../../../SureDelete/SureDelete";
+import { useDeletePostComments } from "../../hook/useDeleteAllByPC";
 
 import styles from "../cardPost.module.css";
 
-export const OptionsPost = ({
-  infoUserActive,
-  isAtBottom,
-  post,
-  setOpenOptions,
-}) => {
+export const OptionsPost = ({ infoUserActive, post, setOpenOptions }) => {
   const [openUpdatePost, setOpenUpdatePost] = useState(false);
   const [openSureDeletePost, setOpenSureDeletePost] = useState(false);
   const ref = useCloseModal(() => setOpenOptions(false));
+  const { onDeletePost } = useDeletePostComments({
+    firePath: "posts",
+    infoToSearchFire: post,
+  });
 
   const iCreatedThisPost = infoUserActive.uid === post.uid;
   const isSavedPost = infoUserActive?.savedPosts?.includes(post.idDoc);
@@ -50,9 +44,9 @@ export const OptionsPost = ({
     }
   };
 
-  const onDeletePost = async () => {
+  const onDeletePosts = async () => {
     try {
-      await deleteDoc(doc(firebaseDB, "posts", post.idDoc));
+      await onDeletePost();
 
       toast.success("Se borro correctamente la publicación");
     } catch (error) {
@@ -72,7 +66,7 @@ export const OptionsPost = ({
     <div
       ref={ref}
       className={`${styles.options_post__container} ${
-        isAtBottom ? styles.options__post_top : ""
+        false ? styles.options__post_top : ""
       }`}
     >
       <div
@@ -125,7 +119,7 @@ export const OptionsPost = ({
           buttonText="Borrar"
           confirmationMessage="¿Seguro que quieres borrar esta publicación?"
           onClose={() => setOpenSureDeletePost(false)}
-          onDelete={onDeletePost}
+          onDelete={onDeletePosts}
         />
       )}
     </div>

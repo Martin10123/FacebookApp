@@ -20,15 +20,15 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
   const onCreateNewPost = async () => {
     if (post.trim().length === 0 && selectedImages.length === 0) return;
 
+    let photosUrls;
+
     setStartLoadingPost(true);
 
+    if (selectedImages.length !== 0) {
+      photosUrls = await startUpdaloadingFiles();
+    }
+
     try {
-      let photosUrls;
-
-      if (selectedImages.length !== 0) {
-        photosUrls = await startUpdaloadingFiles();
-      }
-
       await addDoc(collection(firebaseDB, "posts"), {
         date: new Date().getTime(),
         displayName: infoUserActive.displayName,
@@ -49,27 +49,35 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
   };
 
   const onFileInputchange = ({ target }) => {
-    if (target.files === 0) return;
+    if (target.files.length === 0) return;
 
-    const imagesList = Array.from(target.files).map((file) => ({
-      file,
-      idFile: `imagen/${Math.random() * 50000}`,
-    }));
+    if (target.files.length > 4) {
+      alert(`Solo puedes seleccionar 4 archivos.`);
+    } else {
+      const imagesList = Array.from(target.files).map((file) => ({
+        file,
+        idFile: `imagen/${Math.random() * 50000}`,
+      }));
 
-    setSelectedImages(imagesList);
+      setSelectedImages(imagesList);
+    }
   };
 
   const startUpdaloadingFiles = async () => {
-    const fileUploadPromises = [];
+    try {
+      const fileUploadPromises = [];
 
-    for (const file of selectedImages) {
-      delete file.idFile;
-      fileUploadPromises.push(addPhotoToCloudinary(file.file));
+      for (const file of selectedImages) {
+        delete file.idFile;
+        fileUploadPromises.push(addPhotoToCloudinary(file.file));
+      }
+
+      const photosUrls = await Promise.all(fileUploadPromises);
+
+      return photosUrls;
+    } catch (error) {
+      console.error(error);
     }
-
-    const photosUrls = await Promise.all(fileUploadPromises);
-
-    return photosUrls;
   };
 
   const onDeletePhotoSelected = (idFile) => {

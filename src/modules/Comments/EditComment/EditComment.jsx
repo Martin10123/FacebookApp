@@ -6,16 +6,18 @@ import { firebaseDB } from "../../../services";
 import styles from "./editComment.module.css";
 
 export const EditComment = ({
-  idDocumentCOA,
+  isCommentOrAnswer,
+  pahtToSaveFire,
   setOpenUpdateComment,
   textInfoCOA,
 }) => {
   const [updateCOA, setUpdateCOA] = useState(textInfoCOA || "");
+  const COA = isCommentOrAnswer === "comments" ? "comment" : "answer";
 
   const onSubmitCommentUpdate = () => {
     try {
-      updateDoc(doc(firebaseDB, "comments", idDocumentCOA), {
-        comment: updateCOA,
+      updateDoc(doc(firebaseDB, pahtToSaveFire), {
+        [COA]: updateCOA,
       });
 
       setOpenUpdateComment(false);

@@ -80,7 +80,10 @@ export const LayoutComment = ({
 
         <div className={styles.comments__list}>{children}</div>
 
-        <div className={styles.comments__input_form_send_comment}>
+        <form
+          className={styles.comments__input_form_send_comment}
+          onSubmit={onSubmitFormButton}
+        >
           <input
             onChange={({ target }) => onchangeInput(target.value)}
             placeholder={placeholderInput}
@@ -109,12 +112,13 @@ export const LayoutComment = ({
 
             <button
               className={styles.comments__button_submit}
-              onClick={onSubmitFormButton}
+              disabled={startLoading}
+              type="submit"
             >
               <i className="fa-regular fa-paper-plane"></i>
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

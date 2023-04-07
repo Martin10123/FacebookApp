@@ -112,8 +112,6 @@ export const CreatePost = ({
 
           <input
             multiple
-            max={4}
-            maxLength={4}
             onChange={onFileInputchange}
             ref={fileInputRef}
             style={{ display: "none" }}

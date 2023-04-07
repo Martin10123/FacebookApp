@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  addDoc,
-  collection,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
 import { addPhotoToCloudinary } from "../../../helpers";
@@ -18,9 +12,11 @@ export const useBoxComments = ({ infoUserActive, post }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [startLoading, setStartLoading] = useState(false);
   const [startLoadingComments, setStartLoadingComments] = useState(true);
+
   const fileInputRef = useRef();
 
-  const onSubmitComment = async () => {
+  const onSubmitComment = async (e) => {
+    e.preventDefault();
     if (inputComment.trim().length === 0 && !selectedImage) return;
 
     setStartLoading(true);
@@ -32,18 +28,21 @@ export const useBoxComments = ({ infoUserActive, post }) => {
     }
 
     try {
-      await addDoc(collection(firebaseDB, "comments"), {
-        comment: inputComment,
-        date: new Date().getTime(),
-        uidUser: infoUserActive.uid,
-        idPost: post.idDoc,
-        photoComment: fileComment || null,
-      });
+      await addDoc(
+        collection(firebaseDB, `commentsPosts/${post.idDoc}/comments`),
+        {
+          comment: inputComment,
+          date: new Date().getTime(),
+          uidUser: infoUserActive.uid,
+          idPost: post.idDoc,
+          photoComment: fileComment || null,
+        }
+      );
 
-      setStartLoading(false);
-      toast.success("Agregaste un nuevo comentario");
       setInputComment("");
       setSelectedImage("");
+      setStartLoading(false);
+      toast.success("Agregaste un nuevo comentario");
     } catch (error) {
       console.error(error);
       setStartLoading(false);
@@ -57,9 +56,9 @@ export const useBoxComments = ({ infoUserActive, post }) => {
   };
 
   useEffect(() => {
-    const queryFire = query(
-      collection(firebaseDB, "comments"),
-      where("idPost", "==", post.idDoc)
+    const queryFire = collection(
+      firebaseDB,
+      `commentsPosts/${post.idDoc}/comments`
     );
 
     const unSuscribed = onSnapshot(queryFire, (comments) => {

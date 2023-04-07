@@ -5,7 +5,6 @@ import { getTextPost } from "../../CardPost/helper";
 import { getTimeAgo } from "../../../../helpers";
 import { OptionsPost } from "../../CardPost";
 import { photoUser } from "../../../../assets";
-import { usePositionElement } from "../../../../hooks";
 
 import styles from "./layout.module.css";
 
@@ -17,10 +16,25 @@ export const CardLayout = ({
   userCreatePost,
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
-  const { myDivRef, isAtBottom } = usePositionElement();
   const { displayName, photoUrl, username } = userCreatePost;
 
   const textPost = isCardShare ? post.postShared : post;
+
+  const showIconPrivacity = () => {
+    const isPublic = isCardShare ? post.postShared.privacity : post.privacity;
+    const isOnlyFriends = isCardShare
+      ? post.postShared.privacity
+      : post.privacity;
+    const isOnlyYou = isCardShare ? post.postShared.privacity : post.privacity;
+
+    if (isPublic === "Publico") {
+      return <i className="fa-solid fa-earth-americas"></i>;
+    } else if (isOnlyFriends === "Solo amigos") {
+      return <i className="fa-solid fa-users"></i>;
+    } else if (isOnlyYou === "Solo yo") {
+      return <i className="fa-solid fa-user"></i>;
+    }
+  };
 
   return (
     <div className={styles.layout__container}>
@@ -33,8 +47,7 @@ export const CardLayout = ({
             <p className={styles.layout__name}>{displayName}</p>
             <span className={styles.layout__date_post}>
               <p>
-                {getTimeAgo(post.date)} -{" "}
-                <i className="fa-solid fa-earth-americas"></i>
+                {getTimeAgo(post.date)} - {showIconPrivacity()}
               </p>
             </span>
           </span>
@@ -43,14 +56,12 @@ export const CardLayout = ({
         {!isCardShare && (
           <i
             className="fa-solid fa-ellipsis"
-            ref={myDivRef}
             onClick={() => setOpenOptions(!openOptions)}
           ></i>
         )}
 
         {!isCardShare && openOptions && (
           <OptionsPost
-            isAtBottom={isAtBottom}
             post={post}
             setOpenOptions={setOpenOptions}
             infoUserActive={infoUserActive}
@@ -58,9 +69,11 @@ export const CardLayout = ({
         )}
       </div>
 
-      <div className={styles.layout__desc_post}>
-        <p>{getTextPost({ post: textPost }) || ""}</p>
-      </div>
+      {textPost.post && (
+        <div className={styles.layout__desc_post}>
+          <p>{getTextPost({ post: textPost }) || ""}</p>
+        </div>
+      )}
 
       {children}
     </div>

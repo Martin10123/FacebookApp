@@ -25,6 +25,7 @@ export const CardComment = ({
     openOptions,
     openSureDelete,
     openUpdateComment,
+    pahtToSaveFire,
     photoCOA,
     ref,
     textInfoCOA,
@@ -103,7 +104,9 @@ export const CardComment = ({
                 <ReactionsPost
                   idDocumentToSave={idDocumentCOA}
                   nameCollectionFirebase={
-                    whatIsAOC ? "comments" : "answersComment"
+                    whatIsAOC
+                      ? `commentsPosts/${comment.idPost}/comments`
+                      : `answersComments/${comment.idComment}/answers`
                   }
                   reactionObjCollection={comment?.reactions}
                   styleShowAllContainer={styles.comments__container}
@@ -152,7 +155,8 @@ export const CardComment = ({
 
       {openUpdateComment && (
         <EditComment
-          idDocumentCOA={idDocumentCOA}
+          isCommentOrAnswer={isCommentOrAnswer}
+          pahtToSaveFire={pahtToSaveFire}
           setOpenUpdateComment={setOpenUpdateComment}
           textInfoCOA={textInfoCOA}
         />

@@ -3,9 +3,10 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { deleteDoc, doc } from "firebase/firestore";
 
-import { useCloseModal } from "../../../hooks";
-import { getWhatReactionSelected } from "../../../components/Posts/helpers";
 import { firebaseDB } from "../../../services";
+import { getWhatReactionSelected } from "../../../components/Posts/helpers";
+import { useCloseModal } from "../../../hooks";
+import { useDeletePostComments } from "../../../components/Posts/hook";
 
 export const useCardComment = ({
   comment,
@@ -19,6 +20,10 @@ export const useCardComment = ({
   const [openSureDelete, setOpenSureDelete] = useState(false);
   const [openAnswers, setOpenAnswers] = useState(false);
 
+  const { onDeletePost } = useDeletePostComments({
+    firePath: "comments",
+    infoToSearchFire: comment,
+  });
   const ref = useCloseModal(() => setOpenOptions(false));
   const navigate = useNavigate();
   const isThisUserCreatedComment = comment.uidUser === infoUserActive.uid;
@@ -26,7 +31,9 @@ export const useCardComment = ({
 
   const idDocumentCOA = whatIsAOC ? comment.idComment : comment.idAnswer;
 
-  const pahtToSaveFire = whatIsAOC ? "comments" : "answersComment";
+  const pahtToSaveFire = whatIsAOC
+    ? `commentsPosts/${comment.idPost}/comments/${comment.idComment}`
+    : `answersComments/${comment.idComment}/answers/${comment.idAnswer}`;
 
   const textInfoCOA = whatIsAOC ? comment.comment : comment.answer;
 
@@ -47,7 +54,11 @@ export const useCardComment = ({
 
   const onDeleteComment = async () => {
     try {
-      await deleteDoc(doc(firebaseDB, pahtToSaveFire, idDocumentCOA));
+      if (whatIsAOC) {
+        await onDeletePost();
+      } else {
+        await deleteDoc(doc(firebaseDB, pahtToSaveFire));
+      }
 
       toast.success(`Eliminaste tu ${whatIsAOC ? "comentario" : "respuesta"}`);
     } catch (error) {
@@ -64,6 +75,7 @@ export const useCardComment = ({
     openOptions,
     openSureDelete,
     openUpdateComment,
+    pahtToSaveFire,
     photoCOA,
     ref,
     textInfoCOA,
