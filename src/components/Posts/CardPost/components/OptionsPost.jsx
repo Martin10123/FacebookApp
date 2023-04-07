@@ -10,7 +10,12 @@ import { useDeletePostComments } from "../../hook/useDeleteAllByPC";
 
 import styles from "../cardPost.module.css";
 
-export const OptionsPost = ({ infoUserActive, post, setOpenOptions }) => {
+export const OptionsPost = ({
+  infoUserActive,
+  isNearHeight,
+  post,
+  setOpenOptions,
+}) => {
   const [openUpdatePost, setOpenUpdatePost] = useState(false);
   const [openSureDeletePost, setOpenSureDeletePost] = useState(false);
   const ref = useCloseModal(() => setOpenOptions(false));
@@ -66,7 +71,7 @@ export const OptionsPost = ({ infoUserActive, post, setOpenOptions }) => {
     <div
       ref={ref}
       className={`${styles.options_post__container} ${
-        false ? styles.options__post_top : ""
+        isNearHeight ? styles.options__post_top : ""
       }`}
     >
       <div

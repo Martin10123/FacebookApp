@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getTextPost } from "../../CardPost/helper";
@@ -16,6 +16,8 @@ export const CardLayout = ({
   userCreatePost,
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
+  const [isNearHeight, setIsNearHeight] = useState(false);
+  const ellipsisRef = useRef(null);
   const { displayName, photoUrl, username } = userCreatePost;
 
   const textPost = isCardShare ? post.postShared : post;
@@ -34,6 +36,17 @@ export const CardLayout = ({
     } else if (isOnlyYou === "Solo yo") {
       return <i className="fa-solid fa-user"></i>;
     }
+  };
+
+  const onButtonClick = () => {
+    const element = ellipsisRef.current;
+    const rect = element.getBoundingClientRect();
+    const distanceToBottom = window.innerHeight - rect.bottom;
+    const threshold = 0.25 * window.innerHeight; // 25% de la altura de la ventana
+    const isNearBottom = distanceToBottom <= threshold;
+
+    setIsNearHeight(isNearBottom);
+    setOpenOptions(true);
   };
 
   return (
@@ -56,15 +69,17 @@ export const CardLayout = ({
         {!isCardShare && (
           <i
             className="fa-solid fa-ellipsis"
-            onClick={() => setOpenOptions(!openOptions)}
+            onClick={onButtonClick}
+            ref={ellipsisRef}
           ></i>
         )}
 
         {!isCardShare && openOptions && (
           <OptionsPost
+            infoUserActive={infoUserActive}
+            isNearHeight={isNearHeight}
             post={post}
             setOpenOptions={setOpenOptions}
-            infoUserActive={infoUserActive}
           />
         )}
       </div>
