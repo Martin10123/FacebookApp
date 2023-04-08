@@ -1,5 +1,5 @@
 export * from "./Auth";
-export * from "./Comments";
+export * from "./BoxComments";
 export * from "./EventsBirthday/EventsBirthday";
 export * from "./Historys";
 export * from "./MainApp/MainApp";

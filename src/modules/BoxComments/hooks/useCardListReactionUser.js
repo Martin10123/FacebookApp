@@ -1,5 +1,5 @@
 import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
-import { firebaseDB } from "../../../../services";
+import { firebaseDB } from "../../../services";
 
 export const useCardListReactionUser = ({
   friendsEachUsers,

@@ -1,6 +1,6 @@
-import { useCountReactionsPost } from "../../../components/Posts/hook";
+import { useCountReactionsPost } from "../../../../components/Posts/hook";
 
-import styles from "./layoutComment.module.css";
+import styles from "../../page/boxComments.module.css";
 
 export const ReactionsSvgCount = ({
   onOpenListReaction,

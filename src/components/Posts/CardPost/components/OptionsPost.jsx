@@ -19,13 +19,13 @@ export const OptionsPost = ({
   const [openUpdatePost, setOpenUpdatePost] = useState(false);
   const [openSureDeletePost, setOpenSureDeletePost] = useState(false);
   const ref = useCloseModal(() => setOpenOptions(false));
-  const { onDeletePost } = useDeletePostComments({
-    firePath: "posts",
-    infoToSearchFire: post,
-  });
 
   const iCreatedThisPost = infoUserActive.uid === post.uid;
   const isSavedPost = infoUserActive?.savedPosts?.includes(post.idDoc);
+
+  const { onDeleteAllPost } = useDeletePostComments({
+    isPostOComment: "posts",
+  });
 
   const onSavePost = async () => {
     try {
@@ -51,7 +51,7 @@ export const OptionsPost = ({
 
   const onDeletePosts = async () => {
     try {
-      await onDeletePost();
+      await onDeleteAllPost(post.idDoc);
 
       toast.success("Se borro correctamente la publicación");
     } catch (error) {

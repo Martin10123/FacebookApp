@@ -1,11 +1,26 @@
-import { useBoxComments } from "../../../../modules/Comments/BoxComments/useBoxComments";
+import { useContext } from "react";
 import { useCountReactionsPost } from "../../hook";
+import { GetComOAnsContext } from "../../../../context";
 
 import styles from "./layoutComponents.module.css";
 
-export const CountReactions = ({ post, infoUserActive }) => {
+export const CountReactions = ({ post }) => {
   const { countReactions, totalReactions } = useCountReactionsPost({ post });
-  const { countComment } = useBoxComments({ post, infoUserActive });
+  const { getComments, getAnswers } = useContext(GetComOAnsContext);
+
+  const countCommentAnswersOfPost = () => {
+    const filterCommentsByPost = getComments.filter(
+      (comment) => comment.idPost === post.idDoc
+    );
+
+    const filterAnswersByPost = getAnswers.filter((answer) =>
+      filterCommentsByPost.some(
+        (comment) => answer.idComment === comment.idComment
+      )
+    );
+
+    return filterCommentsByPost.length + filterAnswersByPost.length;
+  };
 
   return (
     <div className={styles.layout__content_reactions_comments_share}>
@@ -22,7 +37,7 @@ export const CountReactions = ({ post, infoUserActive }) => {
         <p>{totalReactions}</p>
       </div>
       <span>
-        <p>{countComment} comentarios</p>
+        <p>{countCommentAnswersOfPost()} comentarios</p>
         <p>{post?.howManyPeopleSharePost?.length || 0} compartidas</p>
       </span>
     </div>

@@ -1,80 +1,41 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { GetComOAnsContext } from "../../../context";
 import { firebaseDB } from "../../../services";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  writeBatch,
-} from "firebase/firestore";
+import { deleteDoc, doc, writeBatch } from "firebase/firestore";
 
-export const useDeletePostComments = ({ firePath, infoToSearchFire }) => {
-  const [postData, setPostData] = useState({ comments: [], answers: [] });
+export const useDeletePostComments = ({ isPostOComment }) => {
+  const { getComments, getAnswers } = useContext(GetComOAnsContext);
 
-  const getPostData = async () => {
-    const idDocument =
-      firePath === "posts" ? infoToSearchFire.idDoc : infoToSearchFire.idPost;
+  const onDeleteAllPost = async (idDocument) => {
+    const pathFire = isPostOComment === "posts" ? "idPost" : "idComment";
 
-    const commentsRef = collection(
-      firebaseDB,
-      `commentsPosts/${idDocument}/comments`
+    const filterCommentsByPost = getComments.filter(
+      (comment) => comment[pathFire] === idDocument
     );
 
-    const commentsSnap = await getDocs(commentsRef);
+    const filterAnswersByPost = getAnswers.filter((answer) =>
+      filterCommentsByPost.some(
+        (comment) => answer.idComment === comment.idComment
+      )
+    );
 
-    const comments = commentsSnap.docs.map((doc) => ({
-      idComment: doc.id,
-      doc,
-    }));
-
-    const answers = [];
-
-    for (const comment of comments) {
-      const queryFire = collection(
-        firebaseDB,
-        `answersComments/${comment.idComment}/answers`
-      );
-
-      const answersSnap = await getDocs(queryFire);
-
-      const answersData = answersSnap.docs.map((doc) => ({
-        idAnswer: doc.id,
-        doc,
-      }));
-
-      answers.push(...answersData);
-    }
-
-    setPostData({ comments, answers });
-  };
-
-  useEffect(() => {
-    getPostData();
-  }, []);
-
-  const onDeletePost = async () => {
     try {
       const batch = writeBatch(firebaseDB);
 
-      if (firePath.toLowerCase() === "posts") {
-        await deleteDoc(doc(firebaseDB, `posts/${infoToSearchFire.idDoc}`));
+      if (isPostOComment === "posts") {
+        await deleteDoc(doc(firebaseDB, `posts/${idDocument}`));
 
-        postData.comments.forEach(({ doc }) => {
+        filterCommentsByPost.forEach((doc) => {
           batch.delete(doc?.ref);
         });
 
-        postData.answers.forEach(({ doc }) => {
+        filterAnswersByPost.forEach((doc) => {
           batch.delete(doc?.ref);
         });
-      } else if (firePath.toLowerCase() === "comments") {
-        await deleteDoc(
-          doc(
-            firebaseDB,
-            `commentsPosts/${infoToSearchFire.idPost}/comments/${infoToSearchFire.idComment}`
-          )
-        );
+      } else if (isPostOComment === "comments") {
+        await deleteDoc(doc(firebaseDB, `comments/${idDocument}`));
 
-        postData.answers.forEach(({ doc }) => {
+        filterAnswersByPost.forEach((doc) => {
           batch.delete(doc?.ref);
         });
       }
@@ -85,5 +46,5 @@ export const useDeletePostComments = ({ firePath, infoToSearchFire }) => {
     }
   };
 
-  return { onDeletePost };
+  return { onDeleteAllPost };
 };

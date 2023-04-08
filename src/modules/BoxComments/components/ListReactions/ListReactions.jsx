@@ -1,4 +1,4 @@
-import { useListReactions } from "./useListReactions";
+import { useListReactions } from "../../hooks";
 import { CardListReactionUser } from "./components/CardListReactionUser";
 
 import styles from "./listReactions.module.css";

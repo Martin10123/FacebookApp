@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { ButtonForm } from "../../Auth/helpers";
 import { doc, updateDoc } from "firebase/firestore";
-import { firebaseDB } from "../../../services";
+
+import { firebaseDB } from "../../../../services";
+import { ButtonForm } from "../../../Auth";
 
 import styles from "./editComment.module.css";
 
 export const EditComment = ({
-  isCommentOrAnswer,
+  idDocumentToSave,
   pahtToSaveFire,
   setOpenUpdateComment,
   textInfoCOA,
 }) => {
   const [updateCOA, setUpdateCOA] = useState(textInfoCOA || "");
-  const COA = isCommentOrAnswer === "comments" ? "comment" : "answer";
 
   const onSubmitCommentUpdate = () => {
     try {
-      updateDoc(doc(firebaseDB, pahtToSaveFire), {
-        [COA]: updateCOA,
+      updateDoc(doc(firebaseDB, pahtToSaveFire, idDocumentToSave), {
+        textCOA: updateCOA,
       });
 
       setOpenUpdateComment(false);

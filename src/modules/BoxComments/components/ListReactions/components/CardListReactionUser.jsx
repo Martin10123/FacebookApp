@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { photoUser } from "../../../../assets";
-import { useCardListReactionUser } from "./useCardListReactionUser";
+import { photoUser } from "../../../../../assets";
 import { ButtonsAddFriend } from "./ButtonsAddFriend";
+import { useCardListReactionUser } from "../../../hooks";
 
 import styles from "../listReactions.module.css";
 
