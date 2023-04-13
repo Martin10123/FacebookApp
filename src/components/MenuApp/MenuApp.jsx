@@ -7,18 +7,54 @@ import { useNavbar } from "../NavBar";
 import styles from "./menuApp.module.css";
 
 const dataMenu = [
-  { name: "Guardado", icon: "fa-solid fa-bookmark", color: "#b8479f" },
-  { name: "Amigos", icon: "fa-solid fa-user-group", color: "#1888ea" },
-  { name: "Grupos", icon: "fa-solid fa-users-rectangle", color: "#389de5" },
-  { name: "Tienda", icon: "fa-solid fa-store", color: "#f1662c" },
-  { name: "Eventos", icon: "fa-solid fa-calendar-day", color: "#de3750" },
+  {
+    name: "Guardado",
+    icon: "fa-solid fa-bookmark",
+    color: "#b8479f",
+    linkTo: "/saved",
+  },
+  {
+    name: "Amigos",
+    icon: "fa-solid fa-user-group",
+    color: "#1888ea",
+    linkTo: "/friends",
+  },
+  {
+    name: "Grupos",
+    icon: "fa-solid fa-users-rectangle",
+    color: "#389de5",
+    linkTo: "/",
+  },
+  {
+    name: "Tienda",
+    icon: "fa-solid fa-store",
+    color: "#f1662c",
+    linkTo: "/store",
+  },
+  {
+    name: "Eventos",
+    icon: "fa-solid fa-calendar-day",
+    color: "#de3750",
+    linkTo: "/",
+  },
   {
     name: "Mensajes",
     icon: "fa-brands fa-facebook-messenger",
     color: "#389de5",
+    linkTo: "/",
   },
-  { name: "Más recientes", icon: "fa-solid fa-newspaper", color: "#249fe3" },
-  { name: "Configuración", icon: "fa-solid fa-gear", color: "#979797" },
+  {
+    name: "Más recientes",
+    icon: "fa-solid fa-newspaper",
+    color: "#249fe3",
+    linkTo: "/",
+  },
+  {
+    name: "Configuración",
+    icon: "fa-solid fa-gear",
+    color: "#979797",
+    linkTo: "/",
+  },
 ];
 
 export const MenuApp = () => {
@@ -54,8 +90,12 @@ export const MenuApp = () => {
           </Link>
 
           <div className={styles.menu__access_direct}>
-            {dataMenu.map(({ name, icon, color }) => (
-              <NavLink key={name} className={styles.menu__access_item}>
+            {dataMenu.map(({ name, icon, color, linkTo }) => (
+              <NavLink
+                className={styles.menu__access_item}
+                key={name}
+                to={linkTo}
+              >
                 <i className={icon} style={{ color: color }}></i>
                 <p>{name}</p>
               </NavLink>

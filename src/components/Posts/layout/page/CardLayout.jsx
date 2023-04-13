@@ -76,6 +76,7 @@ export const CardLayout = ({
 
         {!isCardShare && openOptions && (
           <OptionsPost
+            displayNameUserCreatePost={displayName}
             infoUserActive={infoUserActive}
             isNearHeight={isNearHeight}
             post={post}

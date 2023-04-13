@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthUserContext, GetPostsContext } from "../../context";
 
 export const useShowPostsPrivacity = () => {
-  const { getPosts } = useContext(GetPostsContext);
+  const { getPosts, startLoading } = useContext(GetPostsContext);
   const { friendsEachUsers, infoUserActive, users } =
     useContext(AuthUserContext);
 
@@ -23,5 +23,5 @@ export const useShowPostsPrivacity = () => {
     }
   });
 
-  return savePostByPrivacity;
+  return { savePostByPrivacity, startLoading };
 };

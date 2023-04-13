@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import {
   CardPost,
   CardSharePost,
@@ -8,14 +6,12 @@ import {
   SideMessage,
 } from "../../components";
 import { HistoryPage } from "../Historys/pages/HistoryPage";
-import { GetPostsContext } from "../../context";
 import { useShowPostsPrivacity } from "./useShowPostsPrivacity";
 
 import styles from "./mainApp.module.css";
 
 export const MainApp = () => {
-  const { getPosts, startLoading } = useContext(GetPostsContext);
-  const savePostByPrivacity = useShowPostsPrivacity();
+  const { savePostByPrivacity, startLoading } = useShowPostsPrivacity();
 
   return (
     <main className={styles.main__container}>
@@ -30,8 +26,8 @@ export const MainApp = () => {
           </div>
         ) : (
           <>
-            {savePostByPrivacity
-              .map((post) => (
+            {
+              savePostByPrivacity.map((post) => (
                 <div key={post.idDoc}>
                   {!post.isShared ? (
                     <CardPost post={post} />
@@ -40,7 +36,8 @@ export const MainApp = () => {
                   )}
                 </div>
               ))
-              .sort(() => Math.random() - 0.5)}
+              // .sort(() => Math.random() - 0.5)
+            }
           </>
         )}
       </div>

@@ -1,77 +1,42 @@
-import { useState } from "react";
-import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
-import { toast } from "react-hot-toast";
-
-import { useCloseModal } from "../../../../hooks";
+import { Link } from "react-router-dom";
 import { EditStatePosts } from "../../ModalEditStatePost/ModalEditStatePost";
-import { firebaseDB } from "../../../../services";
 import { SureDelete } from "../../../SureDelete/SureDelete";
-import { useDeletePostComments } from "../../hook/useDeleteAllByPC";
+import { useOptionsPost } from "../hook/useOptionsPost";
 
 import styles from "../cardPost.module.css";
 
 export const OptionsPost = ({
+  displayNameUserCreatePost,
   infoUserActive,
   isNearHeight,
   post,
   setOpenOptions,
 }) => {
-  const [openUpdatePost, setOpenUpdatePost] = useState(false);
-  const [openSureDeletePost, setOpenSureDeletePost] = useState(false);
-  const ref = useCloseModal(() => setOpenOptions(false));
+  const {
+    // Atributos
+    iCreatedThisPost,
+    isSavedPost,
+    openSureDeletePost,
+    openUpdatePost,
+    refClose,
 
-  const iCreatedThisPost = infoUserActive.uid === post.uid;
-  const isSavedPost = infoUserActive?.savedPosts?.includes(post.idDoc);
+    // Metodos
+    onCopyLinkPost,
+    onDeletePosts,
+    onSavePost,
+    setOpenSureDeletePost,
+    setOpenUpdatePost,
+  } = useOptionsPost({ infoUserActive, post, setOpenOptions });
 
-  const { onDeleteAllPost } = useDeletePostComments({
-    isPostOComment: "posts",
-  });
-
-  const onSavePost = async () => {
-    try {
-      await setDoc(
-        doc(firebaseDB, "users", infoUserActive.uid),
-        {
-          savedPosts: isSavedPost
-            ? arrayRemove(post.idDoc)
-            : arrayUnion(post.idDoc),
-        },
-        { merge: true }
-      );
-
-      toast.success(
-        isSavedPost
-          ? "Se borro esta publicación de la lista"
-          : "Se guardo correctamente la publicación"
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onDeletePosts = async () => {
-    try {
-      await onDeleteAllPost(post.idDoc);
-
-      toast.success("Se borro correctamente la publicación");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onCopyLinkPost = async () => {
-    try {
-      console.log(`/post/${post.idDoc}`);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const topOptions = iCreatedThisPost
+    ? styles.options__post_top
+    : styles.options__post_top_no_active_user;
 
   return (
     <div
-      ref={ref}
+      ref={refClose}
       className={`${styles.options_post__container} ${
-        isNearHeight ? styles.options__post_top : ""
+        isNearHeight ? topOptions : ""
       }`}
     >
       <div
@@ -80,6 +45,14 @@ export const OptionsPost = ({
       ></div>
       <div className={styles.options_post__content}>
         <div className={styles.options_post_info}>
+          <Link
+            className={styles.options_post__item}
+            to={`/${displayNameUserCreatePost}/post/${post.idDoc}`}
+          >
+            <i className="fa-solid fa-newspaper"></i>
+            <p>Ver publicación</p>
+          </Link>
+
           <div className={styles.options_post__item} onClick={onSavePost}>
             <i className="fa-solid fa-bookmark"></i>
             <p>{isSavedPost ? "Sacar" : "Guardar"} publicación</p>

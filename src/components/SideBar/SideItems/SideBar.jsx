@@ -18,7 +18,7 @@ const dataWindownSideBar = [
     name: "Guardado",
     icon: "fa-solid fa-bookmark",
     color: "#b8479f",
-    linkTo: "/",
+    linkTo: "/saved",
   },
   {
     name: "Grupos",

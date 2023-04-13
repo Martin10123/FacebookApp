@@ -12,16 +12,20 @@ export const SharePost = ({ infoUserActive, post, setOpenSharePost }) => {
   usePreventScroll();
 
   const {
+    // atributos
     friendsListCurrentUser,
     listTagFriends,
-    onInputChange,
-    onSubmitSharePost,
     openTagFriends,
     photoUrl,
     privacity,
+    startLoading,
+    updatePost,
+
+    // metodos
+    onInputChange,
+    onSubmitSharePost,
     setListTagFriends,
     setOpenTagFriends,
-    updatePost,
   } = useSharePost({ infoUserActive, post, setOpenSharePost });
 
   return (
@@ -29,6 +33,7 @@ export const SharePost = ({ infoUserActive, post, setOpenSharePost }) => {
       <div className={styles.share__container}>
         <div
           className={styles.share__close_modal_share}
+          style={{ display: startLoading ? "none" : "" }}
           onClick={() => setOpenSharePost(false)}
         ></div>
         <div className={styles.share__content}>
@@ -76,7 +81,9 @@ export const SharePost = ({ infoUserActive, post, setOpenSharePost }) => {
             </div>
 
             <div className={styles.share__btn_share}>
-              <button onClick={onSubmitSharePost}>Compartir ahora</button>
+              <button disabled={startLoading} onClick={onSubmitSharePost}>
+                {startLoading ? "Compartiendo..." : "Compartir ahora"}
+              </button>
             </div>
           </div>
 

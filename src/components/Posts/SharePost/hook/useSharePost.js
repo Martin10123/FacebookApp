@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 
 export const useSharePost = ({ infoUserActive, post, setOpenSharePost }) => {
   const [openTagFriends, setOpenTagFriends] = useState(false);
+  const [startLoading, setStartLoading] = useState(false);
   const [listTagFriends, setListTagFriends] = useState([]);
   const { friendsListCurrentUser } = useProfile();
 
@@ -17,6 +18,8 @@ export const useSharePost = ({ infoUserActive, post, setOpenSharePost }) => {
   });
 
   const onSubmitSharePost = async () => {
+    setStartLoading(true);
+
     let newDataInPost;
     let newDataInPostShare;
 
@@ -58,10 +61,12 @@ export const useSharePost = ({ infoUserActive, post, setOpenSharePost }) => {
       });
 
       toast.success("Compartiste esta publicación");
+      setStartLoading(false);
       setOpenSharePost(false);
     } catch (error) {
       console.error(error);
       toast.error("Hubo un error al compartir esta publicación");
+      setStartLoading(false);
     }
   };
 
@@ -72,6 +77,7 @@ export const useSharePost = ({ infoUserActive, post, setOpenSharePost }) => {
     openTagFriends,
     photoUrl,
     privacity,
+    startLoading,
     updatePost,
 
     // metodos
