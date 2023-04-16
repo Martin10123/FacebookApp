@@ -1,3 +1,4 @@
-export * from "./authUser";
-export * from "./getPost";
+export * from "./AuthUser";
 export * from "./GetCommentsAnswers";
+export * from "./GetHistories";
+export * from "./GetPost";

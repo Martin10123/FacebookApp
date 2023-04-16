@@ -5,7 +5,7 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   padding: 1rem;
-  height: 80%;
+  height: 32%;
 }
 
 .select_history__item {
@@ -22,19 +22,11 @@
 }
 
 .select_history__item:nth-child(1) {
-  background: linear-gradient(0deg, #ff2b67 29%, #cb157e 58%);
-}
-
-.select_history__item:nth-child(2) {
   background: linear-gradient(0deg, #006dd6db 35%, #72cb61 70%);
 }
 
-.select_history__item:nth-child(3) {
+.select_history__item:nth-child(2) {
   background: linear-gradient(0deg, #0239f5 35%, #b146ee 70%);
-}
-
-.select_history__item:nth-child(4) {
-  background: linear-gradient(0deg, #fb88e3 35%, #ad53cc 70%);
 }
 
 .select_history__icon {
@@ -47,4 +39,10 @@
   height: 3.5rem;
   justify-content: center;
   width: 3.5rem;
+}
+
+@media (min-width: 800px) {
+  .select_history__options {
+    height: 80%;
+  }
 }

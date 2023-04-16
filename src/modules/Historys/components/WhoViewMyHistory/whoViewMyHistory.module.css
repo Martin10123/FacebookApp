@@ -18,13 +18,13 @@
 
 .who_view__photo > img {
   border-radius: 100%;
-  height: 4rem;
+  height: 2.8rem;
   object-fit: cover;
-  width: 4rem;
+  width: 2.8rem;
 }
 
 .who_view__photo > figcaption {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;

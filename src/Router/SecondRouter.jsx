@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { MainApp, MainStore, ProfilePage } from "../modules";
+import { MainApp, MainStore, ProfilePage, SeeHistory } from "../modules";
 import {
   FriendsRequest,
   MenuApp,
@@ -22,6 +22,7 @@ export const SecondRouter = () => {
         <Route path="/store" element={<MainStore />} />
 
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
+        <Route path="/histories/:history_id" element={<SeeHistory />} />
         <Route path="/:username" element={<ProfilePage />} />
 
         <Route path="*" element={<Navigate to="/" />} />

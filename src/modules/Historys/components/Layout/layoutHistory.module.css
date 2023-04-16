@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10000000;
+  z-index: 100000002;
 }
 
 .create_history__content {
@@ -75,7 +75,7 @@
   .create_history__content {
     border-radius: 1rem;
     box-shadow: 1px 1px 6px grey;
-    height: 40rem;
+    height: 90%;
     width: 40rem;
   }
 }

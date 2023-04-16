@@ -2,6 +2,7 @@ import { AppRouter } from "./AppRouter";
 import {
   AuthUserProvider,
   GetComOAnsProvider,
+  GetHistoriesProvider,
   GetPostsProvider,
 } from "../context";
 
@@ -10,7 +11,9 @@ export const AppContexts = () => {
     <AuthUserProvider>
       <GetPostsProvider>
         <GetComOAnsProvider>
-          <AppRouter />
+          <GetHistoriesProvider>
+            <AppRouter />
+          </GetHistoriesProvider>
         </GetComOAnsProvider>
       </GetPostsProvider>
     </AuthUserProvider>
