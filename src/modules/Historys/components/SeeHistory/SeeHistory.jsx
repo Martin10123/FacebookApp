@@ -34,8 +34,6 @@ export const SeeHistory = () => {
   const userCreateHistory = users.find((user) => user?.uid === history_id);
   const historySelected = getHistoriesUserSelect[nextHistory];
 
-  const {} = useDeletePhotoCloudinary();
-
   const goToPrevSlide = () => {
     if (nextHistory === 0) {
       setNextHistory(getHistoriesUserSelect.length - 1);
