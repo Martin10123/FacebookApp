@@ -1,4 +1,9 @@
-import { CardPost, FormPost, CardSharePost } from "../../../../components";
+import {
+  CardPost,
+  FormPost,
+  CardSharePost,
+  NotFound404,
+} from "../../../../components";
 import { DetailsUser } from "../DetailsUser/DetailsUser";
 import { ListFriendsUser } from "../ListFriendsUsers/ListFriendsUser";
 import { PhotosUserName } from "../PhotosUserName/PhotosUserName";
@@ -22,6 +27,10 @@ export const ProfilePage = () => {
     setOpenYourFriends,
     startLoading,
   } = useProfile();
+
+  if (!matchedUser) {
+    return <NotFound404 />;
+  }
 
   return (
     <div className={styles.profile__container}>

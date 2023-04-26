@@ -14,7 +14,7 @@
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 23rem 1fr;
-    max-width: 70rem;
+    width: 100%;
   }
 
   .chat_not_selected {

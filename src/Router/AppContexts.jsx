@@ -4,17 +4,20 @@ import {
   GetComOAnsProvider,
   GetHistoriesProvider,
   GetPostsProvider,
+  GetUsers_MessagesProvider,
 } from "../context";
 
 export const AppContexts = () => {
   return (
     <AuthUserProvider>
       <GetPostsProvider>
-        <GetComOAnsProvider>
-          <GetHistoriesProvider>
-            <AppRouter />
-          </GetHistoriesProvider>
-        </GetComOAnsProvider>
+        <GetHistoriesProvider>
+          <GetComOAnsProvider>
+            <GetUsers_MessagesProvider>
+              <AppRouter />
+            </GetUsers_MessagesProvider>
+          </GetComOAnsProvider>
+        </GetHistoriesProvider>
       </GetPostsProvider>
     </AuthUserProvider>
   );

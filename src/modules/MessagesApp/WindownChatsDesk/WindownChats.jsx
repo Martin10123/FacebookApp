@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { photoUser } from "../../../assets";
 
 import styles from "./windownChats.module.css";
@@ -44,9 +45,9 @@ export const WindownChats = () => {
           </div>
         </div>
 
-        <div className={styles.windownChats__view_more}>
+        <Link className={styles.windownChats__view_more} to="/chats">
           <p>Ver todos en messenger</p>
-        </div>
+        </Link>
       </div>
     </div>
   );

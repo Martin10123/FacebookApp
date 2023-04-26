@@ -24,7 +24,10 @@ export const FormCOA = ({
 
       <div className={styles.input__content_svgs}>
         <div>
-          <i className="fa-solid fa-camera"></i>
+          <i
+            className="fa-solid fa-camera"
+            onClick={() => refFile.current.click()}
+          ></i>
 
           {selectedImage && <p className={styles.create__count_imgs}>1</p>}
         </div>

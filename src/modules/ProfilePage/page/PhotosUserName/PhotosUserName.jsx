@@ -2,6 +2,7 @@ import { useState } from "react";
 import { photoUser } from "../../../../assets";
 import { EditPhoto } from "../../components";
 import { ProfileButtons } from "./ProfileButtons/ProfileButtons";
+import { ModalSentMessage } from "../../../MessagesApp";
 
 import styles from "./photosUserName.module.css";
 
@@ -11,6 +12,7 @@ export const PhotosUserName = ({
   setOpenEditProfile,
 }) => {
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
+  const [openMessange, setOpenMessange] = useState(false);
 
   return (
     <>
@@ -55,12 +57,20 @@ export const PhotosUserName = ({
             isUserActive={isUserActive}
             matchedUser={matchedUser}
             setOpenEditProfile={setOpenEditProfile}
+            setOpenMessange={setOpenMessange}
           />
         </div>
       </div>
 
       {openEditPhoto && (
         <EditPhoto setOpenEditPhoto={setOpenEditPhoto} typePhoto="photoUrl" />
+      )}
+
+      {openMessange && (
+        <ModalSentMessage
+          matchedUser={matchedUser}
+          setOpenMessange={setOpenMessange}
+        />
       )}
     </>
   );

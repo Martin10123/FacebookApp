@@ -5,10 +5,11 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 9999999;
+  z-index: 99999999999;
 }
 
 .create_group__content {
+  background: #ffffff;
   display: grid;
   gap: 0.5rem;
   grid-template-rows: 0fr 1fr 0fr;

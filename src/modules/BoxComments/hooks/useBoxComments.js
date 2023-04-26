@@ -33,7 +33,7 @@ export const useBoxComments = ({
     reactions: post?.reactions,
   });
 
-  const onChangeFile = () => {
+  const onChangeFile = ({ target }) => {
     if (target.files.length === 0) return;
 
     setSelectedImage(target.files[0]);

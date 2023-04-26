@@ -7,6 +7,7 @@ export const ProfileButtons = ({
   isUserActive,
   matchedUser,
   setOpenEditProfile,
+  setOpenMessange,
 }) => {
   const {
     // atributos
@@ -101,7 +102,10 @@ export const ProfileButtons = ({
             />
           )}
 
-          <button className={styles.profile__btn_other}>
+          <button
+            className={styles.profile__btn_other}
+            onClick={() => setOpenMessange(true)}
+          >
             <i className="fa-brands fa-facebook-messenger"></i>
             Mensaje
           </button>

@@ -1,63 +1,93 @@
 import { PhotoUser } from "./PhotoUser";
+import { CreateGroup } from "../CreateGroup/CreateGroup";
+import { CardFilterChat } from "./CardFilterChat";
+import { useChatsFilters } from "../../hook";
 
 import styles from "./chatsFilters.module.css";
 
-export const ChatsFilters = ({ setOpenMessage, setOpenChats }) => {
+export const ChatsFilters = ({
+  setOpenInfoUserToMessage,
+  setOpenChats,
+  infoUserActive,
+  users,
+}) => {
+  const {
+    // Atributos
+    openCreateGroup,
+    searchFriend,
+
+    // Metodos
+    onCloseChats,
+    searchFriendInTheListCarrousel,
+    searchFriendInTheListChats,
+    setOpenCreateGroup,
+    setSearchFriend,
+  } = useChatsFilters({ infoUserActive, users, setOpenChats });
+
   return (
-    <div className={styles.filters__container}>
-      <div className={styles.filters__content}>
-        <div className={styles.filters__nav}>
-          <i
-            className="fa-solid fa-arrow-left"
-            onClick={() => setOpenChats(false)}
-          ></i>
+    <>
+      <div className={styles.filters__container}>
+        <div className={styles.filters__content}>
+          <div className={styles.filters__nav}>
+            <i className="fa-solid fa-arrow-left" onClick={onCloseChats}></i>
 
-          <h2>Chats</h2>
+            <h2>Chats</h2>
 
-          <span className={styles.filters__icon}>
-            <i className="fa-solid fa-users-line"></i>
-          </span>
-        </div>
-
-        <div className={styles.filters__content_users}>
-          <div className={styles.filters__input_form}>
-            <i className="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Buscar..." />
-          </div>
-
-          <div
-            className={styles.filters__contain_scroll_users_actives}
-            onClick={() => setOpenMessage(true)}
-          >
-            <PhotoUser showName={true} nameUser="Martin Elias" />
-          </div>
-
-          <div className={styles.filters__list_users_chats}>
-            <div
-              className={styles.filters__list_item}
-              onClick={() => setOpenMessage(true)}
+            <span
+              className={styles.filters__icon}
+              onClick={() => setOpenCreateGroup(true)}
             >
-              <PhotoUser
-                height="fit-content"
-                nameUser="Martin Elias"
-                showName={false}
+              <i className="fa-solid fa-users-line"></i>
+            </span>
+          </div>
+
+          <div className={styles.filters__content_users}>
+            <div className={styles.filters__input_form}>
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <input
+                onChange={({ target }) => setSearchFriend(target.value)}
+                placeholder="Buscar..."
+                value={searchFriend}
               />
+            </div>
 
-              <div className={styles.filters__item_name}>
-                <p>Martin Elias</p>
-
-                <span className={styles.filters__content_last_message}>
-                  <p className={styles.filters__last_message}>
-                    tú: hola {"Jsdffsdsdff dsDSFJ skjdffs kj sdfkj fsdkjsdf"}
-                  </p>
-
-                  <p>12:40 p.m</p>
-                </span>
+            {searchFriendInTheListCarrousel.length !== 0 && (
+              <div className={styles.filters__contain_scroll_users_actives}>
+                {searchFriendInTheListCarrousel.map((userCarru) => (
+                  <PhotoUser
+                    isActive={userCarru.isActive}
+                    key={userCarru.uid}
+                    nameUser={userCarru.displayName}
+                    onGoToMessage={() =>
+                      setOpenInfoUserToMessage({ ...userCarru })
+                    }
+                    photoUrl={userCarru?.photoUrl}
+                    showName={true}
+                  />
+                ))}
               </div>
+            )}
+
+            <div className={styles.filters__list_users_chats}>
+              {searchFriendInTheListChats
+                ?.sort((a, b) => b[1].date - a[1].date)
+                ?.map((userChat) => (
+                  <CardFilterChat
+                    infoUserActive={infoUserActive}
+                    key={userChat[0]}
+                    setOpenInfoUserToMessage={setOpenInfoUserToMessage}
+                    userChat={userChat}
+                    users={users}
+                  />
+                ))}
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {openCreateGroup && (
+        <CreateGroup setOpenCreateGroup={setOpenCreateGroup} />
+      )}
+    </>
   );
 };

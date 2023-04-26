@@ -41,7 +41,7 @@ const dataMenu = [
     name: "Mensajes",
     icon: "fa-brands fa-facebook-messenger",
     color: "#389de5",
-    linkTo: "/",
+    linkTo: "/chats",
   },
   {
     name: "Más recientes",

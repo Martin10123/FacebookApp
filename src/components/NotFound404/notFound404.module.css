@@ -1,0 +1,49 @@
+.not_found__container {
+  align-items: center;
+  background: #efefef;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999999;
+}
+
+.not_found__content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.not_found__img {
+  border-radius: 1rem;
+  height: fit-content;
+  object-fit: cover;
+  width: 100%;
+}
+
+.not_found__buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.not_found__buttons a {
+  align-items: center;
+  background: #fff;
+  border-radius: 0.3rem;
+  border: none;
+  box-shadow: 1px 1px 6px #80808061;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.1rem;
+  height: 3rem;
+  justify-content: center;
+  width: 60%;
+}

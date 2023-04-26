@@ -103,6 +103,8 @@ export const RegisterProvider = ({ children }) => {
         username: generateUsernameUnic(displayName),
       });
 
+      await setDoc(doc(firebaseDB, "usersChats", user.uid), {});
+
       setStartLoading(false);
     } catch (error) {
       console.log(error);
