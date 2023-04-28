@@ -23,13 +23,6 @@ const days = [
   "sábado",
 ];
 
-const timeUnits = [
-  { unit: "día", seconds: 86400 },
-  { unit: "hora", seconds: 3600 },
-  { unit: "minute", seconds: 60 },
-  { unit: "segundo", seconds: 1 },
-];
-
 export const getTimeAgo = (timestamp) => {
   const now = new Date();
   const secondsPast = (now.getTime() - timestamp) / 1000;
@@ -52,4 +45,15 @@ export const createAccountDate = (date) => {
   return `${days[new Date().getDay(date)]} ${new Date().getDate(date)} de ${
     month[new Date().getMonth(date)]
   } ${new Date().getFullYear(date)}`;
+};
+
+export const getDateMessage = (timestamp) => {
+  const date = new Date(timestamp);
+
+  const d = date.getDay();
+  const h = date.getHours();
+  const m = date.getMinutes();
+
+  console.log();
+  return `${days[d]} - ${h}:${m}`;
 };

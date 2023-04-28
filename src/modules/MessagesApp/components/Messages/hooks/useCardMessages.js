@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
-import { useEffect, useRef } from "react";
+
 import { firebaseDB } from "../../../../../services";
 
 export const useCardMessages = ({
@@ -9,6 +10,7 @@ export const useCardMessages = ({
   combinedUid,
   idMessage,
 }) => {
+  const [openOptions, setOpenOptions] = useState(false);
   const imageDesk = imgDesk ? "message__image_desk" : "";
   const isUserActive = message.uid === infoUserActive.uid;
   const ref = useRef();
@@ -24,6 +26,10 @@ export const useCardMessages = ({
   const contentInfoMessageIsLeftOrRight = isUserActive
     ? "message__message_active"
     : "message__message_user_other";
+
+  const deleteForMyIncludesUserActive = message?.deleteForMy.includes(
+    infoUserActive.uid
+  );
 
   useEffect(() => {
     const onIsView = async () => {
@@ -57,13 +63,16 @@ export const useCardMessages = ({
   }, [message]);
 
   return {
-    ref,
+    deleteForMyIncludesUserActive,
     isUserActive,
+    openOptions,
+    ref,
 
     // Styles
     contentInfoMessageIsLeftOrRight,
     imageDesk,
     infoMessage,
     messageIsLeftOrRight,
+    setOpenOptions,
   };
 };

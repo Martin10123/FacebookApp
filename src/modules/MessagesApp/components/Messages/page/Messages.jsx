@@ -1,6 +1,4 @@
-import { ContentMessages } from "../components/ContentMessages";
-import { FormMessage } from "../components/FormMessage";
-import { HeaderMessages } from "../components/HeaderMessages";
+import { ContentMessages, FormMessage, HeaderMessages } from "../components";
 
 import styles from "./messages.module.css";
 
@@ -22,12 +20,10 @@ export const Messages = ({
           setOpenInfoUserToMessage={setOpenInfoUserToMessage}
         />
 
-        <div className={styles.message__box_messages}>
-          <ContentMessages
-            infoUserActive={infoUserActive}
-            userMessage={userMessage}
-          />
-        </div>
+        <ContentMessages
+          infoUserActive={infoUserActive}
+          userMessage={userMessage}
+        />
 
         <FormMessage
           infoUserActive={infoUserActive}

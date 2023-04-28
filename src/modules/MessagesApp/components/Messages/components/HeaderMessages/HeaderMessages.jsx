@@ -1,7 +1,7 @@
-import { photoUser } from "../../../../../assets";
-import { getTimeAgo } from "../../../../../helpers";
+import { photoUser } from "../../../../../../assets";
+import { getTimeAgo } from "../../../../../../helpers";
 
-import styles from "./componentsStyles.module.css";
+import styles from "./headerMessages.module.css";
 
 export const HeaderMessages = ({
   isWindownOpen = false,
