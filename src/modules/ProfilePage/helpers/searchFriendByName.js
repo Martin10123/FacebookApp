@@ -19,7 +19,9 @@ export const searchFriendByNameChats = (name, users) => {
 
   return users.filter(
     (user) =>
-      user[1].infoUser.displayNameUser.toLocaleLowerCase().includes(name) ||
-      user[1].infoUser.lastNameUser.toLocaleLowerCase().includes(name)
+      user[1].infoUser?.displayNameUser?.toLocaleLowerCase().includes(name) ||
+      user[1].infoUser?.lastNameUser?.toLocaleLowerCase().includes(name) ||
+      user[1].infoUser?.nameGroup?.toLocaleLowerCase().includes(name) ||
+      user[1].infoUser?.nameCreateGroup?.toLocaleLowerCase().includes(name)
   );
 };

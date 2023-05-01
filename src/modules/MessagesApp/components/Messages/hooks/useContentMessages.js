@@ -9,8 +9,12 @@ export const useContentMessages = ({ infoUserActive, userMessage }) => {
       ? infoUserActive.uid + userMessage.uid
       : userMessage.uid + infoUserActive.uid;
 
+  const uidGroup = `${userMessage?.createGroup}${userMessage?.idUniqGroup}${userMessage?.usersFriends?.length}`;
+
+  const whatMessageIS = userMessage.isGroup ? uidGroup : combinedUid;
+
   const getMessagesChatSelect =
-    getMessages?.find((message) => message.idMessage === combinedUid) || [];
+    getMessages?.find((message) => message.idMessage === whatMessageIS) || [];
 
   const { idMessage, ...messagesSelect } = getMessagesChatSelect;
 
@@ -20,6 +24,6 @@ export const useContentMessages = ({ infoUserActive, userMessage }) => {
 
   return {
     messagesSort,
-    combinedUid,
+    combinedUid: whatMessageIS,
   };
 };

@@ -1,7 +1,7 @@
-import { PhotoUser } from "./PhotoUser";
-import { CreateGroup } from "../CreateGroup/CreateGroup";
-import { CardFilterChat } from "./CardFilterChat";
-import { useChatsFilters } from "../../hook";
+import { PhotoUser } from "../components/PhotoUser";
+import { CreateGroup } from "../../CreateGroup/CreateGroup";
+import { CardFilterChat, CardFilterGroups } from "../components";
+import { useChatsFilters } from "../../../hook";
 
 import styles from "./chatsFilters.module.css";
 
@@ -15,11 +15,11 @@ export const ChatsFilters = ({
     // Atributos
     openCreateGroup,
     searchFriend,
+    searchFriendInTheListCarrousel,
+    searchFriendInTheListChats,
 
     // Metodos
     onCloseChats,
-    searchFriendInTheListCarrousel,
-    searchFriendInTheListChats,
     setOpenCreateGroup,
     setSearchFriend,
   } = useChatsFilters({ infoUserActive, users, setOpenChats });
@@ -71,22 +71,34 @@ export const ChatsFilters = ({
             <div className={styles.filters__list_users_chats}>
               {searchFriendInTheListChats
                 ?.sort((a, b) => b[1].date - a[1].date)
-                ?.map((userChat) => (
-                  <CardFilterChat
-                    infoUserActive={infoUserActive}
-                    key={userChat[0]}
-                    setOpenInfoUserToMessage={setOpenInfoUserToMessage}
-                    userChat={userChat}
-                    users={users}
-                  />
-                ))}
+                ?.map((userChat) =>
+                  userChat[1].infoUser.isGroup ? (
+                    <CardFilterGroups
+                      key={userChat[0]}
+                      setOpenInfoUserToMessage={setOpenInfoUserToMessage}
+                      userChat={userChat}
+                      users={users}
+                    />
+                  ) : (
+                    <CardFilterChat
+                      infoUserActive={infoUserActive}
+                      key={userChat[0]}
+                      setOpenInfoUserToMessage={setOpenInfoUserToMessage}
+                      userChat={userChat}
+                      users={users}
+                    />
+                  )
+                )}
             </div>
           </div>
         </div>
       </div>
 
       {openCreateGroup && (
-        <CreateGroup setOpenCreateGroup={setOpenCreateGroup} />
+        <CreateGroup
+          infoUserActive={infoUserActive}
+          setOpenCreateGroup={setOpenCreateGroup}
+        />
       )}
     </>
   );

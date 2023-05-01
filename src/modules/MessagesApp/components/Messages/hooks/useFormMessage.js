@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useAddMessage } from "../../../hook";
+import { useAddMessage, useAddMessageGroup } from "../../../hook";
 import { addPhotoToCloudinary } from "../../../../../helpers";
 
 export const useFormMessage = ({ infoUserActive, userMessage }) => {
@@ -9,6 +9,7 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
   const refFileMessage = useRef(null);
 
   const { isSending, onSendMessage } = useAddMessage();
+  const { isLoadingGroup, onSendMessageGroup } = useAddMessageGroup();
 
   const onChangeFile = ({ target }) => {
     if (target.files.length === 0) return;
@@ -32,12 +33,19 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
         setLoadingImage(false);
       }
 
-      await onSendMessage({
-        infoUserActive,
-        message: messageForm,
-        photoMessage: fileMessage,
-        userSelected: userMessage,
-      });
+      userMessage?.isGroup
+        ? await onSendMessageGroup({
+            groupSelect: userMessage,
+            infoUserActive,
+            messageGroup: messageForm,
+            photoMessageGroup: fileMessage,
+          })
+        : await onSendMessage({
+            infoUserActive,
+            message: messageForm,
+            photoMessage: fileMessage,
+            userSelected: userMessage,
+          });
 
       setMessageForm("");
       setSelectedImage(null);
@@ -48,7 +56,7 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
 
   return {
     // Atributos
-    isSending,
+    isSending: userMessage?.isGroup ? isLoadingGroup : isSending,
     loadingImage,
     messageForm,
     refFileMessage,

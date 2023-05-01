@@ -8,26 +8,23 @@ export const Messages = ({
   setOpenInfoUserToMessage,
   users,
 }) => {
-  const userMessage = users.find(
-    (user) => user.uid === openInfoUserToMessage.uid
-  );
-
   return (
     <div className={styles.message__container}>
       <div className={styles.message__content}>
         <HeaderMessages
-          userMessage={userMessage}
           setOpenInfoUserToMessage={setOpenInfoUserToMessage}
+          userMessage={openInfoUserToMessage}
+          users={users}
         />
 
         <ContentMessages
           infoUserActive={infoUserActive}
-          userMessage={userMessage}
+          userMessage={openInfoUserToMessage}
         />
 
         <FormMessage
           infoUserActive={infoUserActive}
-          userMessage={userMessage}
+          userMessage={openInfoUserToMessage}
         />
       </div>
     </div>

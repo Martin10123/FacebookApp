@@ -1,4 +1,4 @@
-export * from "./ChatsFilters/ChatsFilters";
-export * from "./ChatsFilters/PhotoUser";
+export * from "./ChatsFilters/page/ChatsFilters";
+export * from "./ChatsFilters/components/PhotoUser";
 export * from "./CreateGroup/CreateGroup";
 export * from "./Messages";

@@ -9,18 +9,20 @@ export const CardMessages = ({
   combinedUid,
   idMessage,
   imgDesk,
-  infoUserActive,
   lastMessageSent,
   message,
   userMessage,
 }) => {
   const {
     deleteForMyIncludesUserActive,
+    infoUserActive,
     isUserActive,
     openOptions,
     ref,
+    showUserWriteInGroup,
 
     // Styles
+
     contentInfoMessageIsLeftOrRight,
     imageDesk,
     infoMessage,
@@ -30,8 +32,8 @@ export const CardMessages = ({
     combinedUid,
     idMessage,
     imgDesk,
-    infoUserActive,
     message,
+    userMessage,
   });
 
   return (
@@ -44,6 +46,7 @@ export const CardMessages = ({
             lastMessageSent={lastMessageSent}
             message={message}
             userMessage={userMessage}
+            showUserWriteInGroup={showUserWriteInGroup}
           />
 
           <div
@@ -55,6 +58,16 @@ export const CardMessages = ({
                   : "100%",
             }}
           >
+            {userMessage?.isGroup && (
+              <>
+                {showUserWriteInGroup.uid !== infoUserActive.uid && (
+                  <p className={styles.message__name_group}>
+                    {showUserWriteInGroup.displayName}
+                  </p>
+                )}
+              </>
+            )}
+
             {message.message && (
               <div className={styles[contentInfoMessageIsLeftOrRight]}>
                 <p

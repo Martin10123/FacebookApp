@@ -1,16 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 
 import { firebaseDB } from "../../../../../services";
+import { AuthUserContext } from "../../../../../context";
 
 export const useCardMessages = ({
   imgDesk,
-  infoUserActive,
   message,
   combinedUid,
   idMessage,
+  userMessage,
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
+  const { infoUserActive, users } = useContext(AuthUserContext);
   const imageDesk = imgDesk ? "message__image_desk" : "";
   const isUserActive = message.uid === infoUserActive.uid;
   const ref = useRef();
@@ -27,9 +29,18 @@ export const useCardMessages = ({
     ? "message__message_active"
     : "message__message_user_other";
 
-  const deleteForMyIncludesUserActive = message?.deleteForMy.includes(
+  const deleteForMyIncludesUserActive = message?.deleteForMy?.includes(
     infoUserActive.uid
   );
+
+  const showUserWriteInGroup = users.find((user) => {
+    if (
+      userMessage?.usersFriends?.includes(user.uid) &&
+      user.uid === message.uid
+    ) {
+      return user;
+    }
+  });
 
   useEffect(() => {
     const onIsView = async () => {
@@ -48,10 +59,12 @@ export const useCardMessages = ({
           ? message.usernameOtherUser
           : message.username;
 
+      const isGroup = userMessage?.isGroup ? message.idUniqGroup : usernameIs;
+
       await setDoc(
         doc(firebaseDB, "usersChats", infoUserActive?.uid),
         {
-          [usernameIs]: { ["infoUser"]: { isView: true } },
+          [isGroup]: { ["infoUser"]: { isView: true } },
         },
         { merge: true }
       );
@@ -64,9 +77,11 @@ export const useCardMessages = ({
 
   return {
     deleteForMyIncludesUserActive,
+    infoUserActive,
     isUserActive,
     openOptions,
     ref,
+    showUserWriteInGroup,
 
     // Styles
     contentInfoMessageIsLeftOrRight,

@@ -12,7 +12,7 @@
   background: #ffffff;
   display: grid;
   gap: 0.5rem;
-  grid-template-rows: 0fr 1fr 0fr;
+  grid-template-rows: 0fr 0fr 1fr 0fr;
   height: 100%;
   width: 100%;
 }
@@ -44,6 +44,11 @@
   height: 100%;
   overflow: auto;
   padding: 1rem;
+}
+
+.create_group__name_group {
+  padding: 1rem;
+  width: 100%;
 }
 
 .create_group__li_user {

@@ -1,7 +1,7 @@
-import { photoUser } from "../../../../assets";
-import { getTimeAgo } from "../../../../helpers";
+import { photoUser } from "../../../../../assets";
+import { getTimeAgo } from "../../../../../helpers";
 
-import styles from "./chatsFilters.module.css";
+import styles from "./componentsStyle.module.css";
 
 export const PhotoUser = ({
   activeAgo,
@@ -13,8 +13,6 @@ export const PhotoUser = ({
   showActiveAgo = false,
   showName = false,
 }) => {
-  console.log();
-
   return (
     <div
       className={styles.filters__content_photo}

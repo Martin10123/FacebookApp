@@ -57,7 +57,9 @@ export const CardLayout = ({
             <img src={photoUrl || photoUser} alt="Foto de perfil del usuario" />
           </Link>
           <span className={styles.layout__content_name_user}>
-            <p className={styles.layout__name}>{displayName}</p>
+            <Link to={`/${username}`}>
+              <p className={styles.layout__name}>{displayName}</p>
+            </Link>
             <span className={styles.layout__date_post}>
               <p>
                 {getTimeAgo(post.date)} - {showIconPrivacity()}

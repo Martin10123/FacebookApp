@@ -1,0 +1,38 @@
+.filters__list_item {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0fr 1fr;
+}
+
+.filters__item_name > p {
+  font-size: 1.2rem;
+}
+
+.filters__content_last_message {
+  align-items: center;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 6rem;
+}
+
+.filters__last_message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .filters__list_item {
+    gap: 0;
+  }
+
+  .filters__item_name > p {
+    font-size: 1rem;
+  }
+
+  .filters__item_name > span {
+    font-size: 0.9rem;
+  }
+}

@@ -20,7 +20,6 @@ export const ContentMessages = ({
           combinedUid={combinedUid}
           idMessage={idDoc}
           imgDesk={imgDesk}
-          infoUserActive={infoUserActive}
           key={idDoc}
           message={message}
           userMessage={userMessage}

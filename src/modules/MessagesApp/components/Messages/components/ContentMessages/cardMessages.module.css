@@ -102,6 +102,12 @@
   left: -2.1rem;
 }
 
+.message__name_group {
+  color: gray;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
 .message__message_user_other {
   align-items: center;
   display: flex;
