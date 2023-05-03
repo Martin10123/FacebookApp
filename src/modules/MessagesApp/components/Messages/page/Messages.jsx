@@ -8,10 +8,13 @@ export const Messages = ({
   setOpenInfoUserToMessage,
   users,
 }) => {
+  console.log(openInfoUserToMessage);
+
   return (
     <div className={styles.message__container}>
       <div className={styles.message__content}>
         <HeaderMessages
+          infoUserActive={infoUserActive}
           setOpenInfoUserToMessage={setOpenInfoUserToMessage}
           userMessage={openInfoUserToMessage}
           users={users}

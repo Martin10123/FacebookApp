@@ -16,7 +16,7 @@ export const useAddMessageGroup = () => {
     try {
       const { usersFriends, createGroup, idUniqGroup } = groupSelect;
 
-      const idDocMessageGroup = `${createGroup}${idUniqGroup}${usersFriends.length}`;
+      const idDocMessageGroup = `${createGroup}${idUniqGroup}`;
 
       const docRef = doc(firebaseDB, "messages", idDocMessageGroup);
       const idMessageGroup = `${idDocMessageGroup}-${Math.round(

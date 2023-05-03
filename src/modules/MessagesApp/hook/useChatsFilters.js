@@ -47,7 +47,7 @@ export const useChatsFilters = ({ infoUserActive, users, setOpenChats }) => {
 
   return {
     // Atributos
-    listUserActive,
+    listUserActive: Object.entries(listUserActive[0]),
     listUsersActiveCarrousel,
     openCreateGroup,
     searchFriend,

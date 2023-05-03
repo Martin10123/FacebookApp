@@ -1,8 +1,6 @@
 import { register } from "../../../../../assets";
 import { LayoutCardFilters } from "../layout/LayoutCardFilters";
 
-import styles from "./componentsStyle.module.css";
-
 export const CardFilterGroups = ({
   setOpenInfoUserToMessage,
   userChat,

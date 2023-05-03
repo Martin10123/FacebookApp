@@ -9,7 +9,7 @@ export const useContentMessages = ({ infoUserActive, userMessage }) => {
       ? infoUserActive.uid + userMessage.uid
       : userMessage.uid + infoUserActive.uid;
 
-  const uidGroup = `${userMessage?.createGroup}${userMessage?.idUniqGroup}${userMessage?.usersFriends?.length}`;
+  const uidGroup = `${userMessage?.createGroup}${userMessage?.idUniqGroup}`;
 
   const whatMessageIS = userMessage.isGroup ? uidGroup : combinedUid;
 

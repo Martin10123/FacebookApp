@@ -7,10 +7,14 @@ const whatIsTheLastViewMessage = ({ lastMessageSent, infoUserActive }) => {
     (messagesUser) => messagesUser[1].uid === infoUserActive.uid
   );
 
-  if (messagesUserActive[messagesUserActive.length - 1][1].isView) {
-    return messagesUserActive[messagesUserActive.length - 1][0];
-  } else {
-    return messagesUserActive[messagesUserActive.length - 2][0];
+  if (messagesUserActive && messagesUserActive.length > 0) {
+    if (messagesUserActive[messagesUserActive.length - 1][1].isView) {
+      return messagesUserActive[messagesUserActive.length - 1][0];
+    } else {
+      if (!messagesUserActive[messagesUserActive.length - 2]) return;
+
+      return messagesUserActive[messagesUserActive.length - 2][0];
+    }
   }
 };
 
