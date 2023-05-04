@@ -46,6 +46,8 @@ export const InfoGroup = ({
         (userFriend) => userFriend !== infoUserActive.uid
       );
 
+      setOpenInfoUserToMessage(null);
+
       const batch = writeBatch(firebaseDB);
 
       const docRefUser = doc(firebaseDB, "usersChats", infoUserActive.uid);
@@ -64,8 +66,6 @@ export const InfoGroup = ({
           },
         });
       }
-
-      setOpenInfoUserToMessage(null);
 
       await batch.commit();
       setopenInfoGroup(false);
