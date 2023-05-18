@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { addPhotoToCloudinary } from "../../../../../helpers";
 import { doc, writeBatch } from "firebase/firestore";
 import { firebaseDB } from "../../../../../services";
+import { photoUser } from "../../../../../assets";
 
 export const useChangePhotoGroup = ({
   setOpenChangePhotoGroup,

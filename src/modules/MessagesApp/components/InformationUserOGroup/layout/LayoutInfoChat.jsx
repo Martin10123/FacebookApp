@@ -7,6 +7,7 @@ export const LayoutInfoChat = ({
   children,
   isActiveChat,
   isGroupOrChat,
+  isUserWhoCreateGroup,
   nameChat,
   onOpenAddFriendOGoProfile,
   photoChat,
@@ -34,6 +35,7 @@ export const LayoutInfoChat = ({
 
           <ListOptionsChat
             isGroup={isGroupOrChat}
+            isUserWhoCreateGroup={isUserWhoCreateGroup}
             onOpenAddFriendOGoProfile={onOpenAddFriendOGoProfile}
           />
         </div>

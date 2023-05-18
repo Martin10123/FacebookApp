@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { doc, writeBatch } from "firebase/firestore";
-
 import { photoUser } from "../../../../../../assets";
 import { LayoutGroup } from "./LayoutGroup";
-import { firebaseDB } from "../../../../../../services";
+import { useAddNewUserGroup } from "../../hooks";
 
 import styles from "./groupComponents.module.css";
 
@@ -12,38 +9,14 @@ export const AddNewUserToGroup = ({
   userMessage,
   users,
 }) => {
-  const [startLoading, setStartLoading] = useState(false);
-  const { usersFriends, idUniqGroup } = userMessage;
-
-  const listUsersInGroup = users.filter(
-    (user) => !usersFriends.includes(user.uid)
-  );
-
-  const onAddNewMember = async (uidMember) => {
-    setStartLoading(true);
-    try {
-      const newMemberAdd = [...usersFriends, uidMember];
-
-      const batch = writeBatch(firebaseDB);
-
-      for (const userUid of newMemberAdd) {
-        const userChatRef = doc(firebaseDB, "usersChats", userUid);
-
-        batch.update(userChatRef, {
-          [idUniqGroup + ".infoUser"]: {
-            ...userMessage,
-            usersFriends: newMemberAdd,
-          },
-        });
-      }
-
-      await batch.commit();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setStartLoading(false);
-    }
-  };
+  const {
+    // Atributos
+    listUsersInGroup,
+    startLoading,
+    usersFriends,
+    // Metodos
+    onAddNewMember,
+  } = useAddNewUserGroup({ userMessage, users });
 
   return (
     <LayoutGroup

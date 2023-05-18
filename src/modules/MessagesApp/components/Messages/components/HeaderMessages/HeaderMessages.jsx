@@ -1,19 +1,16 @@
 import { getTimeAgo } from "../../../../../../helpers";
 import { InfoChat } from "../../../InformationUserOGroup";
-import { useHeaderMessages } from "../../hooks/useHeaderMessages";
 
 import styles from "./headerMessages.module.css";
 
 export const HeaderMessages = ({
-  infoUserActive,
+  dataHeader,
   isWindownOpen = false,
+  openInfoGroup,
+  setopenInfoGroup,
   setOpenInfoUserToMessage,
-  userMessage,
-  users,
+  userSelected,
 }) => {
-  const { dataHeader, openInfoGroup, setopenInfoGroup, userSelected } =
-    useHeaderMessages({ infoUserActive, userMessage, users });
-
   return (
     <>
       <div className={styles.message__nav}>
@@ -56,7 +53,7 @@ export const HeaderMessages = ({
 
       {openInfoGroup && (
         <InfoChat
-          isGroup={userMessage?.isGroup}
+          isGroup={userSelected?.isGroup}
           setopenInfoGroup={setopenInfoGroup}
           setOpenInfoUserToMessage={setOpenInfoUserToMessage}
           userMessage={userSelected}

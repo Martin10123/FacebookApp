@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { deleteField, doc, updateDoc, writeBatch } from "firebase/firestore";
-
 import { photoUser } from "../../../../../../assets";
 import { LayoutGroup } from "./LayoutGroup";
-import { firebaseDB } from "../../../../../../services";
 import { SureDelete } from "../../../../../../components/SureDelete/SureDelete";
+import { useViewMembersGroup } from "../../hooks";
 
 import styles from "./groupComponents.module.css";
 
@@ -14,56 +11,19 @@ export const ViewMembersGroup = ({
   userMessage,
   users,
 }) => {
-  const { usersFriends, uidCreateGroup, idUniqGroup } = userMessage;
-  const [openDeleteMember, setOpenDeleteMember] = useState(false);
+  const {
+    // Atributos
+    displayNameUser,
+    listUsersInGroup,
+    uidCreateGroup,
+    openDeleteMember,
+    uidUser,
 
-  const [{ displayNameUser, uidUser }, setInfoMember] = useState({
-    displayNameUser: "",
-    uidUser: "",
-  });
-
-  const listUsersInGroup = users.filter((user) =>
-    usersFriends.includes(user.uid)
-  );
-
-  const onOpenSureDelete = (uid, name) => {
-    setOpenDeleteMember(true);
-
-    setInfoMember({ displayNameUser: name, uidUser: uid });
-  };
-
-  const onDeleteMember = async (uidUser) => {
-    try {
-      const newUsersFriends = usersFriends.filter(
-        (userFriend) => userFriend !== uidUser
-      );
-
-      const batch = writeBatch(firebaseDB);
-
-      const docRefUser = doc(firebaseDB, "usersChats", uidUser);
-
-      await updateDoc(docRefUser, {
-        [idUniqGroup]: deleteField(),
-      });
-
-      for (const uidNewUser of newUsersFriends) {
-        const userChatRef = doc(firebaseDB, "usersChats", uidNewUser);
-
-        batch.update(userChatRef, {
-          [idUniqGroup + ".infoUser"]: {
-            ...userMessage,
-            usersFriends: newUsersFriends,
-          },
-        });
-      }
-
-      await batch.commit();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setOpenDeleteMember(false);
-    }
-  };
+    // Metodos
+    onDeleteMember,
+    onOpenSureDelete,
+    setOpenDeleteMember,
+  } = useViewMembersGroup({ userMessage, users });
 
   return (
     <>

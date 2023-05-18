@@ -10,6 +10,7 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
 
   const { isSending, onSendMessage } = useAddMessage();
   const { isLoadingGroup, onSendMessageGroup } = useAddMessageGroup();
+  const isUserInChat = !userMessage?.usersDelete?.includes(infoUserActive.uid);
 
   const onChangeFile = ({ target }) => {
     if (target.files.length === 0) return;
@@ -57,6 +58,7 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
   return {
     // Atributos
     isSending: userMessage?.isGroup ? isLoadingGroup : isSending,
+    isUserInChat,
     loadingImage,
     messageForm,
     refFileMessage,

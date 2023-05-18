@@ -1,4 +1,5 @@
 import { ContentMessages, FormMessage, HeaderMessages } from "../components";
+import { useHeaderMessages } from "../hooks";
 
 import styles from "./messages.module.css";
 
@@ -8,26 +9,32 @@ export const Messages = ({
   setOpenInfoUserToMessage,
   users,
 }) => {
-  console.log(openInfoUserToMessage);
+  const { dataHeader, openInfoGroup, setopenInfoGroup, userSelected } =
+    useHeaderMessages({
+      infoUserActive,
+      userMessage: openInfoUserToMessage,
+      users,
+    });
 
   return (
     <div className={styles.message__container}>
       <div className={styles.message__content}>
         <HeaderMessages
-          infoUserActive={infoUserActive}
+          dataHeader={dataHeader}
+          openInfoGroup={openInfoGroup}
+          setopenInfoGroup={setopenInfoGroup}
           setOpenInfoUserToMessage={setOpenInfoUserToMessage}
-          userMessage={openInfoUserToMessage}
-          users={users}
+          userSelected={userSelected}
         />
 
         <ContentMessages
           infoUserActive={infoUserActive}
-          userMessage={openInfoUserToMessage}
+          userMessage={userSelected}
         />
 
         <FormMessage
           infoUserActive={infoUserActive}
-          userMessage={openInfoUserToMessage}
+          userMessage={userSelected}
         />
       </div>
     </div>

@@ -73,6 +73,17 @@
   cursor: pointer;
 }
 
+@media (max-width: 400px) {
+  .message__figcaption > p {
+    /* font-size: 1.2rem;
+    font-weight: 500; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 7rem;
+  }
+}
+
 @media (min-width: 900px) {
   /* HeaderMessages */
 

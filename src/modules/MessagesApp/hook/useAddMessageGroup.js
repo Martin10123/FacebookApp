@@ -32,6 +32,7 @@ export const useAddMessageGroup = () => {
             idUniqGroup,
             isView: false,
             message: messageGroup,
+            nameUserWriteMessage: infoUserActive.displayName,
             photoMessage: photoMessageGroup || "",
             uid: infoUserActive.uid,
           },
@@ -70,17 +71,19 @@ const onAddNewInfo = async ({
     const batch = writeBatch(firebaseDB);
 
     for (const userUid of usersInGroup) {
-      const userChatRef = doc(firebaseDB, "usersChats", userUid);
+      if (groupSelect.usersFriends.includes(userUid)) {
+        const userChatRef = doc(firebaseDB, "usersChats", userUid);
 
-      batch.update(userChatRef, {
-        [idGroup + ".infoUser"]: {
-          ...groupSelect,
-          isView: uidUserSendMessage === userUid ? true : false,
-          lastMessage,
-          uidWhoWriteMessage: uidUserSendMessage,
-        },
-        [idGroup + ".date"]: serverTimestamp(),
-      });
+        batch.update(userChatRef, {
+          [idGroup + ".infoUser"]: {
+            ...groupSelect,
+            isView: uidUserSendMessage === userUid ? true : false,
+            lastMessage,
+            uidWhoWriteMessage: uidUserSendMessage,
+          },
+          [idGroup + ".date"]: serverTimestamp(),
+        });
+      }
     }
 
     await batch.commit();

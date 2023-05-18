@@ -60,9 +60,10 @@ export const CardMessages = ({
           >
             {userMessage?.isGroup && (
               <>
-                {showUserWriteInGroup.uid !== infoUserActive.uid && (
+                {showUserWriteInGroup?.uid !== infoUserActive.uid && (
                   <p className={styles.message__name_group}>
-                    {showUserWriteInGroup.displayName}
+                    {showUserWriteInGroup?.displayName ||
+                      message.nameUserWriteMessage}
                   </p>
                 )}
               </>
