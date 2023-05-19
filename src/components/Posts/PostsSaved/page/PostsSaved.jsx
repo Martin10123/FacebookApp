@@ -11,13 +11,16 @@ export const PostsSaved = () => {
     infoUserActive,
     startLoading,
     users,
+
+    // Metodos
+    onReturnPage,
   } = usePostsSaved();
 
   return (
     <div className={styles.post_save__container}>
       <div className={styles.post_save__content}>
         <div className={styles.post_save__nav}>
-          <i className="fa-solid fa-arrow-left"></i>
+          <i className="fa-solid fa-arrow-left" onClick={onReturnPage}></i>
           <p>Articulos guardados</p>
         </div>
 

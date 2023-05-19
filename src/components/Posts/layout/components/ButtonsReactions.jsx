@@ -36,7 +36,7 @@ export const ButtonsReactions = ({
           nameCollectionFirebase="posts"
           reactionObjCollection={post?.reactions}
           styleShowAllContainer={styles.reactions__container}
-          uidUserToSaveReaction={infoUserActive.uid}
+          uidUserToSaveReaction={infoUserActive?.uid}
         />
       </button>
       <button

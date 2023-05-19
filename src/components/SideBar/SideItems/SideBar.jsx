@@ -2,8 +2,10 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AuthUserContext } from "../../../context";
-import { photoUser } from "../../../assets";
 import { CreatePost } from "../../Posts/CreatePost/page/CreatePost";
+import { EventsBirthday } from "../../../modules";
+import { photoUser } from "../../../assets";
+import { whichBirthdayIsClose } from "../../../modules/EventsBirthday/helpers/whoBirthdayIsClose";
 
 import styles from "./sideBar.module.css";
 
@@ -43,13 +45,15 @@ const dataWindownSideBar = [
 export const SideBar = () => {
   const [openViewEvents, setOpenViewEvents] = useState(false);
   const [openCreatePost, setOpenCreatePost] = useState(false);
-  const { infoUserActive } = useContext(AuthUserContext);
+  const { infoUserActive, users } = useContext(AuthUserContext);
   const navigate = useNavigate();
 
   const goToProfileUser = (setCloseModal = () => {}) => {
     navigate(`/${infoUserActive?.username}`);
     setCloseModal(false);
   };
+
+  const usersWhoBirthdayIsClose = whichBirthdayIsClose(users);
 
   return (
     <>
@@ -117,6 +121,13 @@ export const SideBar = () => {
           goToProfileUser={goToProfileUser}
           infoUserActive={infoUserActive}
           setOpenCreatePost={setOpenCreatePost}
+        />
+      )}
+
+      {openViewEvents && (
+        <EventsBirthday
+          setOpenBirthdays={setOpenViewEvents}
+          usersWhoBirthdayIsClose={usersWhoBirthdayIsClose}
         />
       )}
     </>

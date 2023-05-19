@@ -22,7 +22,7 @@ export const HistoryPage = () => {
         >
           <figure className={styles.history__create_photo}>
             <img
-              src={infoUserActive.photoUrl || photoUser}
+              src={infoUserActive?.photoUrl || photoUser}
               alt="Foto de perfil"
             />
           </figure>

@@ -6,11 +6,15 @@ import { useAddMessage } from "../hook";
 
 import styles from "./modalSentMessage.module.css";
 
-export const ModalSentMessage = ({ matchedUser, setOpenMessange }) => {
+export const ModalSentMessage = ({
+  matchedUser,
+  messagePrede,
+  setOpenMessange,
+}) => {
   usePreventScroll();
 
   const { infoUserActive } = useContext(AuthUserContext);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(messagePrede || "");
   const { isSending, onSendMessage } = useAddMessage();
   const refModal = useCloseModal(() => setOpenMessange(false));
 
