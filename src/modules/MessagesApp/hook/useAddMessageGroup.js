@@ -77,6 +77,7 @@ const onAddNewInfo = async ({
         batch.update(userChatRef, {
           [idGroup + ".infoUser"]: {
             ...groupSelect,
+            dateCreateMessage: new Date().getTime(),
             isView: uidUserSendMessage === userUid ? true : false,
             lastMessage,
             uidWhoWriteMessage: uidUserSendMessage,

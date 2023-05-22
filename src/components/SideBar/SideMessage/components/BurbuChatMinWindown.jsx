@@ -9,6 +9,7 @@ export const BurbuChatMinWindown = ({
   minChat,
 }) => {
   const friendSelect = users.find((user) => user.uid === minChat);
+
   const groupSelect = Object.entries(listUserActive[0]).find(
     (user) => user[0] === minChat
   );

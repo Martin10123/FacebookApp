@@ -6,6 +6,7 @@ import {
   GetPostsProvider,
   GetUsers_MessagesProvider,
 } from "../context";
+import { OpenWindownChatProvider } from "../components";
 
 export const AppContexts = () => {
   return (
@@ -14,7 +15,9 @@ export const AppContexts = () => {
         <GetHistoriesProvider>
           <GetComOAnsProvider>
             <GetUsers_MessagesProvider>
-              <AppRouter />
+              <OpenWindownChatProvider>
+                <AppRouter />
+              </OpenWindownChatProvider>
             </GetUsers_MessagesProvider>
           </GetComOAnsProvider>
         </GetHistoriesProvider>

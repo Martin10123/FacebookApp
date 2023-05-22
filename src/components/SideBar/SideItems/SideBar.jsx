@@ -77,14 +77,12 @@ export const SideBar = () => {
             </Link>
           </div>
           <div className={styles.sideBar__windown}>
-            {dataWindownSideBar.map(
-              ({ name, icon, color, linkTo, onClick }) => (
-                <Link to={linkTo} key={name} className={styles.sideBar__item}>
-                  <i className={icon} style={{ color }}></i>
-                  <p>{name}</p>
-                </Link>
-              )
-            )}
+            {dataWindownSideBar.map(({ name, icon, color, linkTo }) => (
+              <Link to={linkTo} key={name} className={styles.sideBar__item}>
+                <i className={icon} style={{ color }}></i>
+                <p>{name}</p>
+              </Link>
+            ))}
 
             <div
               className={styles.sideBar__item}

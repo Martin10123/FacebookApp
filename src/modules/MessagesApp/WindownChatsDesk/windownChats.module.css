@@ -97,16 +97,21 @@
   right: 0.4rem;
 }
 
+.windownChats__content_texts {
+  display: grid;
+  gap: 0.4rem;
+}
+
 .windownChats__user_name {
   color: #000;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .windownChats__content_lastmessage {
   align-items: center;
   color: #000;
   display: grid;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   grid-template-columns: 1fr 4rem;
 }
 

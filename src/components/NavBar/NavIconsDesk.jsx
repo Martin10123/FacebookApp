@@ -9,10 +9,8 @@ import styles from "./navbar.module.css";
 
 export const NavIconsDesk = () => {
   const {
+    // Atributos
     infoUserActive,
-    onInputChange,
-    onResetForm,
-    onStartLogout,
     openAutoComplete,
     openMenuDesk,
     openWindownChat,
@@ -22,12 +20,17 @@ export const NavIconsDesk = () => {
     refMenu,
     refNotifi,
     searchFriend,
+    stylesIcons,
+    users,
+
+    // Metodos
+    onInputChange,
+    onResetForm,
+    onStartLogout,
     setOpenAutoComplete,
     setOpenMenuDesk,
     setOpenWindownChat,
     setOpenWindownNotifi,
-    stylesIcons,
-    users,
   } = useNavbar();
 
   return (
@@ -84,9 +87,7 @@ export const NavIconsDesk = () => {
         >
           <figure className={styles.nav__user_photo}>
             <img
-              src={
-                infoUserActive?.photoUrl ? infoUserActive?.photoUrl : photoUser
-              }
+              src={infoUserActive?.photoUrl || photoUser}
               alt="Foto de perfil del usuario"
             />
           </figure>

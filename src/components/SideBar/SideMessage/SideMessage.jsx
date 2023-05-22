@@ -9,7 +9,6 @@ import {
 import { useSideMessage } from "./hook/useSideMessage";
 
 import styles from "./sideMessage.module.css";
-import { photoUser } from "../../../assets";
 
 export const SideMessage = () => {
   const {

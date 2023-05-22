@@ -12,7 +12,7 @@ export const CardFilterGroups = ({
     isView,
     lastMessage,
     photoGroup,
-    createGroup,
+    dateCreateMessage,
   } = userChat[1].infoUser;
 
   const thereUserActive = users.some((user) => {
@@ -29,7 +29,7 @@ export const CardFilterGroups = ({
     <>
       <LayoutCardFilters
         activeAgoUOG={""}
-        dateCreateMessageUOG={createGroup}
+        dateCreateMessageUOG={dateCreateMessage}
         displayNameUOG={nameGroup}
         isActiveUOG={thereUserActive}
         isViewUOG={isView}

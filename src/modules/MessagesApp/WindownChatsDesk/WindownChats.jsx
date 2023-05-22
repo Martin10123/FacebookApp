@@ -1,13 +1,27 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { photoUser } from "../../../assets";
+import { AuthUserContext } from "../../../context";
+import { useChatsFilters } from "../hook";
+import { CardWindownChats } from "./components/CardWindownChats";
+import { useSideMessage } from "../../../components";
 
 import styles from "./windownChats.module.css";
 
 export const WindownChats = () => {
-  const text = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-    fugiat totam cum modi quos reiciendis ipsam dolor aliquam
-    facilis est in sapiente non enim veniam quod, officia debitis
-    aspernatur assumenda?`;
+  const { infoUserActive, users } = useContext(AuthUserContext);
+
+  const {
+    listUserActive,
+    searchFriend,
+    searchFriendInTheListChats,
+    setSearchFriend,
+  } = useChatsFilters({
+    infoUserActive,
+    users,
+    setOpenChats: () => {},
+  });
+
+  const { openWindownChat } = useSideMessage();
 
   return (
     <div className={styles.windownChats__container}>
@@ -24,25 +38,28 @@ export const WindownChats = () => {
 
         <div className={styles.windownChats__search}>
           <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="searchFriend" placeholder="Buscar chat..." />
+          <input
+            onChange={({ target }) => setSearchFriend(target.value)}
+            placeholder="Buscar chat..."
+            type="text"
+            value={searchFriend}
+          />
         </div>
 
         <div className={styles.windownChats__list_users}>
-          <div className={styles.windownChats__info_user}>
-            <figure className={styles.windownChats__photo_user}>
-              <img src={photoUser} alt="Foto de perfil" />
-              <i className="fa-solid fa-circle"></i>
-            </figure>
-            <div className={styles.windownChats__content_texts}>
-              <p className={styles.windownChats__user_name}>Martin Elias</p>
-              <div className={styles.windownChats__content_lastmessage}>
-                <p className={styles.windownChats__lastmessage}>
-                  Tú: {text.substring(0, 30) + "..."}
-                </p>
-                <p className={styles.windownChats__date}>1 min</p>
-              </div>
-            </div>
-          </div>
+          {searchFriendInTheListChats
+            ?.sort((a, b) => b[1].date - a[1].date)
+            ?.map((userChat) => (
+              <CardWindownChats
+                infoUserActive={infoUserActive}
+                key={userChat[0]}
+                listUserActive={listUserActive}
+                openWindownChat={openWindownChat}
+                userChat={userChat[1].infoUser}
+                usernameUniq={userChat[0]}
+                users={users}
+              />
+            ))}
         </div>
 
         <Link className={styles.windownChats__view_more} to="/chats">

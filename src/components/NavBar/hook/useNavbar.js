@@ -44,10 +44,8 @@ export const useNavbar = () => {
   };
 
   return {
+    // Atributos
     infoUserActive,
-    onInputChange,
-    onResetForm,
-    onStartLogout,
     openAutoComplete,
     openMenuDesk,
     openWindownChat,
@@ -57,11 +55,16 @@ export const useNavbar = () => {
     refMenu,
     refNotifi,
     searchFriend,
+    stylesIcons,
+    users,
+
+    // Metodos
+    onInputChange,
+    onResetForm,
+    onStartLogout,
     setOpenAutoComplete,
     setOpenMenuDesk,
     setOpenWindownChat,
     setOpenWindownNotifi,
-    stylesIcons,
-    users,
   };
 };
