@@ -46,14 +46,18 @@ export const useOptionsPost = ({ post, infoUserActive, setOpenOptions }) => {
           { merge: true }
         );
       } else {
+        const savePhoto = post?.isShared
+          ? post.postShared.photosUrls || []
+          : post.photosUrls || [];
+
         await setDoc(
           docPathRef,
           {
             [post.idDoc]: {
               date: new Date().getTime(),
-              photoPost: post.photosUrls || [],
+              photoPost: savePhoto || [],
               textPost: post?.post,
-              therePhoto: post?.photosUrls.length !== 0 ? true : false,
+              therePhoto: savePhoto?.length !== 0 ? true : false,
               thereText: post?.post?.length !== 0 ? true : false,
               uidCreatePost: post?.uid,
               whoCreatePost: post?.displayName,

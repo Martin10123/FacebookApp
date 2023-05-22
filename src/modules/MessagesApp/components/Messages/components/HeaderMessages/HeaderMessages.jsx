@@ -5,7 +5,6 @@ import styles from "./headerMessages.module.css";
 
 export const HeaderMessages = ({
   dataHeader,
-  isWindownOpen = false,
   openInfoGroup,
   setopenInfoGroup,
   setOpenInfoUserToMessage,
@@ -39,15 +38,10 @@ export const HeaderMessages = ({
         <div className={styles.message__options}>
           <i className="fa-solid fa-phone"></i>
           <i className="fa-solid fa-video"></i>
-          {isWindownOpen && <i className="fa-solid fa-window-minimize"></i>}
-          {!isWindownOpen ? (
-            <i
-              className="fa-solid fa-circle-info"
-              onClick={() => setopenInfoGroup(true)}
-            ></i>
-          ) : (
-            <i className="fa-solid fa-x"></i>
-          )}
+          <i
+            className="fa-solid fa-circle-info"
+            onClick={() => setopenInfoGroup(true)}
+          ></i>
         </div>
       </div>
 

@@ -1,3 +1,6 @@
+.windown_message__container {
+}
+
 .windown_message__content {
   background: #fff;
   border-radius: 1rem 1rem 0 0;
@@ -9,12 +12,82 @@
   max-width: 20rem;
 }
 
+.windown_message__header_content {
+  align-items: center;
+  border-bottom: 1px solid #80808080;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0.5rem 0;
+  padding: 0.2rem 0.4rem;
+  width: 100%;
+}
+
+.windown_message_photo_name {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  max-width: 15rem;
+}
+
+.windown_message_photo {
+  position: relative;
+}
+
+.windown_message_photo > img {
+  border-radius: 100%;
+  border: 3px solid #fff;
+  cursor: pointer;
+  height: 2.8rem;
+  object-fit: cover;
+  width: 2.8rem;
+}
+
+.windown_message_photo > i {
+  border-radius: 100%;
+  border: 2px solid #fff;
+  bottom: 0.3rem;
+  color: lime;
+  cursor: pointer;
+  font-size: 0.6rem;
+  position: absolute;
+  right: 0.2rem;
+}
+
+.windown_message__lastTime_name {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.windown_message__lastTime_name > p:nth-child(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 12rem;
+}
+
+.windown_message__lastTime_name > p:nth-child(2) {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.windown_message__content_options {
+  align-items: center;
+  color: #0099ff;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.windown_message__content_options i {
+  cursor: pointer;
+}
+
 .windown_message__box_messages {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   height: 100%;
   overflow: auto;
-  padding: 0 0.5rem;
   width: 100%;
 }

@@ -1,71 +1,80 @@
-import { useContext, useState } from "react";
-import { photoUser } from "../../../assets";
-import { ButtonForm } from "../../../modules/Auth";
-// import { WindownMessage } from "../../../MessagesApp";
+import { WindownMessage } from "../../../modules/MessagesApp";
 import { EventsBirthday } from "../../../modules/EventsBirthday/EventsBirthday";
-import { AuthUserContext } from "../../../context";
-import { whichBirthdayIsClose } from "../../../modules/EventsBirthday/helpers/whoBirthdayIsClose";
+import {
+  BurbuChatMinWindown,
+  ListBirthdays,
+  ListFriendsChat,
+  ListGroupsChat,
+} from "./components";
+import { useSideMessage } from "./hook/useSideMessage";
 
 import styles from "./sideMessage.module.css";
+import { photoUser } from "../../../assets";
 
 export const SideMessage = () => {
-  const { infoUserActive, users } = useContext(AuthUserContext);
-  const [openBirthdays, setOpenBirthdays] = useState(false);
+  const {
+    // Atributos
+    contentChatsUser,
+    infoUserActive,
+    listUserActive,
+    minWindownChat,
+    openBirthdays,
+    users,
+    usersWhoBirthdayIsClose,
 
-  const usersWhoBirthdayIsClose = whichBirthdayIsClose(users);
+    // Metodos
+    openMinWindownChat,
+    openWindownChat,
+    setOpenBirthdays,
+  } = useSideMessage();
 
   return (
     <>
       <div className={styles.sideMessage__container}>
         <div className={styles.sideMessage__content}>
-          <div className={styles.sideMessage__windown_events}>
-            <h3>
-              <i className="fa-solid fa-cake-candles"></i>
-              Cumpleaños cercanos
-            </h3>
-            {usersWhoBirthdayIsClose.slice(0, 2).map((userBirthday) => (
-              <div
-                className={styles.sideMessage__info_card_events}
-                key={userBirthday.uid}
-              >
-                <p>{userBirthday.displayName}</p>
-                <span>
-                  {userBirthday.birthday} ({userBirthday.daysLeft} dias)
-                </span>
-              </div>
-            ))}
-
-            <ButtonForm
-              title="Ver más..."
-              stylesButton={{ height: "2.5rem", fontSize: "1rem" }}
-              onSubmit={() => setOpenBirthdays(true)}
-            />
-          </div>
+          <ListBirthdays
+            setOpenBirthdays={setOpenBirthdays}
+            usersWhoBirthdayIsClose={usersWhoBirthdayIsClose}
+          />
 
           <div className={styles.sideMessage__contacts_users}>
-            <div className={styles.sideMessage__titles}>
-              <p>Contactos</p>
-            </div>
-            <div className={styles.sideMessage__users_lists}>
-              <div
-                className={styles.sideMessage__list_item}
-                onClick={() => createANewWindow(userSelected.length)}
-              >
-                <figure className={styles.sideMessage__photo_user}>
-                  <img src={photoUser} alt="Foto de perfil" />
-                  <i className="fa-solid fa-circle"></i>
-                </figure>
-                <p>Martin Elias</p>
-              </div>
-            </div>
+            <ListFriendsChat
+              infoUserActive={infoUserActive}
+              users={users}
+              openWindownChat={openWindownChat}
+            />
+
+            <ListGroupsChat
+              listUserActive={listUserActive}
+              openWindownChat={openWindownChat}
+            />
           </div>
         </div>
 
-        <div
-          className={styles.sideMessage__content_windown_messages}
-          style={{}}
-        >
-          {/* <WindownMessage /> */}
+        <div className={styles.sideMessage__content_windown_messages}>
+          {contentChatsUser.map((contentChat) => (
+            <WindownMessage
+              infoUserActive={infoUserActive}
+              key={contentChat}
+              listUserActive={listUserActive}
+              openMinWindownChat={openMinWindownChat}
+              openWindownChat={openWindownChat}
+              uidSelectChat={contentChat}
+              users={users}
+            />
+          ))}
+        </div>
+
+        <div className={styles.sideMessage__content_min_windown}>
+          {minWindownChat.map((minChat) => (
+            <BurbuChatMinWindown
+              key={minChat}
+              listUserActive={listUserActive}
+              minChat={minChat}
+              openMinWindownChat={openMinWindownChat}
+              users={users}
+            />
+          ))}
         </div>
       </div>
 

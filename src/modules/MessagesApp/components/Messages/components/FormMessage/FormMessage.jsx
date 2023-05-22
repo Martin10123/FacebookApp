@@ -2,7 +2,7 @@ import { useFormMessage } from "../../hooks/useFormMessage";
 
 import styles from "./formMessage.module.css";
 
-export const FormMessage = ({ infoUserActive, userMessage }) => {
+export const FormMessage = ({ infoUserActive, userMessage, isWindown }) => {
   const {
     // Atributos
     isSending,
@@ -16,7 +16,7 @@ export const FormMessage = ({ infoUserActive, userMessage }) => {
     onChangeFile,
     onSentMessage,
     setMessageForm,
-  } = useFormMessage({ infoUserActive, userMessage });
+  } = useFormMessage({ infoUserActive, userMessage, isWindown });
 
   return (
     <>

@@ -13,6 +13,7 @@ export const useAddMessage = () => {
     message,
     userSelected,
     photoMessage,
+    isWindown,
   }) => {
     setIsSending(true);
 
@@ -80,7 +81,9 @@ export const useAddMessage = () => {
         { merge: true }
       );
 
-      navigate("/chats");
+      if (!isWindown) {
+        navigate("/chats");
+      }
     } catch (error) {
       console.error(error);
     } finally {

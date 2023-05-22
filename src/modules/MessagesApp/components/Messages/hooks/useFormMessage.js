@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useAddMessage, useAddMessageGroup } from "../../../hook";
 import { addPhotoToCloudinary } from "../../../../../helpers";
 
-export const useFormMessage = ({ infoUserActive, userMessage }) => {
+export const useFormMessage = ({ infoUserActive, userMessage, isWindown }) => {
   const [messageForm, setMessageForm] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [loadingImage, setLoadingImage] = useState(false);
@@ -46,6 +46,7 @@ export const useFormMessage = ({ infoUserActive, userMessage }) => {
             message: messageForm,
             photoMessage: fileMessage,
             userSelected: userMessage,
+            isWindown,
           });
 
       setMessageForm("");
