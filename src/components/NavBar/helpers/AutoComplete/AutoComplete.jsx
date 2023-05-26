@@ -34,7 +34,6 @@ export const AutoComplete = ({ onResetForm, searchFriend, users }) => {
               />
               <figcaption>{user.displayName}</figcaption>
             </figure>
-            <i className="fa-solid fa-circle-xmark"></i>
           </li>
         ))}
       </ul>

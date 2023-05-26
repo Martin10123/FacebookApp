@@ -49,7 +49,9 @@
   white-space: nowrap;
 }
 
-.auto__li_item > i {
-  color: #00000059;
-  font-size: 1.2rem;
+@media (min-width: 800px) {
+  .auto__container {
+    max-height: 25rem;
+    overflow: auto;
+  }
 }

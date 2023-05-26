@@ -24,6 +24,10 @@
   grid-template-columns: 0fr 1fr;
 }
 
+.layout__content_name_user > a {
+  width: fit-content;
+}
+
 .layout__name_date > a > img {
   border-radius: 50%;
   cursor: pointer;
@@ -63,5 +67,9 @@
 
   .reactions__container {
     width: 19rem;
+  }
+
+  .layout__name {
+    color: #000 !important;
   }
 }

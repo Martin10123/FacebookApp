@@ -32,7 +32,10 @@ export const CardSharePost = ({ post }) => {
             userCreatePost={userCreatePostShared}
           >
             {post?.photosUrls?.length !== 0 && (
-              <ListImagesPost post={post?.postShared} />
+              <ListImagesPost
+                idPost={post?.postShared.idDoc}
+                listImages={post?.postShared.photosUrls}
+              />
             )}
           </CardLayout>
         </div>

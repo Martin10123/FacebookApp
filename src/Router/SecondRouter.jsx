@@ -3,6 +3,7 @@ import {
   ChatAppPage,
   MainApp,
   MainStore,
+  ModalImagesPost,
   ProfilePage,
   SeeHistory,
 } from "../modules";
@@ -31,6 +32,7 @@ export const SecondRouter = () => {
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
         <Route path="/:username" element={<ProfilePage />} />
         <Route path="/histories/:history_id" element={<SeeHistory />} />
+        <Route path="/photo/:post_id" element={<ModalImagesPost />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

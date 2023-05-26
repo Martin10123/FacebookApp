@@ -13,6 +13,11 @@ export const CardLayout = ({
   infoUserActive,
   isCardShare = false,
   post,
+  styleCInfoUser,
+  styleCNameUser,
+  styleContainer,
+  styleDatePost,
+  styleNameDate,
   userCreatePost,
 }) => {
   const {
@@ -27,23 +32,24 @@ export const CardLayout = ({
 
     // Metodos
     onButtonClick,
-    setIsNearHeight,
     setOpenOptions,
     showIconPrivacity,
   } = useCardLayout({ isCardShare, post, userCreatePost });
 
   return (
-    <div className={styles.layout__container}>
-      <div className={styles.layout__content_info_user}>
-        <div className={styles.layout__name_date}>
+    <div className={styles.layout__container} style={styleContainer}>
+      <div className={styles.layout__content_info_user} style={styleCInfoUser}>
+        <div className={styles.layout__name_date} style={styleNameDate}>
           <Link to={`/${username}`}>
             <img src={photoUrl || photoUser} alt="Foto de perfil del usuario" />
           </Link>
           <span className={styles.layout__content_name_user}>
             <Link to={`/${username}`}>
-              <p className={styles.layout__name}>{displayName}</p>
+              <p className={styles.layout__name} style={styleCNameUser}>
+                {displayName}
+              </p>
             </Link>
-            <span className={styles.layout__date_post}>
+            <span className={styles.layout__date_post} style={styleDatePost}>
               <p>
                 {getTimeAgo(post.date)} - {showIconPrivacity()}
               </p>

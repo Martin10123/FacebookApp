@@ -19,7 +19,9 @@ export const CardPost = ({ post }) => {
         post={post}
         userCreatePost={userCreatePost}
       >
-        {post.photosUrls.length !== 0 && <ListImagesPost post={post} />}
+        {post.photosUrls.length !== 0 && (
+          <ListImagesPost idPost={post.idDoc} listImages={post?.photosUrls} />
+        )}
 
         <CountReactions post={post} />
 
