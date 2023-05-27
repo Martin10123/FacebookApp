@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 999999999;
 }
 
 .card_alone {
@@ -39,6 +39,7 @@
 
 .card_alone img {
   height: fit-content;
+  max-height: 20rem;
   object-fit: contain;
   width: 100%;
 }

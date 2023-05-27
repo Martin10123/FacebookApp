@@ -22,6 +22,7 @@
 
 .card__image > img {
   height: fit-content;
+  max-height: 15rem;
   object-fit: contain;
   width: 100%;
 }

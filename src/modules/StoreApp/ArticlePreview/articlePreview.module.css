@@ -16,6 +16,7 @@
     border-radius: 1rem;
     box-shadow: 1px 1px 15px grey;
     height: fit-content;
+    max-width: 87%;
     padding: 0.5rem;
     width: 100%;
   }
