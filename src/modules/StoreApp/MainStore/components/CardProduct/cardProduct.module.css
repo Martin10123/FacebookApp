@@ -31,6 +31,11 @@
   font-size: 1.4rem;
 }
 
+.card__prices_state_product {
+  display: grid;
+  gap: 0.5rem;
+}
+
 .card__prices_state_product > p:nth-child(2) {
   font-size: 1rem;
   color: gray;

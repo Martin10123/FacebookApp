@@ -1,43 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { logicVotes } from "../../../helpers";
 import { SeeProductAlone } from "../SeeProductAlone/SeeProductAlone";
+import { ModalSentMessage } from "../../../../MessagesApp";
+import { useCardProduct } from "../../../Hook";
 
 import styles from "./cardProduct.module.css";
 
 export const CardProduct = ({ product, infoUserActive, users }) => {
-  const navigate = useNavigate();
   const {
+    // Atributos
     category,
-    idDoc,
     name,
+    openSendMessage,
+    openViewProductAlone,
     photoProduct,
     price,
     stateProduct,
+    typeLike,
     uid,
+    user,
     username,
-    votesGood,
-  } = product;
-  const [openSendMessage, setOpenSendMessage] = useState(false);
-  const [openViewProductAlone, setOpenViewProductAlone] = useState(false);
-  const user = users.find((user) => user.uid === uid);
 
-  const typeLike = votesGood?.includes(infoUserActive?.uid)
-    ? "votesBad"
-    : "votesGood";
-
-  const onLikeToProduct = async () => {
-    try {
-      await logicVotes(
-        product,
-        typeLike,
-        infoUserActive?.uid,
-        `storeApp/${idDoc}`
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    // Metodos
+    navigate,
+    onLikeToProduct,
+    setOpenSendMessage,
+    setOpenViewProductAlone,
+  } = useCardProduct({ infoUserActive, product, users });
 
   return (
     <>
@@ -97,6 +84,14 @@ export const CardProduct = ({ product, infoUserActive, users }) => {
           product={product}
           setOpenViewProductAlone={setOpenViewProductAlone}
           uidUserActive={infoUserActive?.uid}
+        />
+      )}
+
+      {openSendMessage && (
+        <ModalSentMessage
+          matchedUser={user}
+          setOpenMessange={setOpenSendMessage}
+          messagePrede={`Hola ${user.displayName} estoy interesado en su producto, ¿me podria brindar más información?`}
         />
       )}
     </>

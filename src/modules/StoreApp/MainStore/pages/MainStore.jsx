@@ -1,46 +1,22 @@
-import { useContext, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CardProduct, SideBar } from "../components";
-import { AuthUserContext } from "../../../../context";
+import { useMainStore } from "../../Hook";
 
 import styles from "./mainStore.module.css";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { firebaseDB } from "../../../../services";
-import { getProductByAny } from "../../helpers";
 
 export const MainStore = () => {
-  const { users, infoUserActive } = useContext(AuthUserContext);
+  const {
+    // Atributos
+    infoUserActive,
+    loadingProducts,
+    openSideBar,
+    productsFilter,
+    searchProduct,
+    users,
 
-  const [openSideBar, setOpenSideBar] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [searchProduct, setSearchProduct] = useState("");
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const docRef = query(
-      collection(firebaseDB, "storeApp"),
-      orderBy("name", "asc")
-    );
-
-    const unSuscribed = onSnapshot(docRef, (product) => {
-      const productsColection = product.docs.map((doc) => {
-        return {
-          idDoc: doc.id,
-          ...doc.data(),
-        };
-      });
-
-      setProducts(productsColection);
-    });
-
-    return () => unSuscribed();
-  }, []);
-
-  const productsFilter = useMemo(
-    () => getProductByAny(products, searchProduct),
-    [products, searchProduct]
-  );
+    // Metodos
+    setOpenSideBar,
+    setSearchProduct,
+  } = useMainStore();
 
   return (
     <section className={styles.container}>
@@ -74,21 +50,29 @@ export const MainStore = () => {
           <p>Productos</p>
         </div>
 
-        {productsFilter.length !== 0 ? (
-          <div className={styles.container_card}>
-            {productsFilter.map((product) => (
-              <CardProduct
-                key={product.idDoc}
-                product={product}
-                infoUserActive={infoUserActive}
-                users={users}
-              />
-            ))}
-          </div>
-        ) : (
+        {loadingProducts ? (
           <p className={styles.not_vacations_by_filter}>
-            No se ha agregado ninguna producto
+            Cargando productos...
           </p>
+        ) : (
+          <>
+            {productsFilter.length !== 0 ? (
+              <div className={styles.container_card}>
+                {productsFilter.map((product) => (
+                  <CardProduct
+                    key={product.idDoc}
+                    product={product}
+                    infoUserActive={infoUserActive}
+                    users={users}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className={styles.not_vacations_by_filter}>
+                No se ha agregado ninguna producto
+              </p>
+            )}
+          </>
         )}
       </div>
     </section>
