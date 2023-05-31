@@ -43,8 +43,9 @@ export const EventsBirthday = ({
               <div className={styles.events__list_users}>
                 {birthdayToday.map((userBirthday) => (
                   <CardBithday
-                    userBirthday={userBirthday}
                     key={userBirthday.uid}
+                    onSelectUserBithday={onSelectUserBithday}
+                    userBirthday={userBirthday}
                   />
                 ))}
               </div>
@@ -56,13 +57,16 @@ export const EventsBirthday = ({
           </h2>
 
           <div className={styles.events__list_users}>
-            {usersWhoBirthdayIsClose.map((userBirthday) => (
-              <CardBithday
-                key={userBirthday.uid}
-                onSelectUserBithday={onSelectUserBithday}
-                userBirthday={userBirthday}
-              />
-            ))}
+            {usersWhoBirthdayIsClose.map(
+              (userBirthday) =>
+                userBirthday.daysLeft >= 0 && (
+                  <CardBithday
+                    key={userBirthday.uid}
+                    onSelectUserBithday={onSelectUserBithday}
+                    userBirthday={userBirthday}
+                  />
+                )
+            )}
           </div>
         </div>
       </section>
@@ -71,7 +75,7 @@ export const EventsBirthday = ({
         <ModalSentMessage
           matchedUser={userSelectMessage}
           setOpenMessange={setOpenSentMessage}
-          messagePrede={`Feliz cumpleaños ${userSelectMessage.displayName}pásala genial en tu día.`}
+          messagePrede={`Feliz cumpleaños ${userSelectMessage.displayName} pásala genial en tu día.`}
         />
       )}
     </>

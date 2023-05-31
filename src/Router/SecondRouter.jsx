@@ -9,6 +9,7 @@ import {
 } from "../modules";
 import {
   FriendsRequest,
+  InformationPrivacity,
   MenuApp,
   Navbar,
   PostsSaved,
@@ -24,6 +25,7 @@ export const SecondRouter = () => {
         <Route path="/" element={<MainApp />} />
         <Route path="/chats" element={<ChatAppPage />} />
         <Route path="/friends" element={<FriendsRequest />} />
+        <Route path="/infoPrivacity" element={<InformationPrivacity />} />
         <Route path="/menu" element={<MenuApp />} />
         <Route path="/notifications" element={<WindownNotifications />} />
         <Route path="/saved" element={<PostsSaved />} />

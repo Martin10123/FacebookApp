@@ -7,3 +7,4 @@ export * from "./SideBar";
 export * from "./StartLoading/StartLoading";
 export * from "./SureDelete/SureDelete";
 export * from "./WindownNotifications/WindownNotifications";
+export * from "./InformationPrivacity/InformationPrivacity";

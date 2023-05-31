@@ -11,17 +11,20 @@ export const ListBirthdays = ({
         <i className="fa-solid fa-cake-candles"></i>
         Cumpleaños cercanos
       </h3>
-      {usersWhoBirthdayIsClose.slice(0, 2).map((userBirthday) => (
-        <div
-          className={styles.sideMessage__info_card_events}
-          key={userBirthday.uid}
-        >
-          <p>{userBirthday.displayName}</p>
-          <span>
-            {userBirthday.birthday} ({userBirthday.daysLeft} dias)
-          </span>
-        </div>
-      ))}
+      {usersWhoBirthdayIsClose.slice(0, 2).map(
+        (userBirthday) =>
+          userBirthday.daysLeft >= 0 && (
+            <div
+              className={styles.sideMessage__info_card_events}
+              key={userBirthday.uid}
+            >
+              <p>{userBirthday.displayName}</p>
+              <span>
+                {userBirthday.birthday} ({userBirthday.daysLeft} dias)
+              </span>
+            </div>
+          )
+      )}
 
       <ButtonForm
         title="Ver más..."

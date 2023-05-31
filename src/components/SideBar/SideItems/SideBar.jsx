@@ -23,12 +23,6 @@ const dataWindownSideBar = [
     linkTo: "/saved",
   },
   {
-    name: "Grupos",
-    icon: "fa-solid fa-users-rectangle",
-    color: "#389de5",
-    linkTo: "/",
-  },
-  {
     name: "Tienda",
     icon: "fa-solid fa-store",
     color: "#f1662c",
@@ -95,10 +89,10 @@ export const SideBar = () => {
               <p>Eventos</p>
             </div>
 
-            <div className={styles.sideBar__item}>
+            <Link className={styles.sideBar__item} to="/infoPrivacity">
               <i className="fa-solid fa-gear" style={{ color: "#979797" }}></i>
-              <p>Configuraciones</p>
-            </div>
+              <p>Información y privacidad</p>
+            </Link>
 
             <div
               className={styles.sideBar__item}
