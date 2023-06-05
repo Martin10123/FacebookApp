@@ -82,6 +82,7 @@ export const BoxComments = ({
                 nameCollectionFirebase="posts"
                 reactionObjCollection={post?.reactions}
                 styleShowAllContainer={styles.layout__container_float_buttons}
+                uidUserCreatePost={post.uid}
                 uidUserToSaveReaction={infoUserActive.uid}
               />
             </figure>

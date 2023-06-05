@@ -1,9 +1,6 @@
-import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { photoUser } from "../../../../assets";
 import { getTimeAgo } from "../../../../helpers";
-import { useCloseModal } from "../../../../hooks";
-import { GetComOAnsContext } from "../../../../context";
 import {
   AnswersComments,
   ListReactions,
@@ -11,7 +8,7 @@ import {
   ReactionsSvgCount,
 } from "..";
 import { ReactionsPost, SureDelete } from "../../../../components";
-import { getWhatReactionSelected } from "../../../../components/Posts/helpers";
+import { useCardComment } from "../../hooks";
 
 import styles from "./cardComment.module.css";
 
@@ -22,25 +19,25 @@ export const CardComment = ({
   users,
   whatIsAOC,
 }) => {
-  const { getAnswers, startLoadingAnswers } = useContext(GetComOAnsContext);
-  const [openAnswers, setOpenAnswers] = useState(false);
-  const [openListReactions, setOpenListReactions] = useState(false);
-  const [openOptionsCOA, setOpenOptionsCOA] = useState(false);
-  const [openSureDelete, setOpenSureDelete] = useState(false);
-  const [openUpdateCOA, setOpenUpdateCOA] = useState(false);
-  const refOptions = useCloseModal(() => setOpenOptionsCOA(false));
-  const isCOA = whatIsAOC === "comments";
-  const isThisUserCreatedComment = infoCOA.uidUser === infoUserActive.uid;
-
-  const filterAnswersByComment = getAnswers.filter(
-    (answer) => answer.idComment === infoCOA.idComment
-  );
-
-  const userCreateCOA = users.find((user) => user?.uid === infoCOA?.uidUser);
-  const getReactionSelected = getWhatReactionSelected({
-    infoUserActive,
-    reactions: infoCOA?.reactions,
-  });
+  const {
+    filterAnswersByComment,
+    getReactionSelected,
+    isCOA,
+    isThisUserCreatedComment,
+    openAnswers,
+    openListReactions,
+    openOptionsCOA,
+    openSureDelete,
+    openUpdateCOA,
+    refOptions,
+    setOpenAnswers,
+    setOpenListReactions,
+    setOpenOptionsCOA,
+    setOpenSureDelete,
+    setOpenUpdateCOA,
+    startLoadingAnswers,
+    userCreateCOA,
+  } = useCardComment({ infoCOA, infoUserActive, whatIsAOC, users });
 
   return (
     <>
@@ -106,6 +103,7 @@ export const CardComment = ({
                   nameCollectionFirebase={isCOA ? "comments" : "answers"}
                   reactionObjCollection={infoCOA?.reactions}
                   styleShowAllContainer={styles.card_comment__container}
+                  uidUserCreatePost={infoCOA.uidUser}
                   uidUserToSaveReaction={infoUserActive.uid}
                 />
               </span>

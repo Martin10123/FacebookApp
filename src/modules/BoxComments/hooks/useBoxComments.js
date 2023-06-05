@@ -7,6 +7,7 @@ import { firebaseDB } from "../../../services";
 import { GetComOAnsContext } from "../../../context/GetCommentsAnswers";
 import { getWhatReactionSelected } from "../../../components/Posts/helpers";
 import { useDeletePostComments } from "../../../components/Posts/hook";
+import { useSaveNotifications } from "../../../hooks";
 
 export const useBoxComments = ({
   infoUserActive,
@@ -19,6 +20,7 @@ export const useBoxComments = ({
   const [selectedImage, setSelectedImage] = useState(null);
   const [startLoading, setstartLoading] = useState(false);
   const refComment = useRef(null);
+  const { savaNotification } = useSaveNotifications();
 
   const { onDeleteAllPost } = useDeletePostComments({
     isPostOComment: "comments",
@@ -68,6 +70,13 @@ export const useBoxComments = ({
     } catch (error) {
       console.error(error);
       setstartLoading(false);
+    } finally {
+      await savaNotification({
+        dataToSave: "",
+        idToSaveDocument: post.idDoc,
+        typeNotifi: "comments",
+        uidUserReceiveNotifi: post.uid,
+      });
     }
   };
 
