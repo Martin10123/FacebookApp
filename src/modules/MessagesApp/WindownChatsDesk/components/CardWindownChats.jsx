@@ -13,6 +13,7 @@ export const CardWindownChats = ({
 }) => {
   const {
     idGroupOChat,
+    isActiveUOG,
     isViewOrNot,
     nameUOG,
     photoUOG,
@@ -34,7 +35,7 @@ export const CardWindownChats = ({
     >
       <figure className={styles.windownChats__photo_user}>
         <img src={photoUOG} alt="Foto de perfil" />
-        <i className="fa-solid fa-circle"></i>
+        {isActiveUOG && <i className="fa-solid fa-circle"></i>}
       </figure>
       <div className={styles.windownChats__content_texts}>
         <p className={styles.windownChats__user_name}>{nameUOG}</p>

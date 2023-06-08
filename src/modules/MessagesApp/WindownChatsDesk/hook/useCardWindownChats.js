@@ -20,6 +20,8 @@ export const useCardWindownChats = ({
     ? userFound.nameGroup
     : userFound.displayName;
 
+  const isActiveUOG = userFound.isGroup ? false : userFound.isActive;
+
   const postText =
     userChat.lastMessage.length >= 30
       ? userChat.lastMessage.substring(0, 30) + "..."
@@ -33,6 +35,7 @@ export const useCardWindownChats = ({
 
   return {
     idGroupOChat,
+    isActiveUOG,
     isViewOrNot,
     nameUOG,
     photoUOG,

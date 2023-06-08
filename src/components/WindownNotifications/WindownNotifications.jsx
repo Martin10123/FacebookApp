@@ -4,7 +4,8 @@ import { useNotifications } from "./hook/useNotifications";
 import styles from "./windownNotifications.module.css";
 
 export const WindownNotifications = () => {
-  const { updatedNotifications, users } = useNotifications();
+  const { filterBy, setFilterBy, updatedNotifications, users } =
+    useNotifications();
 
   return (
     <div className={styles.windownNoti__container}>
@@ -17,17 +18,26 @@ export const WindownNotifications = () => {
         </div>
 
         <div className={styles.windownNoti__search}>
-          <p className={styles.windownNoti__all}>Todas</p>
-          <p className={styles.windownNoti__not_reading}>No Leidas</p>
+          <p
+            className={styles.windownNoti__all}
+            onClick={() => setFilterBy("todos")}
+          >
+            Todas
+          </p>
+          <p
+            className={styles.windownNoti__not_reading}
+            onClick={() => setFilterBy("noTodos")}
+          >
+            No Leidas
+          </p>
         </div>
 
-        <div className={styles.windownNoti__list_users}>
-          {Object.entries(updatedNotifications?.notifications || {})
-            .map((notifi) => (
-              <CardNotification key={notifi[0]} notifi={notifi} users={users} />
-            ))
-            .sort((a, b) => b.props.notifi[1].date - a.props.notifi[1].date)}
-        </div>
+        {Object.entries(updatedNotifications?.notifications || {})
+          .filter((notifi) => filterBy === "todos" || !notifi[1].view)
+          .sort((a, b) => b[1].date - a[1].date)
+          .map(([key, notifi]) => (
+            <CardNotification key={key} notifi={[key, notifi]} users={users} />
+          ))}
       </div>
     </div>
   );
