@@ -33,11 +33,12 @@ export const useAnswersComments = ({ comment, infoUserActive }) => {
 
     try {
       await addDoc(collection(firebaseDB, "answers"), {
-        textCOA: inputAnswer,
         date: new Date().getTime(),
-        uidUser: infoUserActive.uid,
         idComment: comment.idComment,
+        idPost: comment.idPost,
         photoCOA: fileComment || null,
+        textCOA: inputAnswer,
+        uidUser: infoUserActive.uid,
       });
 
       setInputAnswer("");

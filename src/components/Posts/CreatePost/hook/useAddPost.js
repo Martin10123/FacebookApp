@@ -3,7 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 
 import { addPhotoToCloudinary } from "../../../../helpers";
 import { firebaseDB } from "../../../../services";
-import { useForm } from "../../../../hooks";
+import { useForm, useSaveNotifications } from "../../../../hooks";
 
 export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
   const [openTagFriends, setOpenTagFriends] = useState(false);
@@ -12,6 +12,7 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
   const [listTagFriends, setListTagFriends] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const fileInputRef = useRef();
+  const { savaNotification } = useSaveNotifications();
   const { post, privacity, onInputChange } = useForm({
     post: "",
     privacity: "Publico",
@@ -29,10 +30,10 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
     }
 
     try {
-      await addDoc(collection(firebaseDB, "posts"), {
+      const dataPost = await addDoc(collection(firebaseDB, "posts"), {
         date: new Date().getTime(),
         displayName: infoUserActive.displayName,
-        howManyPeopleSharePost: [],
+        howManyPeopleSharePost: 0,
         listTagFriends,
         photosUrls: photosUrls || [],
         post,
@@ -40,10 +41,21 @@ export const useAddPost = ({ infoUserActive, setOpenCreatePost }) => {
         uid: infoUserActive.uid,
       });
 
-      setStartLoadingPost(false);
+      if (listTagFriends.length !== 0) {
+        for (const user of listTagFriends) {
+          await savaNotification({
+            dataToSave: "",
+            idToSaveDocument: dataPost.id,
+            typeNotifi: "tagFriends",
+            uidUserReceiveNotifi: user.uidUser,
+          });
+        }
+      }
+
       setOpenCreatePost(false);
     } catch (error) {
       console.log(error);
+    } finally {
       setStartLoadingPost(false);
     }
   };

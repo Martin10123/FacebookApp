@@ -3,12 +3,14 @@ import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
 import { firebaseDB } from "../../../services";
-import { useCloseModal } from "../../../hooks";
+import { useCloseModal, useSaveNotifications } from "../../../hooks";
 import { useProfile } from "./useProfile";
 
 export const useAddNewFriends = ({ matchedUser }) => {
   const { currentUserFriendsList, infoUserActive, searchFriendListByUid } =
     useProfile();
+
+  const { savaNotification } = useSaveNotifications();
 
   const [openResponseRequest, setOpenResponseRequest] = useState(false);
   const activeUserUid = infoUserActive.uid;
@@ -68,6 +70,13 @@ export const useAddNewFriends = ({ matchedUser }) => {
           isOtherUserInListRequestSent ? "eliminar" : "enviar"
         } la solicitud de amistad a ${displayName}, intentelo nuevamente`
       );
+    } finally {
+      await savaNotification({
+        dataToSave: "",
+        idToSaveDocument: otherUserUid,
+        typeNotifi: "requestFriend",
+        uidUserReceiveNotifi: otherUserUid,
+      });
     }
   };
 
@@ -92,6 +101,13 @@ export const useAddNewFriends = ({ matchedUser }) => {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      await savaNotification({
+        dataToSave: "",
+        idToSaveDocument: otherUserUid,
+        typeNotifi: "acceptRequest",
+        uidUserReceiveNotifi: otherUserUid,
+      });
     }
   };
 

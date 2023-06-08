@@ -18,6 +18,7 @@ export const useSaveNotifications = () => {
 
     try {
       const notificationDescriptions = {
+        acceptRequest: `${infoUserActive.displayName} acepto tu solicitud de amistad`,
         answers: `${infoUserActive.displayName} respondió a tu comentario`,
         comments: `${infoUserActive.displayName} comentó tu publicación`,
         reactionanswers: `${infoUserActive.displayName} reaccionó a tu respuesta`,
@@ -25,6 +26,7 @@ export const useSaveNotifications = () => {
         reactionposts: `${infoUserActive.displayName} reaccionó a tu publicación`,
         requestFriend: `${infoUserActive.displayName} te envió una solicitud de amistad`,
         share: `${infoUserActive.displayName} compartió tu publicación`,
+        tagFriends: `${infoUserActive.displayName} te etiqueto en una publicación`,
       };
 
       const descriptionNotifi = notificationDescriptions[typeNotifi];
@@ -36,14 +38,17 @@ export const useSaveNotifications = () => {
       await setDoc(
         doc(firebaseDB, "notifications", uidUserReceiveNotifi),
         {
-          [createIDUniq]: {
-            dataToSave,
-            date: new Date().getTime(),
-            descriptionNotifi,
-            idDocumentNotifi: idToSaveDocument,
-            typeNotifi,
-            uidUserReceiveNotifi,
-            uidUserWhoSentNotification: infoUserActive.uid,
+          ["notifications"]: {
+            [createIDUniq]: {
+              dataToSave,
+              date: new Date().getTime(),
+              descriptionNotifi,
+              idDocumentNotifi: idToSaveDocument,
+              typeNotifi,
+              uidUserReceiveNotifi,
+              uidUserWhoSentNotification: infoUserActive.uid,
+              view: false,
+            },
           },
         },
         { merge: true }

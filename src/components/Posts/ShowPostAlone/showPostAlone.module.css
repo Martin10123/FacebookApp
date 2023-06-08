@@ -35,6 +35,22 @@
   font-size: 1.5rem;
 }
 
+.message_error_no_found {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 91vh;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.message_error_no_found > p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
 @media (min-width: 800px) {
   .show_post_alone__container {
     align-items: center;
@@ -55,5 +71,15 @@
 
   .show_post__return {
     display: none;
+  }
+
+  .message_error_no_found > img {
+    height: 12rem;
+    object-fit: cover;
+    width: 12rem;
+  }
+
+  .message_error_no_found > p {
+    font-size: 1.5rem;
   }
 }

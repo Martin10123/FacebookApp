@@ -38,7 +38,7 @@ export const CountReactions = ({ post }) => {
       </div>
       <span>
         <p>{countCommentAnswersOfPost()} comentarios</p>
-        <p>{post?.howManyPeopleSharePost?.length || 0} compartidas</p>
+        <p>{post?.howManyPeopleSharePost || 0} compartidas</p>
       </span>
     </div>
   );

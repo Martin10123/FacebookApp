@@ -1,11 +1,14 @@
 import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
 import { firebaseDB } from "../../../services";
+import { useSaveNotifications } from "../../../hooks";
 
 export const useCardListReactionUser = ({
   friendsEachUsers,
   infoUserActive,
   uidUser,
 }) => {
+  const { savaNotification } = useSaveNotifications();
+
   const currentUserFriendsList = friendsEachUsers?.find(
     (listFriends) => listFriends.uidDocUser === infoUserActive.uid
   );
@@ -55,6 +58,13 @@ export const useCardListReactionUser = ({
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      await savaNotification({
+        dataToSave: "",
+        idToSaveDocument: uidUser,
+        typeNotifi: "requestFriend",
+        uidUserReceiveNotifi: uidUser,
+      });
     }
   };
 

@@ -7,6 +7,7 @@ import styles from "./reactionsPost.module.css";
 
 export const ReactionsPost = ({
   idDocumentToSave,
+  idSaveReactionNotification,
   nameCollectionFirebase,
   reactionObjCollection,
   styleShowAllContainer,
@@ -55,9 +56,17 @@ export const ReactionsPost = ({
     } catch (error) {
       console.error(error);
     } finally {
+      let idSaveNotifi;
+
+      if (nameCollectionFirebase === "answers") {
+        idSaveNotifi = idSaveReactionNotification;
+      } else {
+        idSaveNotifi = idDocumentToSave;
+      }
+
       await savaNotification({
         dataToSave: saveReactionFire,
-        idToSaveDocument: idDocumentToSave,
+        idToSaveDocument: idSaveNotifi,
         typeNotifi: `reaction${nameCollectionFirebase}`,
         uidUserReceiveNotifi: uidUserCreatePost,
       });

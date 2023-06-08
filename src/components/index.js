@@ -8,3 +8,4 @@ export * from "./StartLoading/StartLoading";
 export * from "./SureDelete/SureDelete";
 export * from "./WindownNotifications/WindownNotifications";
 export * from "./InformationPrivacity/InformationPrivacity";
+export * from "./WindownNotifications/context/GetNotifications";

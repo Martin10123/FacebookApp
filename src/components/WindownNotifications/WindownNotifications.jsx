@@ -1,8 +1,11 @@
-import { photoUser } from "../../assets";
+import { CardNotification } from "./components/CardNotification";
+import { useNotifications } from "./hook/useNotifications";
 
 import styles from "./windownNotifications.module.css";
 
 export const WindownNotifications = () => {
+  const { updatedNotifications, users } = useNotifications();
+
   return (
     <div className={styles.windownNoti__container}>
       <div className={styles.windownNoti__content}>
@@ -19,22 +22,11 @@ export const WindownNotifications = () => {
         </div>
 
         <div className={styles.windownNoti__list_users}>
-          <div className={styles.windownNoti__info_user}>
-            <figure className={styles.windownNoti__photo_user}>
-              <img src={photoUser} alt="Foto de perfil" />
-              <i className="fa-solid fa-circle"></i>
-            </figure>
-            <div className={styles.windownNoti__content_type_notifi}>
-              <p className={styles.windownNoti__type_notifi}>
-                Karen Bolaño te etiquetó en una publicación
-              </p>
-              <p className={styles.windownNoti__date}>Hace 2 minutos</p>
-            </div>
-
-            <i
-              className={`fa-solid fa-circle ${styles.windownNoti__btn_not_reading}`}
-            ></i>
-          </div>
+          {Object.entries(updatedNotifications?.notifications || {})
+            .map((notifi) => (
+              <CardNotification key={notifi[0]} notifi={notifi} users={users} />
+            ))
+            .sort((a, b) => b.props.notifi[1].date - a.props.notifi[1].date)}
         </div>
       </div>
     </div>

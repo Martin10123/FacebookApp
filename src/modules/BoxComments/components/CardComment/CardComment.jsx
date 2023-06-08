@@ -100,6 +100,7 @@ export const CardComment = ({
                   idDocumentToSave={
                     isCOA ? infoCOA.idComment : infoCOA.idAnswer
                   }
+                  idSaveReactionNotification={!isCOA && infoCOA.idPost}
                   nameCollectionFirebase={isCOA ? "comments" : "answers"}
                   reactionObjCollection={infoCOA?.reactions}
                   styleShowAllContainer={styles.card_comment__container}
