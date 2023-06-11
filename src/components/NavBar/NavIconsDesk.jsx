@@ -1,7 +1,7 @@
 import { AutoComplete } from "./helpers";
 import { MenuDesk } from "../MenuApp";
 import { photoUser } from "../../assets";
-import { useNavbar } from "./hook/useNavbar";
+import { useNavbar, useCountMessageNotifi } from "./hook";
 import { WindownChats } from "../../modules";
 import { WindownNotifications } from "../WindownNotifications/WindownNotifications";
 
@@ -32,6 +32,8 @@ export const NavIconsDesk = () => {
     setOpenWindownChat,
     setOpenWindownNotifi,
   } = useNavbar();
+
+  const { getMessaCount, getNotifiCount } = useCountMessageNotifi();
 
   return (
     <>
@@ -65,7 +67,13 @@ export const NavIconsDesk = () => {
           ref={refChat}
           style={stylesIcons.openWindownChat}
         >
-          <i className="fa-brands fa-facebook-messenger"></i>
+          <span className={styles.nav__count_notifi_message}>
+            <i className="fa-brands fa-facebook-messenger"></i>
+
+            {getMessaCount !== 0 && (
+              <p className={styles.nav__count_float}>{getMessaCount}</p>
+            )}
+          </span>
 
           {openWindownChat && <WindownChats />}
         </div>
@@ -75,7 +83,13 @@ export const NavIconsDesk = () => {
           ref={refNotifi}
           style={stylesIcons.openWindownNotifi}
         >
-          <i className="fa-solid fa-bell"></i>
+          <span className={styles.nav__count_notifi_message}>
+            <i className="fa-solid fa-bell"></i>
+
+            {getNotifiCount !== 0 && (
+              <p className={styles.nav__count_float}>{getNotifiCount}</p>
+            )}
+          </span>
 
           {openWindownNotifi && <WindownNotifications />}
         </div>

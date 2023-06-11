@@ -40,7 +40,7 @@ export const PostsSaved = () => {
           {error && <p>Hubo un error al cargar las publicaciones</p>}
 
           <div className={styles.post_save__list_card}>
-            {Object.entries(getPostsSaved).map((post) => (
+            {Object.entries(getPostsSaved || {}).map((post) => (
               <CardPostSave
                 infoUserActive={infoUserActive}
                 key={post[0]}

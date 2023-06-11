@@ -17,13 +17,12 @@ export const useSideMessage = () => {
 
   const usersWhoBirthdayIsClose = whichBirthdayIsClose(users);
   const listUserActive = getUsersMessages
-    .filter((listUser) => listUser.idDoc === infoUserActive.uid)
+    .filter((listUser) => listUser.idDoc === infoUserActive?.uid)
     .map(({ idDoc, ...userWithoutId }) => userWithoutId);
 
   return {
     // Atributos
     contentChatsUser,
-    getUsersMessages,
     infoUserActive,
     listUserActive,
     minWindownChat,

@@ -11,7 +11,7 @@ export const ListGroupsChat = ({ listUserActive, openWindownChat }) => {
       </div>
 
       <div className={styles.sideMessage__users_lists}>
-        {Object.entries(listUserActive[0]).map(
+        {Object.entries(listUserActive[0] || {}).map(
           (group) =>
             group[1].infoUser?.isGroup && (
               <CardChatMessage

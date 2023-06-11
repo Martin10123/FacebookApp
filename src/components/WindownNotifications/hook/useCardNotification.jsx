@@ -24,10 +24,15 @@ export const useCardNotification = ({ notifi, users }) => {
   );
 
   const onViewPost = async () => {
-    const linkTo =
-      typeNotifi === "requestFriend"
-        ? "/friends"
-        : `/${userNotifi.displayName}/post/${idDocumentNotifi}`;
+    let linkTo;
+
+    if (typeNotifi === "requestFriend") {
+      linkTo = "/friends";
+    } else if (typeNotifi === "accestRequest") {
+      linkTo = `/${userNotifi.username}`;
+    } else {
+      linkTo = `/${userNotifi.displayName}/post/${idDocumentNotifi}`;
+    }
 
     navigate(linkTo);
 

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useNavbar } from "./hook/useNavbar";
 
 import styles from "./navbar.module.css";
+import { useCountMessageNotifi } from "./hook";
 
 export const NavIconsMobile = () => {
   const { infoUserActive } = useNavbar();
@@ -15,19 +16,31 @@ export const NavIconsMobile = () => {
     { icon: "fa-solid fa-bars", to: "/menu" },
   ];
 
+  const { getNotifiCount } = useCountMessageNotifi();
+
   return (
     <div className={styles.nav__icons_redirect_to}>
-      {dataIcons.map(({ icon, to }) => (
-        <NavLink
-          to={to}
-          key={icon}
-          className={({ isActive }) =>
-            `${styles.nav__icon_item} ${isActive ? styles.active_icon : ""}`
-          }
-        >
-          <i className={icon}></i>
-        </NavLink>
-      ))}
+      {dataIcons.map(({ icon, to }) => {
+        const showCountNoti = to === "/notifications" && getNotifiCount !== 0;
+
+        return (
+          <NavLink
+            to={to}
+            key={icon}
+            className={({ isActive }) =>
+              `${styles.nav__icon_item} ${isActive ? styles.active_icon : ""}`
+            }
+          >
+            <span className={styles.nav__count_notifi_message}>
+              <i className={icon}></i>
+
+              {showCountNoti && (
+                <p className={styles.nav__count_float}>{getNotifiCount}</p>
+              )}
+            </span>
+          </NavLink>
+        );
+      })}
     </div>
   );
 };

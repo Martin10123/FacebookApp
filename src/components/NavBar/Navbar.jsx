@@ -5,12 +5,15 @@ import { ChatAppPage } from "../../modules";
 import { NavIconsDesk } from "./NavIconsDesk";
 import { NavIconsMobile } from "./NavIconsMobile";
 import { SearchFriends } from "../Friends";
+import { useCountMessageNotifi } from "./hook";
 
 import styles from "./navbar.module.css";
 
 export const Navbar = () => {
   const [openChats, setOpenChats] = useState(false);
   const [openSearchFriends, setOpenSearchFriends] = useState(false);
+
+  const { getMessaCount } = useCountMessageNotifi();
 
   return (
     <nav className={styles.nav__container}>
@@ -39,7 +42,13 @@ export const Navbar = () => {
               className={styles.nav__icon}
               onClick={() => setOpenChats(true)}
             >
-              <i className="fa-brands fa-facebook-messenger"></i>
+              <span className={styles.nav__count_notifi_message}>
+                <i className="fa-brands fa-facebook-messenger"></i>
+
+                {getMessaCount !== 0 && (
+                  <p className={styles.nav__count_float}>{getMessaCount}</p>
+                )}
+              </span>
             </div>
 
             {openChats && <ChatAppPage setOpenChats={setOpenChats} />}

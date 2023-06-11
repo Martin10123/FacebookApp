@@ -60,7 +60,7 @@ export const validatorRegister = {
     "Ingrese su nombre y su segundo nombre real",
   ],
   lastName: [
-    (value) => validateName(value, 10) === false,
+    (value) => validateName(value, 5) === false,
     "Ingrese sus apellidos completos",
   ],
   email: [(value) => regex.test(value) === false, "Ingrese un email valido"],

@@ -39,8 +39,9 @@ export const SideMessage = () => {
           <div className={styles.sideMessage__contacts_users}>
             <ListFriendsChat
               infoUserActive={infoUserActive}
-              users={users}
+              listUserActive={listUserActive}
               openWindownChat={openWindownChat}
+              users={users}
             />
 
             <ListGroupsChat

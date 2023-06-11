@@ -89,6 +89,25 @@
   border-bottom: 2px solid #006be8;
 }
 
+.nav__count_notifi_message {
+  position: relative;
+}
+
+.nav__count_float {
+  align-items: center;
+  background: red;
+  border-radius: 100%;
+  color: #fff;
+  display: flex;
+  font-size: 0.9rem;
+  height: 1.4rem;
+  justify-content: center;
+  position: absolute;
+  right: -13px;
+  top: -13px;
+  width: 1.4rem;
+}
+
 @media (min-width: 800px) {
   .nav__container {
     box-shadow: 1px 1px 6px #80808080;

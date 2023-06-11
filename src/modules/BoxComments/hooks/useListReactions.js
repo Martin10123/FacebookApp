@@ -13,25 +13,28 @@ export const useListReactions = ({ listReactionsUse }) => {
   });
 
   useEffect(() => {
-    const usersWithReactions = reactionsDataPost
-      .map(({ tofire, img }) => {
-        const reaction = listReactionsUse.reactions[tofire];
-        if (reaction && reaction.length > 0) {
-          const user = users.find(({ uid }) => uid === reaction[0]);
-          if (user) {
-            return {
-              displayName: user.displayName,
-              photoUrl: user.photoUrl,
-              reactionImg: img,
-              reactionName: tofire,
-              uid: user.uid,
-              username: user.username,
-            };
-          }
-        }
-        return null;
-      })
-      .filter((user) => user !== null);
+    const usersWithReactions = reactionsDataPost.flatMap(({ tofire, img }) => {
+      const reaction = listReactionsUse?.reactions[tofire];
+
+      if (reaction && reaction.length !== 0) {
+        return reaction.map((uidUserReaction) => {
+          const userFind = users.find(
+            (userFound) => userFound.uid === uidUserReaction
+          );
+
+          return {
+            displayName: userFind.displayName,
+            photoUrl: userFind.photoUrl,
+            reactionImg: img,
+            reactionName: tofire,
+            uid: userFind.uid,
+            username: userFind.username,
+          };
+        });
+      }
+
+      return [];
+    });
 
     setListUserReactions(usersWithReactions);
   }, []);

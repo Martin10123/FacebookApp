@@ -9,7 +9,7 @@ export const useNotifications = () => {
   const [filterBy, setFilterBy] = useState("todos");
 
   const updatedNotifications = getNotifications.find(
-    (notifi) => notifi.idDoc === infoUserActive.uid
+    (notifi) => notifi.idDoc === infoUserActive?.uid
   );
 
   return {
