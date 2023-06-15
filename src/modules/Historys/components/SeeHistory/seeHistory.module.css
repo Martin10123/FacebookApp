@@ -97,7 +97,10 @@
 
 .see_history__text > p {
   font-size: 1.3rem;
+  overflow-wrap: break-word;
   text-align: center;
+  white-space: break-spaces;
+  width: 100%;
 }
 
 .see_history__send_message {
@@ -206,6 +209,19 @@
 .see_history__button_next {
   left: initial;
   right: 0.5rem;
+}
+
+/* Not found */
+
+.see_history_link_return {
+  align-items: center;
+  background: #0099ff;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: 12rem;
 }
 
 @media (min-width: 430px) {

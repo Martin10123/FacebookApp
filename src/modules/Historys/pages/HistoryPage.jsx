@@ -4,6 +4,7 @@ import { AuthUserContext, GetHistoriesContext } from "../../../context";
 import { CardHistoryMain } from "./CardHistoryMain";
 import { photoUser } from "../../../assets";
 import { SelectTypeHistory } from "../components";
+import { useDeleteHistory } from "../hook/useDeleteHistory";
 
 import styles from "./history.module.css";
 
@@ -12,6 +13,16 @@ export const HistoryPage = () => {
   const { startLoadingHistories, getHistories } =
     useContext(GetHistoriesContext);
   const [openSelectTypeHistory, setOpenSelectTypeHistory] = useState(false);
+
+  const historyUserActive = getHistories.filter(
+    (history) => history?.idHistorie === infoUserActive?.uid
+  );
+
+  const aloneUserActive = Object.values(
+    historyUserActive[0]?.histories || {}
+  )[0];
+
+  useDeleteHistory({ getHistories });
 
   return (
     <>
@@ -36,13 +47,21 @@ export const HistoryPage = () => {
           </div>
         )}
 
-        {getHistories.map((history) => (
-          <CardHistoryMain
-            key={Object.entries(history)[0][0]}
-            history={Object.entries(history)[1][1]}
-            users={users}
-          />
-        ))}
+        {aloneUserActive && (
+          <CardHistoryMain history={aloneUserActive} users={users} />
+        )}
+
+        {getHistories.map(
+          ({ idHistorie, histories }) =>
+            Object.keys(histories || {}).length !== 0 &&
+            idHistorie !== infoUserActive?.uid && (
+              <CardHistoryMain
+                key={Object.keys(histories || {})[0]}
+                history={Object.values(histories || {})[0]}
+                users={users}
+              />
+            )
+        )}
       </section>
 
       {openSelectTypeHistory && (

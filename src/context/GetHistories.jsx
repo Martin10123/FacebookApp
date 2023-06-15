@@ -15,6 +15,7 @@ export const GetHistoriesProvider = ({ children }) => {
       const arrayHistories = histories.docs.map((doc) => {
         return {
           ...doc.data(),
+          idHistorie: doc.id,
         };
       });
       setGetHistories([...arrayHistories]);
