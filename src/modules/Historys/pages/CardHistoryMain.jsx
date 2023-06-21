@@ -1,41 +1,29 @@
-import { useNavigate } from "react-router-dom";
 import { photoUser } from "../../../assets";
 
 import styles from "./history.module.css";
 
-export const CardHistoryMain = ({ history, users }) => {
-  const navigate = useNavigate();
-  const userCreateHistory = users.find(
-    (user) => user?.uid === history?.uidUser
-  );
-
+export const CardHistoryMain = () => {
   return (
-    <div
-      className={styles.history__card_info}
-      onClick={() => navigate(`/histories/${userCreateHistory?.uid}`)}
-      style={{ background: history?.colorHistory ? history?.colorHistory : "" }}
-    >
+    <div className={styles.history__card_info}>
       <img
         className={styles.history__card_photo_user}
-        src={userCreateHistory?.photoUrl || photoUser}
+        src={photoUser}
         alt="Foto de perfil"
       />
 
-      {history?.isPhoto && (
-        <img
-          className={styles.history__card_photo_select}
-          src={history.photoHistory}
-          alt=""
-        />
-      )}
+      <img
+        className={styles.history__card_photo_select}
+        src={photoUser}
+        alt=""
+      />
 
-      {history?.textHistory && (
+      {false && (
         <div className={styles.history__text_card}>
-          <p>{history?.textHistory}</p>
+          <p>fgddg</p>
         </div>
       )}
 
-      <p>{userCreateHistory?.displayName}</p>
+      <p>Martin</p>
     </div>
   );
 };
