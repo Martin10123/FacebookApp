@@ -1,0 +1,129 @@
+.privacity__container {
+  background: #fff;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999999;
+}
+
+.privacity__content {
+  height: 100%;
+  padding: 1rem;
+  width: 100%;
+}
+
+.privacity__nav {
+  align-items: center;
+  border-bottom: 1px solid gray;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  padding: 0.5rem 0 1rem 0;
+}
+
+.privacity__who_see_history {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.privacity__title_who_see_history {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.privacity__title_who_see_history h4 {
+  font-size: 1.1rem;
+}
+
+.privacity__list_options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.privacity__item_privacity {
+  align-items: center;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr 0fr;
+  justify-content: space-between;
+}
+
+.privacity__title_option {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0fr 1fr;
+}
+
+.privacity__icon_option {
+  align-items: center;
+  background: #c3c3c3;
+  border-radius: 100%;
+  display: flex;
+  font-size: 1.2rem;
+  height: 3.2rem;
+  justify-content: center;
+  width: 3.2rem;
+}
+
+.privacity__type {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.privacity__input_check {
+  height: 1rem;
+  width: 1rem;
+}
+
+.privacity__other_options {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.privacity__buttons {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding: 2rem 0 1rem;
+}
+
+.privacity__btn_cancel,
+.privacity__btn_save {
+  border-radius: 0.6rem;
+  border: none;
+  color: #0099ff;
+  cursor: pointer;
+  font-weight: 500;
+  height: 2.3rem;
+  width: 8rem;
+}
+
+.privacity__btn_save {
+  background: #1b74e4;
+  color: #fff;
+}
+
+@media (min-width: 900px) {
+  .privacity__container {
+    align-items: center;
+    background: #ffffffc9;
+    display: flex;
+    justify-content: center;
+  }
+
+  .privacity__content {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px gray;
+    height: fit-content;
+    width: 34rem;
+  }
+}

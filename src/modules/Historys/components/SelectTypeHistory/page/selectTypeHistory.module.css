@@ -1,0 +1,204 @@
+.select_history__container {
+  background: #fff;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999999;
+}
+
+.select_history__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  padding: 1rem;
+  width: 100%;
+}
+
+.select_history__nav_mobile {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select_history__nav_mobile > p {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.select_history__nav_mobile > i {
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.select_history__content_displayName {
+  display: none;
+}
+
+.select_history__options {
+  align-items: center;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  height: 32%;
+  justify-items: center;
+  max-width: 40rem;
+}
+
+.select_history__item {
+  align-items: center;
+  border-radius: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  justify-content: center;
+  max-width: 20rem;
+  width: 100%;
+}
+
+.select_history__item:nth-child(1) {
+  background: linear-gradient(0deg, #006dd6db 35%, #72cb61 70%);
+}
+
+.select_history__item:nth-child(2) {
+  background: linear-gradient(0deg, #0239f5 35%, #b146ee 70%);
+}
+
+.select_history__icon {
+  align-items: center;
+  background: #fff;
+  border-radius: 50%;
+  color: #000;
+  display: flex;
+  font-size: 1.5rem;
+  height: 3.5rem;
+  justify-content: center;
+  width: 3.5rem;
+}
+
+@media (min-width: 700px) {
+  .select_history__options {
+    height: 65%;
+    left: 50%;
+    position: relative;
+    top: 42%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 900px) {
+  .select_history__content {
+    background: #f1f2f6;
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    padding: 0;
+  }
+
+  .select_history__nav_mobile {
+    display: none;
+  }
+
+  .select_history__content_displayName {
+    background: #fff;
+    display: grid;
+    grid-template-rows: 0fr 1fr 0.1fr;
+    overflow: auto;
+    padding: 1rem;
+  }
+
+  .select_history__nav {
+    align-items: center;
+    border-bottom: 1px solid #cfcfcf;
+    display: flex;
+    gap: 0.4rem;
+    padding: 0 0 0.5rem 0;
+    width: 100%;
+  }
+
+  .select_history__close_create_history {
+    background: #00000082;
+    border-radius: 100%;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .select_history__logo_facebook {
+    display: flex;
+  }
+
+  .select_history__logo_facebook img {
+    border-radius: 100%;
+    cursor: pointer;
+    height: 2rem;
+    object-fit: cover;
+    width: 2rem;
+  }
+
+  .select_history__info_user_create_history {
+    border-bottom: 1px solid #cfcfcf;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: fit-content;
+    padding: 2rem 0;
+  }
+
+  .select_history__title_history {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .select_history__settings {
+    align-items: center;
+    background: #d8dadf;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    width: 2rem;
+  }
+
+  .select_history__image_name {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .select_history__image_name img {
+    border-radius: 100%;
+    height: 3.3rem;
+    object-fit: cover;
+    width: 3.3rem;
+  }
+
+  .select_history__name_user {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .select_history__options {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+  }
+
+  .select_history__item {
+    height: 22rem;
+    width: 17rem;
+  }
+}

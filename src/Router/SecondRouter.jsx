@@ -6,6 +6,7 @@ import {
   ModalImagesPost,
   ProfilePage,
   SeeHistory,
+  SelectTypeHistory,
 } from "../modules";
 import {
   FriendsRequest,
@@ -30,10 +31,11 @@ export const SecondRouter = () => {
         <Route path="/notifications" element={<WindownNotifications />} />
         <Route path="/saved" element={<PostsSaved />} />
         <Route path="/store" element={<MainStore />} />
+        <Route path="/stories/create" element={<SelectTypeHistory />} />
 
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
         <Route path="/:username" element={<ProfilePage />} />
-        <Route path="/histories/:history_id" element={<SeeHistory />} />
+        <Route path="/stories/:uidUser" element={<SeeHistory />} />
         <Route path="/photo/:post_id" element={<ModalImagesPost />} />
 
         <Route path="*" element={<Navigate to="/" />} />
