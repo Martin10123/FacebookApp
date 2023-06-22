@@ -1,3 +1,4 @@
+import { notFound404 } from "../../../../../assets";
 import { CreateHistoryPreview } from "../../CreateHistory/components/CreateHistoryPreview";
 import { ImagesHistoryDesk } from "../components/ImagesHistoryDesk";
 import { ImagesHistoryMobile } from "../components/ImagesHistoryMobile";
@@ -8,17 +9,16 @@ export const ImagesHistory = ({
   infoUserActive,
   selectImage,
   setOpenHistoryFile,
-  setSelectImage,
 }) => {
   return (
     <div className={styles.image__history__container}>
       <div className={styles.image_history__box_images_history}>
-        <ImagesHistoryMobile />
+        <ImagesHistoryMobile infoUserActive={infoUserActive} />
 
         <ImagesHistoryDesk
+          infoUserActive={infoUserActive}
           selectImage={selectImage}
           setOpenHistoryFile={setOpenHistoryFile}
-          setSelectImage={setSelectImage}
         />
 
         <CreateHistoryPreview>
@@ -29,7 +29,11 @@ export const ImagesHistory = ({
 
             <figure className={styles.image__history__show_image}>
               <img
-                src={URL.createObjectURL(selectImage)}
+                src={
+                  selectImage.length > 0
+                    ? URL.createObjectURL(selectImage[0])
+                    : notFound404
+                }
                 alt="Imagen de la historia previa"
               />
             </figure>

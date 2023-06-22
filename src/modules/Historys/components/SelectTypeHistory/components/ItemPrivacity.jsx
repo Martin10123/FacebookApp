@@ -1,6 +1,14 @@
 import styles from "./componentsStyles.module.css";
 
-export const ItemPrivacity = ({ icon, type, descrip }) => {
+export const ItemPrivacity = ({
+  changeInput,
+  descrip,
+  icon,
+  name,
+  onChange,
+  selectedPreview,
+  type,
+}) => {
   return (
     <li className={styles.privacity__item_privacity}>
       <div className={styles.privacity__title_option}>
@@ -13,7 +21,14 @@ export const ItemPrivacity = ({ icon, type, descrip }) => {
         </span>
       </div>
 
-      <input type="radio" className={styles.privacity__input_check} />
+      <input
+        checked={selectedPreview === type}
+        className={styles.privacity__input_check}
+        name={name}
+        onChange={onChange}
+        type={changeInput ? "checkbox" : "radio"}
+        value={type}
+      />
     </li>
   );
 };

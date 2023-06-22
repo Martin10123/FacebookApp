@@ -7,6 +7,7 @@ import styles from "../page/selectTypeHistory.module.css";
 
 export const HistoryDesk = ({
   children,
+  displayNameUser,
   removeRowsGrid = false,
   setOpenHistoryText,
   typeOnBackPage,
@@ -70,7 +71,7 @@ export const HistoryDesk = ({
             <img src={photoUser} alt="Foto del usuario" />
 
             <figcaption className={styles.select_history__name_user}>
-              Martin Elias
+              {displayNameUser}
             </figcaption>
           </figure>
         </div>

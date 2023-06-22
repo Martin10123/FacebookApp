@@ -3,7 +3,15 @@ import { ColorsGradients } from "./ColorsGradients";
 
 import styles from "../page/createHistory.module.css";
 
-export const CreateHistoryMobile = ({ setOpenHistoryText }) => {
+export const CreateHistoryMobile = ({
+  onSaveHistory,
+  setOpenHistoryText,
+  setSelectColor,
+  setTextHistory,
+  startLoading,
+  styleColorBack,
+  textHistory,
+}) => {
   const [openColors, setOpenColors] = useState(false);
 
   const autoResize = (event) => {
@@ -12,21 +20,29 @@ export const CreateHistoryMobile = ({ setOpenHistoryText }) => {
   };
 
   return (
-    <div className={styles.create_history__content}>
+    <div className={styles.create_history__content} style={styleColorBack}>
       <div className={styles.create_history__nav}>
         <i
           className="fa-solid fa-xmark"
           onClick={() => setOpenHistoryText(false)}
         ></i>
 
-        <button className={styles.create_history__btn_create}>Listo</button>
+        <button
+          className={styles.create_history__btn_create}
+          onClick={onSaveHistory}
+        >
+          {startLoading ? "compartiendo..." : "Listo"}
+        </button>
       </div>
 
       <div className={styles.create_history__write_text}>
         <textarea
           className={styles.create_history__textarea}
+          maxLength={300}
+          onChange={({ target }) => setTextHistory(target.value)}
           onInput={autoResize}
           placeholder="Empieza a escribir"
+          value={textHistory}
         />
       </div>
 
@@ -34,8 +50,10 @@ export const CreateHistoryMobile = ({ setOpenHistoryText }) => {
         <div
           className={styles.create_history__select_colors}
           onClick={() => setOpenColors(!openColors)}
+          style={styleColorBack}
         ></div>
-        {openColors && <ColorsGradients />}
+
+        {openColors && <ColorsGradients setSelectColor={setSelectColor} />}
       </div>
     </div>
   );

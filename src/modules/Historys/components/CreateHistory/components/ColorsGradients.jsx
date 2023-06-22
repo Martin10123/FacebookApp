@@ -13,7 +13,7 @@ export const colorsGradients = [
   "radial-gradient(circle at 50% -20.71%, #fff56b 0, #fff866 6.25%, #fdfa63 12.5%, #e7fb61 18.75%, #d0fb62 25%, #b5fa65 31.25%, #97f86a 37.5%, #73f670 43.75%, #3cf278 50%, #00ee82 56.25%, #00ea8f 62.5%, #00e69d 68.75%, #00e2ad 75%, #00dfbe 81.25%, #00dbd1 87.5%, #00d8e3 93.75%, #00d6f6 100%)",
 ];
 
-export const ColorsGradients = () => {
+export const ColorsGradients = ({ setSelectColor }) => {
   return (
     <div className={styles.colors__container}>
       {colorsGradients.map((color) => (
@@ -21,6 +21,7 @@ export const ColorsGradients = () => {
           className={styles.colors__color}
           key={color}
           style={{ background: color }}
+          onClick={() => setSelectColor(color)}
         ></div>
       ))}
     </div>

@@ -1,7 +1,19 @@
 import { ItemPrivacity } from "./ItemPrivacity";
+import { usePrivacityHistories } from "../../hooks";
+
 import styles from "./componentsStyles.module.css";
 
 export const PrivacityHistories = ({ setOpenSettings }) => {
+  const {
+    // Atributos
+    selectedOption,
+    startLoading,
+
+    // Metodos
+    onOptionChange,
+    onSaveInfo,
+  } = usePrivacityHistories({ setOpenSettings });
+
   return (
     <div className={styles.privacity__container}>
       <div className={styles.privacity__content}>
@@ -19,16 +31,25 @@ export const PrivacityHistories = ({ setOpenSettings }) => {
             <ItemPrivacity
               descrip="Cualquiera en Facebook o Messenger"
               icon="fa-solid fa-earth-americas"
+              name="radioCheck"
+              onChange={onOptionChange}
+              selectedPreview={selectedOption.radioCheck}
               type="Publico"
             />
             <ItemPrivacity
               descrip="Solo tus amigos de Facebook"
               icon="fa-solid fa-user-group"
+              name="radioCheck"
+              onChange={onOptionChange}
+              selectedPreview={selectedOption.radioCheck}
               type="Amigos"
             />
             <ItemPrivacity
               descrip="Solo tú podras ver esta historia"
               icon="fa-solid fa-child"
+              name="radioCheck"
+              onChange={onOptionChange}
+              selectedPreview={selectedOption.radioCheck}
               type="Solo yo"
             />
           </ul>
@@ -37,8 +58,12 @@ export const PrivacityHistories = ({ setOpenSettings }) => {
         <div className={styles.privacity__other_options}>
           <h2>Otras opciones</h2>
           <ItemPrivacity
+            changeInput={true}
             descrip="Actualmente activados para todas las historias"
             icon="fa-brands fa-facebook-messenger"
+            name="checkInput"
+            onChange={onOptionChange}
+            selectedPreview={selectedOption.checkInput}
             type="Enviar mensajes"
           />
         </div>
@@ -50,7 +75,9 @@ export const PrivacityHistories = ({ setOpenSettings }) => {
           >
             Cancelar
           </button>
-          <button className={styles.privacity__btn_save}>Guardar</button>
+          <button className={styles.privacity__btn_save} onClick={onSaveInfo}>
+            {startLoading ? "Guardando..." : "Guardar"}
+          </button>
         </div>
       </div>
     </div>

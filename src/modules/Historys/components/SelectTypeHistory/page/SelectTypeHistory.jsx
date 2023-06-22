@@ -5,25 +5,38 @@ import { CreateHistory, ImagesHistory } from "../..";
 import { HistoryDesk } from "../components/HistoryDesk";
 import { AuthUserContext } from "../../../../../context";
 import { PrivacityHistories } from "../components/PrivacityHistories";
+import {
+  ContextListImagesContext,
+  ContextListImagesProvider,
+} from "../../ImagesHistory/context/ContextListImages";
+import { useKnowIfDeskOMobile } from "../../../../../hooks";
 
 import styles from "./selectTypeHistory.module.css";
 
 export const SelectTypeHistory = () => {
+  return (
+    <ContextListImagesProvider>
+      <SelectTypeHistoryIOF />
+    </ContextListImagesProvider>
+  );
+};
+
+const SelectTypeHistoryIOF = () => {
   const { infoUserActive } = useContext(AuthUserContext);
+  const {
+    onFileInputchange,
+    openHistoryFile,
+    selectImage,
+    setOpenHistoryFile,
+    setSelectImage,
+  } = useContext(ContextListImagesContext);
   const navigate = useNavigate();
   const refFile = useRef();
 
+  const isMobile = useKnowIfDeskOMobile();
+
   const [openHistoryText, setOpenHistoryText] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-  const [selectImage, setSelectImage] = useState("");
-  const [openHistoryFile, setOpenHistoryFile] = useState(false);
-
-  const onFileInputchange = ({ target }) => {
-    if (target.files.length === 0) return;
-
-    setSelectImage(target.files[0]);
-    setOpenHistoryFile(true);
-  };
 
   const onBackPage = (type) => {
     if (type === "logo") {
@@ -36,7 +49,7 @@ export const SelectTypeHistory = () => {
   return (
     <div className={styles.select_history__container}>
       <div className={styles.select_history__content}>
-        <HistoryDesk typeOnBackPage="" />
+        <HistoryDesk displayNameUser={infoUserActive.displayName} />
 
         <div className={styles.select_history__nav_mobile}>
           <i className="fa-solid fa-xmark" onClick={onBackPage}></i>
@@ -72,7 +85,7 @@ export const SelectTypeHistory = () => {
           type="file"
           style={{ display: "none" }}
           onChange={onFileInputchange}
-          multiple
+          multiple={isMobile ? true : false}
         />
       </div>
 

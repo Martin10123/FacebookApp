@@ -43,6 +43,7 @@
   color: #fff;
   cursor: pointer;
   height: 2.3rem;
+  max-width: 10rem;
   width: 5rem;
 }
 
@@ -84,6 +85,10 @@
   height: 3rem;
   margin: 0 auto;
   width: 3rem;
+}
+
+.create_preview__container {
+  display: none;
 }
 
 /* Colors */
@@ -219,6 +224,7 @@
     font-size: 1.6rem;
     height: 95%;
     justify-content: center;
+    line-break: anywhere;
     padding: 1rem;
     width: 20rem;
   }
