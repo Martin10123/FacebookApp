@@ -88,6 +88,7 @@
 }
 
 .history__text_card p {
+  color: #fff;
   overflow-wrap: break-word;
   white-space: break-spaces;
   width: 100%;

@@ -3,15 +3,17 @@ import { doc, setDoc } from "firebase/firestore";
 import { addPhotoToCloudinary } from "../../../../../helpers";
 import { HistoryDesk } from "../../SelectTypeHistory/components/HistoryDesk";
 import { firebaseDB } from "../../../../../services";
+import { useImagesHistory } from "../../hooks";
 
 import styles from "../page/imagesHistory.module.css";
 
 export const ImagesHistoryDesk = ({
   infoUserActive,
-  setOpenHistoryFile,
   selectImage,
+  setOpenHistoryFile,
 }) => {
   const [startLoading, setStartLoading] = useState(false);
+  const { onCloseModal } = useImagesHistory({ infoUserActive });
 
   const onSaveHistory = async () => {
     if (selectImage.length === 0) return;
@@ -34,6 +36,7 @@ export const ImagesHistoryDesk = ({
               canSentMessage:
                 infoUserActive?.privacityHistories.whoCanSentMessage,
               date: new Date().getTime(),
+              isImage: true,
               photoUrl,
               typePrivacityHistory:
                 infoUserActive?.privacityHistories.whoCanSeeHistory,
@@ -61,7 +64,7 @@ export const ImagesHistoryDesk = ({
       <div className={styles.image_history__btn_create_desk}>
         <button
           className={styles.image_history__btn_cancel}
-          onClick={() => setOpenHistoryFile(false)}
+          onClick={onCloseModal}
         >
           Descartar
         </button>

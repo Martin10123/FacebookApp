@@ -19,19 +19,27 @@ export const useCreateHistory = ({ infoUserActive, setOpenHistoryText }) => {
       new Date().getTime() +
       Math.random(Math.round() * 1000);
 
+    const privacityHistories = {
+      canSentMessage:
+        infoUserActive?.privacityHistories?.whoCanSentMessage || "Publico",
+      typePrivacityHistory:
+        infoUserActive?.privacityHistories?.whoCanSeeHistory ||
+        "Enviar mensajes",
+    };
+
     try {
       await setDoc(
         doc(firebaseDB, "stories", infoUserActive.uid),
         {
           ["histories"]: {
             [generateId]: {
-              canSentMessage:
-                infoUserActive?.privacityHistories.whoCanSentMessage,
+              canSentMessage: privacityHistories.canSentMessage,
               date: new Date().getTime(),
+              idStorieCreate: generateId,
               selectColor,
               textHistory,
-              typePrivacityHistory:
-                infoUserActive?.privacityHistories.whoCanSeeHistory,
+              typePrivacityHistory: privacityHistories.typePrivacityHistory,
+              uidUser: infoUserActive.uid,
               whoHaveSeenHistory: [],
             },
           },

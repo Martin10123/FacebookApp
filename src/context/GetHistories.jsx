@@ -9,13 +9,13 @@ export const GetHistoriesProvider = ({ children }) => {
   const [startLoadingHistories, setStartLoadingHistories] = useState(true);
 
   useEffect(() => {
-    const queryFire = collection(firebaseDB, "histories");
+    const queryFire = collection(firebaseDB, "stories");
 
     const unSuscribed = onSnapshot(queryFire, (histories) => {
       const arrayHistories = histories.docs.map((doc) => {
         return {
           ...doc.data(),
-          idHistorie: doc.id,
+          idStorie: doc.id,
         };
       });
       setGetHistories([...arrayHistories]);

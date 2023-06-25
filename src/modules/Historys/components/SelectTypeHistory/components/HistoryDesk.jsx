@@ -30,15 +30,7 @@ export const HistoryDesk = ({
     <>
       <div
         className={styles.select_history__content_displayName}
-        style={
-          removeRowsGrid
-            ? {
-                gridTemplateRows: "none",
-                height: "fit-content",
-                maxHeight: "100vh",
-              }
-            : {}
-        }
+        style={removeRowsGrid ? { gridTemplateRows: "0fr 0fr 1fr" } : {}}
       >
         <div className={styles.select_history__nav}>
           <button
