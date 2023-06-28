@@ -47,19 +47,23 @@ export const HistoryPage = () => {
               numBetweenCeroOrLength(arrayStorieUserActive.length)
             ]
           }
+          numStorie={numBetweenCeroOrLength(arrayStorieUserActive.length)}
           users={users}
         />
       )}
 
       {nonEmptyHistories.map((stories) => {
-        const getAllHistories = Object.values(stories.histories || {});
+        const getAllHistories = Object.values(stories.histories || {}).sort(
+          (a, b) => a.date - b.date
+        );
         const randomIndex = numBetweenCeroOrLength(getAllHistories.length);
         const history = getAllHistories[randomIndex];
 
         return (
           <CardHistoryMain
-            key={stories.idStorie}
             history={history}
+            key={stories.idStorie}
+            numStorie={randomIndex}
             users={users}
           />
         );

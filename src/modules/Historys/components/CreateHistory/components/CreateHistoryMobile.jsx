@@ -30,8 +30,9 @@ export const CreateHistoryMobile = ({
         <button
           className={styles.create_history__btn_create}
           onClick={onSaveHistory}
+          style={startLoading ? { width: "40%" } : {}}
         >
-          {startLoading ? "compartiendo..." : "Listo"}
+          {startLoading ? "Compartiendo..." : "Listo"}
         </button>
       </div>
 

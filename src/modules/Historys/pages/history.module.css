@@ -90,6 +90,7 @@
 .history__text_card p {
   color: #fff;
   overflow-wrap: break-word;
+  text-align: center;
   white-space: break-spaces;
   width: 100%;
 }

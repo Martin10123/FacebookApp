@@ -35,7 +35,7 @@ export const SecondRouter = () => {
 
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
         <Route path="/:username" element={<ProfilePage />} />
-        <Route path="/stories/:uidUser" element={<SeeHistory />} />
+        <Route path="/stories/:uidUser/:numStorie?" element={<SeeHistory />} />
         <Route path="/photo/:post_id" element={<ModalImagesPost />} />
 
         <Route path="*" element={<Navigate to="/" />} />

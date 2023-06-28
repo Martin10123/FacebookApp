@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { photoUser } from "../../../../../assets";
 import { getTimeAgo } from "../../../../../helpers";
-import { deleteField, doc, setDoc } from "firebase/firestore";
-import { firebaseDB } from "../../../../../services";
 import { SureDelete } from "../../../../../components/SureDelete/SureDelete";
 
 import styles from "./stylesComponents.module.css";
@@ -11,37 +9,13 @@ import styles from "./stylesComponents.module.css";
 export const InfoUserSeeHistory = ({
   countStorieSelect,
   infoUserActive,
+  onDeleteStorie,
+  startLoading,
   storieSelectPage,
-  users,
+  userStorie,
 }) => {
   const navigate = useNavigate();
-  const [startLoading, setStartLoading] = useState(false);
   const [openSureDelete, setOpenSureDelete] = useState(false);
-  const userStorie = users.find(
-    (user) => user.uid === storieSelectPage?.uidUser
-  );
-
-  const onDeleteStorie = async () => {
-    setStartLoading(true);
-
-    try {
-      await setDoc(
-        doc(firebaseDB, "stories", infoUserActive.uid),
-        {
-          ["histories"]: {
-            [storieSelectPage.idStorieCreate]: deleteField(),
-          },
-        },
-        { merge: true }
-      );
-
-      setOpenSureDelete(false);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setStartLoading(false);
-    }
-  };
 
   return (
     <>
@@ -52,7 +26,7 @@ export const InfoUserSeeHistory = ({
               className={styles.see_history__line}
               key={storie[0]}
               style={
-                storie[0] === storieSelectPage.idStorieCreate
+                storie[0] === storieSelectPage?.idStorieCreate
                   ? { background: "#0099ff" }
                   : {}
               }
@@ -89,7 +63,7 @@ export const InfoUserSeeHistory = ({
               <i
                 className="fa-solid fa-trash"
                 onClick={() => setOpenSureDelete(true)}
-                style={{ background: startLoading ? "red" : "" }}
+                style={{ color: startLoading ? "red" : "" }}
               ></i>
             )}
           </div>
@@ -100,7 +74,7 @@ export const InfoUserSeeHistory = ({
         <SureDelete
           confirmationMessage="¿Estas seguro que quieres eliminar esta historia?"
           onClose={() => setOpenSureDelete(false)}
-          onDelete={onDeleteStorie}
+          onDelete={() => onDeleteStorie({ setOpenSureDelete })}
         />
       )}
     </>

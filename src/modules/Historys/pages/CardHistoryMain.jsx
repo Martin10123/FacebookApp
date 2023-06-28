@@ -3,7 +3,7 @@ import { photoUser } from "../../../assets";
 
 import styles from "./history.module.css";
 
-export const CardHistoryMain = ({ history, users }) => {
+export const CardHistoryMain = ({ history, users, numStorie }) => {
   const navigate = useNavigate();
   const userCreateStorie = users.find((user) => user.uid === history.uidUser);
 
@@ -11,7 +11,7 @@ export const CardHistoryMain = ({ history, users }) => {
     <div
       className={styles.history__card_info}
       style={history.selectColor ? { background: history.selectColor } : {}}
-      onClick={() => navigate(`/stories/${userCreateStorie.uid}`)}
+      onClick={() => navigate(`/stories/${userCreateStorie.uid}/${numStorie}`)}
     >
       <img
         alt="Foto de perfil"

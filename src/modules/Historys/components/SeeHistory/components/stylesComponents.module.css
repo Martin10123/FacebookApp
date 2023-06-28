@@ -126,6 +126,17 @@
   font-size: 1.1rem;
 }
 
+.see_history__see_count_users_have_seen_your_storie {
+  align-items: center;
+  background: #fff;
+  border-radius: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.1rem;
+  gap: 0.4rem;
+  padding: 1rem;
+}
+
 .see_history__list_emojis {
   align-items: center;
   display: flex;
@@ -138,6 +149,19 @@
   height: 2.5rem;
   object-fit: cover;
   width: 2.5rem;
+}
+
+.see_history__show_reaction_preview {
+  align-items: center;
+  background: #ffffff7a;
+  border-radius: 0.5rem;
+  bottom: 18%;
+  display: flex;
+  gap: 0.5rem;
+  left: 4%;
+  padding: 0.3rem;
+  position: absolute;
+  z-index: 0;
 }
 
 /* SeeHistoryDesk */
