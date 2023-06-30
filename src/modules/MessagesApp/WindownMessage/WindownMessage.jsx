@@ -34,6 +34,7 @@ export const WindownMessage = ({
             imgDesk={true}
             infoUserActive={infoUserActive}
             userMessage={useSelectMessage}
+            isWindown
           />
         </div>
 

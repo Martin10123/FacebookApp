@@ -287,4 +287,9 @@
     align-items: center;
     justify-content: center;
   }
+
+  .see_history__show_reaction_preview {
+    bottom: 10%;
+    left: 35%;
+  }
 }

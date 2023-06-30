@@ -30,6 +30,8 @@ export const useCardNotification = ({ notifi, users }) => {
       linkTo = "/friends";
     } else if (typeNotifi === "accestRequest") {
       linkTo = `/${userNotifi.username}`;
+    } else if (typeNotifi === "reactionStorie") {
+      linkTo = `/stories/${idDocumentNotifi[0]}/${idDocumentNotifi[1]}`;
     } else {
       linkTo = `/${userNotifi.displayName}/post/${idDocumentNotifi}`;
     }

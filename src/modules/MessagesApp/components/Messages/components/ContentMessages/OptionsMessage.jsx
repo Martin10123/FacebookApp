@@ -6,6 +6,7 @@ export const OptionsMessage = ({
   combinedUid,
   infoUserActive,
   isUserActive,
+  isWindown,
   message,
   setOpenOptions,
 }) => {
@@ -17,6 +18,7 @@ export const OptionsMessage = ({
     onCopyMessage,
     onDeleteMessage,
     onGoProfile,
+    onGoToStorie,
   } = useOptionsMessage({
     combinedUid,
     infoUserActive,
@@ -24,9 +26,19 @@ export const OptionsMessage = ({
     setOpenOptions,
   });
 
+  const startWithStorie = message?.message?.startsWith(
+    "Respondio a tu historia con:"
+  );
+
   return (
-    <div className={styles.message__options_container} ref={ref}>
-      <ul className={styles.message__options_content}>
+    <div
+      className={`${styles.message__options_container} ${
+        isWindown
+          ? styles.message__options_container_desk
+          : styles.message__options_container_screen
+      }`}
+    >
+      <ul className={styles.message__options_content} ref={ref}>
         <li onClick={onGoProfile}>
           <i className="fa-regular fa-circle-user"></i>Ver pefil
         </li>
@@ -41,6 +53,11 @@ export const OptionsMessage = ({
         <li onClick={onCopyMessage}>
           <i className="fa-solid fa-copy"></i>Copiar mensaje
         </li>
+        {startWithStorie && (
+          <li onClick={onGoToStorie}>
+            <i className="fa-solid fa-person-booth"></i>Ir a la historia
+          </li>
+        )}
       </ul>
     </div>
   );

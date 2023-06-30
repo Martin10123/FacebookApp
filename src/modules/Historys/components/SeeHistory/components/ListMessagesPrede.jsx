@@ -6,6 +6,7 @@ import styles from "./stylesComponents.module.css";
 export const ListMessagesPrede = ({
   infoUserActive,
   isTheSameUser,
+  numStorie,
   storieSelectPage,
   userStorie,
 }) => {
@@ -51,6 +52,7 @@ export const ListMessagesPrede = ({
       <div className={styles.see_history__show_reactions_history}>
         <ListReactionsHistory
           isTheSameUser={isTheSameUser}
+          numStorie={numStorie}
           storieSelectPage={storieSelectPage}
           userStorie={userStorie}
         />

@@ -4,6 +4,7 @@ import { CardFilterChat, CardFilterGroups } from "../components";
 import { useChatsFilters } from "../../../hook";
 
 import styles from "./chatsFilters.module.css";
+import { usePreventScroll } from "../../../../../hooks";
 
 export const ChatsFilters = ({
   setOpenInfoUserToMessage,
@@ -11,6 +12,7 @@ export const ChatsFilters = ({
   infoUserActive,
   users,
 }) => {
+  usePreventScroll();
   const {
     // Atributos
     openCreateGroup,

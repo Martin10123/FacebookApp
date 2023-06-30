@@ -9,6 +9,7 @@ export const CardMessages = ({
   combinedUid,
   idMessage,
   imgDesk,
+  isWindown,
   lastMessageSent,
   message,
   userMessage,
@@ -50,6 +51,7 @@ export const CardMessages = ({
           />
 
           <div
+            className={styles.message__open_date_sent_message}
             style={{
               width:
                 (message.message && message.photoMessage) ||
@@ -70,60 +72,56 @@ export const CardMessages = ({
             )}
 
             {message.message && (
-              <div className={styles[contentInfoMessageIsLeftOrRight]}>
-                <p
-                  className={styles[infoMessage]}
-                  onClick={() => setOpenOptions(true)}
-                >
-                  {message.message}
-                </p>
-                <span
-                  className={
-                    isUserActive
-                      ? styles.message__date_user_active
-                      : styles.message__date
-                  }
-                >
+              <>
+                <span className={styles.message__date}>
                   {getDateMessage(message.datecreateMessage)}
                 </span>
-              </div>
+
+                <div className={styles[contentInfoMessageIsLeftOrRight]}>
+                  <p className={styles[infoMessage]}>{message.message}</p>
+
+                  <i
+                    className="fa-solid fa-ellipsis"
+                    onClick={() => setOpenOptions(true)}
+                  ></i>
+                </div>
+              </>
             )}
 
             {message.photoMessage && (
-              <figure
-                className={`${styles.message__image} ${
-                  styles[imageDesk] || ""
-                }`}
-                style={{ flexDirection: isUserActive ? "row-reverse" : "" }}
-              >
-                <img
-                  alt="Foto del mensaje"
-                  onClick={() => setOpenOptions(true)}
-                  src={message.photoMessage}
-                />
-                <span
-                  className={
-                    isUserActive
-                      ? styles.message__date_user_active
-                      : styles.message__date
-                  }
-                >
+              <>
+                <span className={styles.message__date}>
                   {getDateMessage(message.datecreateMessage)}
                 </span>
-              </figure>
-            )}
 
-            {openOptions && (
-              <OptionsMessage
-                combinedUid={combinedUid}
-                infoUserActive={infoUserActive}
-                isUserActive={isUserActive}
-                message={message}
-                setOpenOptions={setOpenOptions}
-              />
+                <figure
+                  className={`${styles.message__image} ${
+                    styles[imageDesk] || ""
+                  }`}
+                  style={{ flexDirection: isUserActive ? "row-reverse" : "" }}
+                >
+                  <img alt="Foto del mensaje" src={message.photoMessage} />
+
+                  <i
+                    className="fa-solid fa-ellipsis"
+                    onClick={() => setOpenOptions(true)}
+                  ></i>
+                </figure>
+              </>
             )}
           </div>
         </div>
+      )}
+
+      {openOptions && (
+        <OptionsMessage
+          combinedUid={combinedUid}
+          infoUserActive={infoUserActive}
+          isUserActive={isUserActive}
+          isWindown={isWindown}
+          message={message}
+          setOpenOptions={setOpenOptions}
+        />
       )}
     </>
   );

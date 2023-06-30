@@ -10,6 +10,7 @@ export const SeeHistoryMobile = ({
   colorStorie,
   countStorieSelect,
   infoUserActive,
+  numStorie,
   onDeleteStorie,
   onNextStorie,
   onPreviewStorie,
@@ -52,6 +53,7 @@ export const SeeHistoryMobile = ({
         <ListMessagesPrede
           infoUserActive={infoUserActive}
           isTheSameUser={isTheSameUser}
+          numStorie={numStorie}
           storieSelectPage={storieSelectPage}
           userStorie={userStorie}
         />
@@ -60,6 +62,7 @@ export const SeeHistoryMobile = ({
       <div>
         <ListReactionsHistory
           isTheSameUser={isTheSameUser}
+          numStorie={numStorie}
           storieSelectPage={storieSelectPage}
           userStorie={userStorie}
         />

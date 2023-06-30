@@ -89,7 +89,11 @@ export const useOptionsPost = ({ post, infoUserActive, setOpenOptions }) => {
 
   const onCopyLinkPost = async () => {
     try {
-      console.log(`/post/${post.idDoc}`);
+      await navigator.clipboard.writeText(
+        `/${post?.displayName}/post/${post.idDoc}`
+      );
+
+      toast.success("Se copio el texto");
     } catch (error) {
       console.error(error);
     }

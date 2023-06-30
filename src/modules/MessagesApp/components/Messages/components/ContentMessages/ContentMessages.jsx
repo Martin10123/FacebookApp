@@ -6,6 +6,7 @@ import styles from "./cardMessages.module.css";
 export const ContentMessages = ({
   imgDesk = false,
   infoUserActive,
+  isWindown = false,
   userMessage,
 }) => {
   const { messagesSort, combinedUid } = useContentMessages({
@@ -24,10 +25,11 @@ export const ContentMessages = ({
               combinedUid={combinedUid}
               idMessage={idDoc}
               imgDesk={imgDesk}
+              isWindown={isWindown}
               key={idDoc}
+              lastMessageSent={messagesSort}
               message={message}
               userMessage={userMessage}
-              lastMessageSent={messagesSort}
             />
           ))}
         </>

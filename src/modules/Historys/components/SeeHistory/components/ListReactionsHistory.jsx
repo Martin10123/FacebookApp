@@ -1,54 +1,31 @@
-import { useState } from "react";
 import { reactionsDataPost } from "../../../../../components/Posts/helpers";
 import { WhoViewMyHistory } from "../../WhoViewMyHistory/WhoViewMyHistory";
 import { ModalSentMessage } from "../../../../MessagesApp";
-import { arrayUnion, doc, setDoc } from "firebase/firestore";
-import { firebaseDB } from "../../../../../services";
+import { useListReactionsHistory } from "../../hooks";
 
 import styles from "./stylesComponents.module.css";
-import { useEffect } from "react";
 
 export const ListReactionsHistory = ({
   isTheSameUser,
+  numStorie,
   storieSelectPage,
   userStorie,
 }) => {
-  const [openViewStorie, setOpenViewStorie] = useState(false);
-  const [openMessageModal, setOpenMessageModal] = useState(false);
-  const [reactionStorie, setReactionStorie] = useState([]);
+  const {
+    // Atributos
+    openMessageModal,
+    openViewStorie,
+    reactionStorie,
 
-  useEffect(() => {
-    setReactionStorie([...(storieSelectPage?.reactionStorie || [])]);
-  }, [storieSelectPage]);
-
-  const onReactionStorie = async ({ typeReaction, dateReaction }) => {
-    setReactionStorie([
-      ...reactionStorie,
-      {
-        typeReaction,
-        dateReaction,
-      },
-    ]);
-
-    try {
-      await setDoc(
-        doc(firebaseDB, "stories", storieSelectPage.uidUser),
-        {
-          ["histories"]: {
-            [storieSelectPage.idStorieCreate]: {
-              reactionStorie: arrayUnion({
-                typeReaction,
-                dateReaction,
-              }),
-            },
-          },
-        },
-        { merge: true }
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    // Metodos
+    onReactionStorie,
+    setOpenMessageModal,
+    setOpenViewStorie,
+  } = useListReactionsHistory({
+    numStorie,
+    storieSelectPage,
+    userStorie,
+  });
 
   return (
     <>

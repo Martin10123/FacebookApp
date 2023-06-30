@@ -11,6 +11,7 @@ export const SeeHistory = () => {
     getAllStoriesWithOutEmpty,
     getHistories,
     infoUserActive,
+    numStorie,
     startLoading,
     storieSelectPage,
     users,
@@ -52,6 +53,7 @@ export const SeeHistory = () => {
               colorStorie={colorStorie}
               countStorieSelect={countStorieSelect}
               infoUserActive={infoUserActive}
+              numStorie={numStorie}
               onDeleteStorie={onDeleteStorie}
               onNextStorie={onNextStorie}
               onPreviewStorie={onPreviewStorie}

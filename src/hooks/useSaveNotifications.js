@@ -24,6 +24,7 @@ export const useSaveNotifications = () => {
         reactionanswers: `${infoUserActive.displayName} reaccionó a tu respuesta`,
         reactioncomments: `${infoUserActive.displayName} reaccionó a tu comentario`,
         reactionposts: `${infoUserActive.displayName} reaccionó a tu publicación`,
+        reactionStorie: `${infoUserActive.displayName} reacciono a tu historia`,
         requestFriend: `${infoUserActive.displayName} te envió una solicitud de amistad`,
         share: `${infoUserActive.displayName} compartió tu publicación`,
         tagFriends: `${infoUserActive.displayName} te etiqueto en una publicación`,

@@ -1,7 +1,13 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AuthUserContext, GetHistoriesContext } from "../../../../context";
 import { useNavigate, useParams } from "react-router-dom";
-import { arrayUnion, deleteField, doc, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  deleteField,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { firebaseDB } from "../../../../services";
 
 export const useSeeHistory = () => {
@@ -13,7 +19,7 @@ export const useSeeHistory = () => {
   const [selectStorieUser, setSelectStorieUser] = useState(uidUser);
   const [startLoading, setStartLoading] = useState(false);
   const [indexStorieSelect, setIndexStorieSelect] = useState(-1);
-  const [numStorie, setNumStorie] = useState(numStorieUrl || 0);
+  const [numStorie, setNumStorie] = useState(Number(numStorieUrl) || 0);
 
   const getAllStoriesWithOutEmpty = useMemo(() => {
     return getHistories.filter(
@@ -179,6 +185,45 @@ export const useSeeHistory = () => {
     whoViewHistory();
   }, [numStorie]);
 
+  const checkExpiredStories = async () => {
+    try {
+      const storiesSnapshot = await getDoc(
+        doc(firebaseDB, "stories", storieSelectPage?.uidUser)
+      );
+      const now = new Date().getTime();
+      const expirationTime = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      const getStoriesUser = Object.values(storiesSnapshot.data().histories);
+
+      const onDeleteStorie = async () => {
+        await setDoc(
+          doc(firebaseDB, "stories", storieSelectPage?.uidUser),
+          {
+            ["histories"]: {
+              [storieSelectPage.idStorieCreate]: deleteField(),
+            },
+          },
+          { merge: true }
+        );
+      };
+
+      for (const storyDoc of getStoriesUser) {
+        const storyTimestamp = storyDoc.date;
+
+        if (now - storyTimestamp > expirationTime) {
+          await onDeleteStorie();
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!storieSelectPage) return;
+
+    checkExpiredStories();
+  }, [numStorie]);
+
   return {
     // Atributos
     colorStorie,
@@ -186,6 +231,7 @@ export const useSeeHistory = () => {
     getAllStoriesWithOutEmpty,
     getHistories,
     infoUserActive,
+    numStorie,
     startLoading,
     storieSelectPage,
     users,

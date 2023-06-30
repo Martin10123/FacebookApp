@@ -34,6 +34,7 @@ export const Messages = ({
 
         <FormMessage
           infoUserActive={infoUserActive}
+          isWindown
           userMessage={userSelected}
         />
       </div>

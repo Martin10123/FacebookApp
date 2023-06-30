@@ -86,6 +86,10 @@ export const useOptionsMessage = ({
     }
   };
 
+  const onGoToStorie = () => {
+    navigate(`/stories/${message.uidOtherUser}`);
+  };
+
   return {
     // Atributos
     ref,
@@ -94,5 +98,6 @@ export const useOptionsMessage = ({
     onCopyMessage,
     onDeleteMessage,
     onGoProfile,
+    onGoToStorie,
   };
 };
