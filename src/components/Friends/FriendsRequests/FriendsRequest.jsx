@@ -30,3 +30,5 @@ export const FriendsRequest = () => {
     </section>
   );
 };
+
+export default FriendsRequest;

@@ -54,3 +54,5 @@ export const PostsSaved = () => {
     </div>
   );
 };
+
+export default PostsSaved;

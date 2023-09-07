@@ -1,22 +1,22 @@
+import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
   ChatAppPage,
   MainApp,
-  MainStore,
   ModalImagesPost,
   ProfilePage,
   SeeHistory,
   SelectTypeHistory,
 } from "../modules";
 import {
-  FriendsRequest,
-  InformationPrivacity,
   MenuApp,
   Navbar,
-  PostsSaved,
   ShowPostAlone,
   WindownNotifications,
 } from "../components";
+
+// lazy
+const SideBarOptions = lazy(() => import("../ModulesLazy/SideBarMenus"));
 
 export const SecondRouter = () => {
   return (
@@ -25,13 +25,13 @@ export const SecondRouter = () => {
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/chats" element={<ChatAppPage />} />
-        <Route path="/friends" element={<FriendsRequest />} />
-        <Route path="/infoPrivacity" element={<InformationPrivacity />} />
         <Route path="/menu" element={<MenuApp />} />
         <Route path="/notifications" element={<WindownNotifications />} />
-        <Route path="/saved" element={<PostsSaved />} />
-        <Route path="/store" element={<MainStore />} />
         <Route path="/stories/create" element={<SelectTypeHistory />} />
+
+        {/* Lazy */}
+
+        {/* <Route path="/*" element={<SideBarOptions />} /> */}
 
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
         <Route path="/:username" element={<ProfilePage />} />

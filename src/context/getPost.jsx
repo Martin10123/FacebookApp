@@ -1,4 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { firebaseDB } from "../services";
 
@@ -9,10 +9,7 @@ export const GetPostsProvider = ({ children }) => {
   const [startLoading, setStartLoading] = useState(true);
 
   useEffect(() => {
-    const queryFire = query(
-      collection(firebaseDB, "posts"),
-      orderBy("date", "desc")
-    );
+    const queryFire = collection(firebaseDB, "posts");
 
     const unSuscribed = onSnapshot(queryFire, (posts) => {
       const arrayPosts = posts.docs.map((doc) => {
@@ -21,6 +18,7 @@ export const GetPostsProvider = ({ children }) => {
           ...doc.data(),
         };
       });
+
       setGetPosts([...arrayPosts]);
       setStartLoading(false);
     });

@@ -26,18 +26,15 @@ export const MainApp = () => {
           </div>
         ) : (
           <>
-            {
-              savePostByPrivacity.map((post) => (
-                <div key={post.idDoc}>
-                  {!post.isShared ? (
-                    <CardPost post={post} />
-                  ) : (
-                    <CardSharePost post={post} />
-                  )}
-                </div>
-              ))
-              // .sort(() => Math.random() - 0.5)
-            }
+            {savePostByPrivacity.map((post) => (
+              <div key={post.idDoc}>
+                {!post.isShared ? (
+                  <CardPost post={post} />
+                ) : (
+                  <CardSharePost post={post} />
+                )}
+              </div>
+            ))}
           </>
         )}
       </div>

@@ -48,3 +48,5 @@ export const InformationPrivacity = () => {
     </section>
   );
 };
+
+export default InformationPrivacity;

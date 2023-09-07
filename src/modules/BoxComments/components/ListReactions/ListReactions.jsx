@@ -1,9 +1,12 @@
+import { usePreventScroll } from "../../../../hooks";
 import { useListReactions } from "../../hooks";
 import { CardListReactionUser } from "./components/CardListReactionUser";
 
 import styles from "./listReactions.module.css";
 
 export const ListReactions = ({ listReactionsUse, setOpenListReactions }) => {
+  usePreventScroll();
+
   const {
     // Atributos
     countReactions,

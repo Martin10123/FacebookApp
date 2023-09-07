@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { getWhatReactionSelected } from "../../helpers";
 import { ReactionsPost } from "./ReactionsPost/ReactionsPost";
 
@@ -9,15 +10,30 @@ export const ButtonsReactions = ({
   setOpenCommentsPost,
   setOpenSharePost,
 }) => {
+  const [openReactios, setOpenReactios] = useState(false);
+  const timeoutRef = useRef(null);
   const getReactionSelected = getWhatReactionSelected({
     infoUserActive,
     reactions: post?.reactions,
   });
 
+  const onOpenReactions = () => {
+    clearTimeout(timeoutRef.current);
+    setOpenReactios(true);
+  };
+
+  const onCloseReactions = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenReactios(false);
+    }, 200);
+  };
+
   return (
     <div className={styles.layout__buttons_reactions}>
       <button
         className={styles.layout__button_like}
+        onMouseEnter={onOpenReactions}
+        onMouseLeave={onCloseReactions}
         style={{ color: getReactionSelected?.textColor || "" }}
       >
         {getReactionSelected?.img ? (
@@ -31,14 +47,16 @@ export const ButtonsReactions = ({
         )}
         {getReactionSelected?.name || "Like"}
 
-        <ReactionsPost
-          idDocumentToSave={post.idDoc}
-          nameCollectionFirebase="posts"
-          reactionObjCollection={post?.reactions}
-          styleShowAllContainer={styles.reactions__container}
-          uidUserCreatePost={post.uid}
-          uidUserToSaveReaction={infoUserActive?.uid}
-        />
+        {openReactios && (
+          <ReactionsPost
+            idDocumentToSave={post.idDoc}
+            nameCollectionFirebase="posts"
+            reactionObjCollection={post?.reactions}
+            setOpenReactios={setOpenReactios}
+            uidUserCreatePost={post.uid}
+            uidUserToSaveReaction={infoUserActive?.uid}
+          />
+        )}
       </button>
       <button
         className={styles.layout__button}

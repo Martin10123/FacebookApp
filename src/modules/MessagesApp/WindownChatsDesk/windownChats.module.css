@@ -126,3 +126,9 @@
   padding: 1rem 0;
   width: 100%;
 }
+
+@media screen and (min-width: 800px) {
+  .windownChats__container {
+    height: calc(100vh - 7rem);
+  }
+}

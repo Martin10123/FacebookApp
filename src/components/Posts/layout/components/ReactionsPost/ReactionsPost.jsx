@@ -1,7 +1,5 @@
-import { arrayRemove, arrayUnion, doc, setDoc } from "firebase/firestore";
-import { firebaseDB } from "../../../../../services";
 import { reactionsDataPost } from "../../../helpers";
-import { useSaveNotifications } from "../../../../../hooks";
+import { useReactioPost } from "../../hook/useReactioPost";
 
 import styles from "./reactionsPost.module.css";
 
@@ -10,71 +8,22 @@ export const ReactionsPost = ({
   idSaveReactionNotification,
   nameCollectionFirebase,
   reactionObjCollection,
-  styleShowAllContainer,
+  setOpenReactios,
   uidUserCreatePost,
   uidUserToSaveReaction,
 }) => {
-  const { savaNotification } = useSaveNotifications();
-
-  const onUpdateReaction = async (saveReactionFire) => {
-    const existingReaction = reactionObjCollection
-      ? Object.keys(reactionObjCollection).find((reaction) =>
-          reactionObjCollection[reaction].includes(uidUserToSaveReaction)
-        )
-      : null;
-
-    try {
-      const reactionsRef = doc(
-        firebaseDB,
-        nameCollectionFirebase,
-        idDocumentToSave
-      );
-
-      if (existingReaction) {
-        setDoc(
-          reactionsRef,
-          {
-            reactions: {
-              [existingReaction]: arrayRemove(uidUserToSaveReaction),
-            },
-          },
-          { merge: true }
-        );
-      }
-
-      if (existingReaction !== saveReactionFire) {
-        setDoc(
-          reactionsRef,
-          {
-            reactions: {
-              [saveReactionFire]: arrayUnion(uidUserToSaveReaction),
-            },
-          },
-          { merge: true }
-        );
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      let idSaveNotifi;
-
-      if (nameCollectionFirebase === "answers") {
-        idSaveNotifi = idSaveReactionNotification;
-      } else {
-        idSaveNotifi = idDocumentToSave;
-      }
-
-      await savaNotification({
-        dataToSave: saveReactionFire,
-        idToSaveDocument: idSaveNotifi,
-        typeNotifi: `reaction${nameCollectionFirebase}`,
-        uidUserReceiveNotifi: uidUserCreatePost,
-      });
-    }
-  };
+  const { onUpdateReaction } = useReactioPost({
+    idDocumentToSave,
+    idSaveReactionNotification,
+    nameCollectionFirebase,
+    reactionObjCollection,
+    setOpenReactios,
+    uidUserCreatePost,
+    uidUserToSaveReaction,
+  });
 
   return (
-    <div className={styleShowAllContainer}>
+    <div className={styles.reactions__container}>
       <div className={styles.reactions__content}>
         {reactionsDataPost.map(({ name, tofire, img, classE }) => (
           <div

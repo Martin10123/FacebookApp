@@ -78,3 +78,5 @@ export const MainStore = () => {
     </section>
   );
 };
+
+export default MainStore;

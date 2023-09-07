@@ -81,3 +81,5 @@ export const EventsBirthday = ({
     </>
   );
 };
+
+export default EventsBirthday;
