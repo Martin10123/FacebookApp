@@ -3,17 +3,21 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import {
   ChatAppPage,
   MainApp,
+  MainStore,
   ModalImagesPost,
   ProfilePage,
   SeeHistory,
   SelectTypeHistory,
 } from "../modules";
 import {
+  InformationPrivacity,
   MenuApp,
   Navbar,
   ShowPostAlone,
   WindownNotifications,
 } from "../components";
+import FriendsRequest from "../components/Friends/FriendsRequests/FriendsRequest";
+import PostsSaved from "../components/Posts/PostsSaved/page/PostsSaved";
 
 // lazy
 const SideBarOptions = lazy(() => import("../ModulesLazy/SideBarMenus"));
@@ -37,6 +41,10 @@ export const SecondRouter = () => {
         <Route path="/:username" element={<ProfilePage />} />
         <Route path="/stories/:uidUser/:numStorie?" element={<SeeHistory />} />
         <Route path="/photo/:post_id" element={<ModalImagesPost />} />
+        <Route path="/friends" element={<FriendsRequest />} />
+        <Route path="/infoPrivacity" element={<InformationPrivacity />} />
+        <Route path="/saved" element={<PostsSaved />} />
+        <Route path="/store" element={<MainStore />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
