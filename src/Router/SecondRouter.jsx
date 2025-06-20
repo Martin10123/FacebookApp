@@ -19,9 +19,6 @@ import {
 import FriendsRequest from "../components/Friends/FriendsRequests/FriendsRequest";
 import PostsSaved from "../components/Posts/PostsSaved/page/PostsSaved";
 
-// lazy
-const SideBarOptions = lazy(() => import("../ModulesLazy/SideBarMenus"));
-
 export const SecondRouter = () => {
   return (
     <>
@@ -34,8 +31,6 @@ export const SecondRouter = () => {
         <Route path="/stories/create" element={<SelectTypeHistory />} />
 
         {/* Lazy */}
-
-        {/* <Route path="/*" element={<SideBarOptions />} /> */}
 
         <Route path="/:name/post/:post_id" element={<ShowPostAlone />} />
         <Route path="/:username" element={<ProfilePage />} />
