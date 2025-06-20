@@ -20,7 +20,7 @@ export const CardNotification = ({ notifi, users }) => {
   return (
     <div className={styles.windownNoti__info_user} onClick={onViewPost}>
       <figure className={styles.windownNoti__photo_user}>
-        <img src={userNotifi.photoUrl || photoUser} alt="Foto de perfil" />
+        <img src={userNotifi?.photoUrl || photoUser} alt="Foto de perfil" />
         {whatIconIs()}
       </figure>
       <div className={styles.windownNoti__content_type_notifi}>

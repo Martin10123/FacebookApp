@@ -54,6 +54,5 @@ export const getDateMessage = (timestamp) => {
   const h = date.getHours();
   const m = date.getMinutes();
 
-  console.log();
   return `${days[d]} - ${h}:${m}`;
 };

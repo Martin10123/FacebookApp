@@ -33,7 +33,7 @@ export const useCardNotification = ({ notifi, users }) => {
     } else if (typeNotifi === "reactionStorie") {
       linkTo = `/stories/${idDocumentNotifi[0]}/${idDocumentNotifi[1]}`;
     } else {
-      linkTo = `/${userNotifi.displayName}/post/${idDocumentNotifi}`;
+      linkTo = `/${userNotifi?.displayName}/post/${idDocumentNotifi}`;
     }
 
     navigate(linkTo);
