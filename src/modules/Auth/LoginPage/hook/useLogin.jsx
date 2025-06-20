@@ -7,8 +7,8 @@ import { regex } from "../../RegisterPage/helpers/validorRegister";
 import { useForm } from "../../../../hooks";
 
 const formLogin = {
-  email: "",
-  password: "",
+  email: "admin@admin.com",
+  password: "Admin12345",
 };
 
 const validatorLogin = {
